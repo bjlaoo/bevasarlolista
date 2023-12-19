@@ -1,1 +1,28 @@
-
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: #DBE5FF;
+}
+div,table,.nav-item{
+    border-radius: 15;
+}
+.container{
+    text-align: center;
+}
+.mainsecondaryMenu{
+    background-color: blue;
+    height: 100px;
+}
+.nav{
+    --bs-navbar-padding-y:0rem;
+}
+.navbar-nav{
+    display: flex;
+    justify-content: center;
+}
+.listelement{
+    width: 100%;
+    background-color: #98B3FA;
+}
