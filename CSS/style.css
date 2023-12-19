@@ -1,28 +1,44 @@
 *{
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 body{
     background-color: #DBE5FF;
 }
-div,table,.nav-item{
-    border-radius: 15;
+.table {
+    border-radius: 6px;
+    overflow: hidden;
 }
 .container{
     text-align: center;
 }
 .mainsecondaryMenu{
-    background-color: blue;
-    height: 100px;
+    background-color: #BACDFF;
+    align-items: center;
+    padding:200px,0px;
 }
-.nav{
-    --bs-navbar-padding-y:0rem;
+.navbar{
+    margin:0 !important;
+	padding: 0px !important;
+}
+nav{
+    background-color: #BACDFF;
 }
 .navbar-nav{
     display: flex;
     justify-content: center;
 }
-.listelement{
-    width: 100%;
+ul{
+   border-radius: 15px;
     background-color: #98B3FA;
+}
+.inline{
+    display: inline;
+}
+.sum{
+    padding-left: 300px;
+}
+.buttons{
+    padding-right:250px;
 }
