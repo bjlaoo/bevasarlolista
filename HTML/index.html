@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="hu">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bevásárlólista oldal</title>
-        <link rel="stylesheet" href="../CSS/bootstrap.min.css">
-        <script src="../JS/bootstrap.bundle.js"></script>
-        <link rel="stylesheet" href="../CSS/style.css">
-        
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Bevásárlólista oldal</title>
+      <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+      <script src="../JS/bootstrap.bundle.js"></script>
+      <link rel="stylesheet" href="../CSS/style.css">
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+       
     </head>
     <body>
         <div class="startingPage">
             <header>
               <nav class="navbar navbar-expand-lg navbar-light padding-x-0">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <div class="container-fluid">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
@@ -26,7 +29,7 @@
                       <a class="nav-link" href="#">Boltok</a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Listák
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -37,10 +40,11 @@
                     </li>
                   </ul>
                 </div>
+              </div>
               </nav>
 
-                <div class="listRename container">
-                    <p>Listanév<sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <div class="list-rename container">
+                    <p class="list-name">Listanév<sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
                       </svg></sup>
@@ -76,6 +80,12 @@
                             <td scope="col">szám</td>
                             <td scope="col">Vásárlási hely</td>
                           </tr>
+                          <script>
+                            //lista növelése
+                            for(let i=0;i<10;i++){
+                              document.querySelector("tbody").innerHTML+='<tr><td scope="col">Név</td><td scope="col">szám</td><td scope="col">szám</td><td scope="col">Vásárlási hely</td></tr>'
+                            }
+                          </script>
                     </tbody>
                   </table>
             </div>
@@ -85,24 +95,27 @@
                 <div class="sum flex-grow-1">
                   <h2>Becsült összeg: </h2>
                 </div>
-                <div class="buttons align-self-end">
-                  <div class="">
-                    <!--<button type="button" class="btn btn-warning">Szerkesztés</button>-->
-                    
-                    <!--bolt-->
+                <div class="align-self-end row">
+                  <div class="col">
+                    <button type="button" class="btn btn-warning">Szerkesztés</button>
+                    <select class="form-select" aria-label="Default select example">
+                      <option selected>bolt</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
                   </div>
-                  <div class="align-self-end d-grid gap-2">
+                  <div class="col">
                     <button type="button" class="btn btn-primary">Rendezés név szerint</button>
                     <button type="button" class="btn btn-primary">Rendezés ár szerint</button>
                   </div>
-                </div>
               </div>
               <div class="deletebtn">
 
               </div>
             </footer>
         </div>
-        
+        <script src="../JS/script.js"></script>
     </body>
 
 </html>
