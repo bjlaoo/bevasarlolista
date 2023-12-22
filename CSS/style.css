@@ -10,13 +10,14 @@ body{
     border-radius: 6px;
     overflow: hidden;
 }
+
 .container{
     text-align: center;
 }
 .mainsecondaryMenu{
     background-color: #BACDFF;
     align-items: center;
-    padding:200px,0px;
+    padding: 20px 50px;
 }
 .navbar{
     margin:0 !important;
@@ -31,7 +32,15 @@ nav{
 }
 ul{
    border-radius: 15px;
-    background-color: #98B3FA;
+   background-color: #98B3FA;
+}
+li{
+    transition: 0.4s;
+    padding:0px 20px;
+}
+li:hover{
+    background-color: rgb(78, 152, 236);
+    border-radius: 15px;
 }
 .inline{
     display: inline;
@@ -41,4 +50,20 @@ ul{
 }
 .buttons{
     padding-right:250px;
+}
+button{
+    margin: 5px;
+}
+.dropdown-menu{
+    background-color: #98B3FA;
+}
+.dropdown-item{
+    
+    transition: 0.4s;
+}
+.dropdown-item:hover{
+    background-color: rgb(78, 152, 236);
+}
+.list-name{
+    align-self: center;
 }
