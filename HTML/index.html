@@ -12,45 +12,48 @@
        
     </head>
     <body>
-        <div class="startingPage">
-            <header>
-              <nav class="navbar navbar-expand-lg navbar-light padding-x-0">
-              <div class="container-fluid">
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-                  <ul class="navbar-nav">
-                    <li class="nav-item">
-                      <a class="nav-link" href="../HTML/test.html">Tesztelés</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Főoldal</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Boltok</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Listák
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Szerkesztés</a>
-                        <a class="dropdown-item" href="#">Törlés</a>
-                        <a class="dropdown-item" href="#">Hozzáadás</a>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              </nav>
-
-                <div class="list-rename container">
-                    <p class="list-name"></p>
-                </div>
-            </header>
-            <div class="container">
+    <div>
+      <header>
+          <nav class="navbar navbar-expand-lg navbar-light padding-x-0">
+          <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="../HTML/test.html">Tesztelés</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Főoldal</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Boltok</a>
+                </li>
+                <li class="nav-item lists">
+                  <a class="nav-link" href="#">Listák</a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Lista
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Szerkesztés</a>
+                    <a class="dropdown-item" href="#">Törlés</a>
+                    <a class="dropdown-item" href="#">Hozzáadás</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          </nav>
+          <div class="list-rename center">
+              <p class="list-name"></p>
+          </div>
+        </header>
+          <div class="startingContainer page">
+            <div class="container-fluid">
                 <table class="table">
                     <thead>
                       <tr>
@@ -64,36 +67,77 @@
                        
                     </tbody>
                   </table>
-            </div>
+                </div>
             
             <footer>
-              <div class="mainsecondaryMenu d-flex">
-                <div class="sum flex-grow-1">
+              <div class="mainsecondaryMenu center row">
+                <div class="col-md-9">
                   <h2>Becsült összeg: </h2>
                 </div>
-                <div class="align-self-end row">
-                  <div class="col">
-                    <button type="button" class="btn btn-warning">Szerkesztés</button>
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>bolt</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                  <div class="col">
-                    <button type="button" class="btn btn-primary">Rendezés név szerint</button>
-                    <button type="button" class="btn btn-primary">Rendezés ár szerint</button>
-                  </div>
-              </div>
-              <div class="deletebtn">
-
+                <div class="col-md-3">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <button type="button" class="btn btn-warning">Szerkesztés</button>
+                      </div>
+                      <div class="row">
+                        <select class="form-select" aria-label="Default select example">
+                          <option selected>bolt</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                      </div>
+                      
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <button type="button" class="btn btn-primary">Rendezés név szerint</button>
+                      </div>
+                      <div class="row">
+                        <button type="button" class="btn btn-primary">Rendezés ár szerint</button>
+                      </div>
+                      </div>                  
+                  </div>                  
+                </div>                
               </div>
             </footer>
+          </div>
+      <div class="listContainer page">
+        <div class="row center">
+          <div class="col-3 center list">
+            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            </svg>
+          </div>
+          <div class="col-3 list">
+
+          </div>
+          <div class="col-3 list">
+
+          </div>
+          <div class="col-3 list">
+
+          </div>
         </div>
+        <div class="row center">
+          <div class="col-3 list">
+
+          </div>
+          <div class="col-3 list">
+
+          </div>
+          <div class="col-3 "></div><div class="col-3"></div>
+        </div>
+        <footer class="del center bg-danger">
+          <button type="button" class="btn btn-outline-danger">Törlés</button>
+        </footer>
+    </div>
         <script src="../JS/element.js"></script>
         <script src="../JS/list.js"></script>
         <script src="../JS/script.js"></script>
+        <script src="../JS/menu.js"></script>
     </body>
 
 </html>
