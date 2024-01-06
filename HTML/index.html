@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="hu">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bevásárlólista oldal</title>
-  <link rel="stylesheet" href="../CSS/bootstrap.min.css">
-  <script src="../JS/bootstrap.bundle.js"></script>
-  <link rel="stylesheet" href="../CSS/style.css">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bevásárlólista oldal</title>
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script src="../JS/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
 
-</head>
-
-<body class="overflow-hidden">
-  <div>
+  <body>
     <header class="sticky-top">
+      <!--NAVBAR-->
       <nav class="navbar navbar-expand-lg navbar-light padding-x-0">
         <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -53,15 +52,14 @@
         </div>
       </nav>
     </header>
-
-    <section class="startingContainer page">
+    <!--MAIN-->
+    <section class="startingContainer">
       <div class="list-rename center">
         <p class="list-name"></p>
       </div>
-      
-      <div class="container-fluid tableContainer overflow-y-scroll">
+      <div class="container-fluid tableContainer">
         <table class="table">
-          <thead class="">
+          <thead>
             <tr>
               <th scope="col">Név</th>
               <th scope="col">Mennyiség</th>
@@ -70,19 +68,17 @@
             </tr>
           </thead>
           <tbody>
-
           </tbody>
         </table>
       </div>
-
-      <footer class="container-fluid sticky-bottom">
+      <footer class="container-fluid sticky-bottom mt-auto">
         <div class="mainsecondaryMenu row">
-          <div class="col-md-9">
+          <div class="col-md-6 center">
             <h2>Becsült összeg: </h2>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-6">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <div class="row">
                   <button type="button" class="btn btn-warning">Szerkesztés</button>
                 </div>
@@ -94,9 +90,11 @@
                     <option value="3">Three</option>
                   </select>
                 </div>
+              </div>
+              <div class="col-md-1">
 
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <div class="row">
                   <button type="button" class="btn btn-primary">Rendezés név szerint</button>
                 </div>
@@ -104,51 +102,76 @@
                   <button type="button" class="btn btn-primary">Rendezés ár szerint</button>
                 </div>
               </div>
+              <div class="col-md-3">
+
+              </div>
             </div>
           </div>
         </div>
       </footer>
     </section>
-
-
-    <section class="listContainer page">
+    <!--LISTA-->
+    <section class="listContainer">
       <div class="container-fluid">
-        <div class="row justify-content-start">
-          <div class="col-3 center list">
-            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-plus-circle"
-              viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-              <path
-                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-            </svg>
+        <div class="justify-content-center">
+          <div class="row justify-content-center">
+            <div class="col-3 center list plus">
+              <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor"
+                class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                <path
+                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+              </svg>
+            </div>
+              <div class="col-3 list center">
+                <div>
+                  <p>Lista</p>
+                  <button type="button" class="btn btn-primary">Megnyitás</button>
+                </div>
+              </div>
+              <div class="col-3 list center">
+                <div>
+                  <p>Lista</p>
+                  <button type="button" class="btn btn-primary">Megnyitás</button>
+                </div>
+              </div>
+              <div class="col-3 list center">
+                <div>
+                  <p>Lista</p>
+                  <button type="button" class="btn btn-primary">Megnyitás</button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col-3 list">
+          <div class="row justify-content-start">
+            <div class="col-3 list center">
+              <div>
+                <p>Lista</p>
+                <button type="button" class="btn btn-primary">Megnyitás</button>
+              </div>
+            </div>
 
-          </div>
-          <div class="col-3 list">
-
-          </div>
-          <div class="col-3 list">
-
-          </div>
-          <div class="col-3 list">
-
-          </div>
-          <div class="col-3 list">
-
+            <div class="col-3 list center">
+              <div>
+                <p>Lista</p>
+                <button type="button" class="btn btn-primary">Megnyitás</button>
+              </div>
+            </div>
           </div>
 
-          </div>
+
         </div>
-      <footer class="del center bg-danger boot">
-        <button type="button" class="btn btn-outline-danger">Törlés</button>
-      </footer>
+        <footer class="mt-auto py-3 del center bg-danger sticky-bottom">
+          <button type="button" class="btn btn-outline-danger">Törlés</button>
+        </footer>
     </section>
-  
-  <script src="../JS/element.js"></script>
-  <script src="../JS/list.js"></script>
-  <script src="../JS/script.js"></script>
-  <script src="../JS/menu.js"></script>
-</body>
+    <section>
+    </section>
+    <!--SCRIPTS-->
+    <script src="../JS/element.js"></script>
+    <script src="../JS/list.js"></script>
+    <script src="../JS/script.js"></script>
+    <script src="../JS/menu.js"></script>
+  </body>
 
 </html>
