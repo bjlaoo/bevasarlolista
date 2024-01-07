@@ -5,7 +5,7 @@
 }
 body{
     background-color: #DBE5FF;
-    font-size: 24px;
+    
 }
 .table {
     border-radius: 15px;
@@ -61,14 +61,11 @@ select{
     background-color: #98B3FA;
 }
 .dropdown-item{
-    font-size: 24px;
+ 
     transition: 0.4s;
 }
 .dropdown-item:hover{
     background-color: rgb(78, 152, 236);
-}
-.list-name{
-    align-self: center;
 }
 .list{
     margin: 25px 25px;
@@ -92,18 +89,30 @@ select{
 .del{
     height: 70px;
 }
-.btn-outline-danger{
+.del-button{
     --bs-btn-color: #fff;
     --bs-btn-border-color: #fff;
 }
-.tableContainer{
-    
-    border-radius: 15px;
+tbody{
+    display: block;
+    height: 300px;
+    width: 100%;
+}
+thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;/* even columns width , fix width of table too*/
 }
 .selected{
     background-color: #d9544f3a;
     border: 1px solid red;
 }
-.btn{
-    font-size: 24px;
+
+/*modal*/
+
+.modal-content{
+    background-color: #DBE5FF;
+}
+.modal-footer{
+    background-color: #BACDFF;
 }
