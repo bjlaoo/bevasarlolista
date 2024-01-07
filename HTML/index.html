@@ -15,7 +15,7 @@
   <body>
     <header class="sticky-top">
       <!--NAVBAR-->
-      <nav class="navbar navbar-expand-lg navbar-light padding-x-0">
+      <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,7 @@
       <div class="list-rename center">
         <p class="list-name"></p>
       </div>
-      <div class="container-fluid tableContainer">
+      <div class="container-fluid tableContainer ">
         <table class="table">
           <thead>
             <tr>
@@ -67,11 +67,11 @@
               <th scope="col">Vásárlási hely</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="overflow-y-scroll">
           </tbody>
         </table>
       </div>
-      <footer class="container-fluid sticky-bottom mt-auto">
+      <footer class="container-fluid fixed-bottom mt-auto">
         <div class="mainsecondaryMenu row">
           <div class="col-md-6 center">
             <h2>Becsült összeg: </h2>
@@ -161,10 +161,11 @@
 
 
         </div>
-        <footer class="mt-auto py-3 del center bg-danger sticky-bottom">
-          <button type="button" class="btn btn-outline-danger">Törlés</button>
+        <footer class="mt-auto py-3 del center bg-danger fixed-bottom">
+          <button type="button" class="btn btn-outline-danger del-button ">Törlés</button>
         </footer>
     </section>
+    <!--lista elemek-->
     <section>
     </section>
     <!--SCRIPTS-->
