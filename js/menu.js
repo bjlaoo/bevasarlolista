@@ -1,4 +1,4 @@
-let windowWidth = window.matchMedia("(max-width: 600px)")
+
 const main=document.querySelector(".main-page");
 //functions
 function clear() {
@@ -17,8 +17,12 @@ clear();
 main.addEventListener("click",function(){
     load(document.querySelector(".starting-container"));   
 })
+
 document.querySelector(".lists-page").addEventListener("click",function(){
     load(document.querySelector(".list-container"));
+})
+document.querySelector(".stores-page").addEventListener("click",function(){
+    load(document.querySelector(".stores-container"));
 })
 document.querySelector(".set-elements").addEventListener("click",function(){
     load(document.querySelector(".element-container"));
@@ -26,4 +30,10 @@ document.querySelector(".set-elements").addEventListener("click",function(){
 document.addEventListener("DOMContentLoaded", function() {
     load(document.querySelector(".starting-container"));
 });
+btns=document.querySelectorAll(".btn-open");
 
+for(let i=0;i<btns.length;i++){
+    btns[i].addEventListener("click",function(){
+    load(document.querySelector(".starting-container"));   
+    })
+}
