@@ -34,8 +34,8 @@ class element{
     setQuantity(quantity){
         this.#quantity=quantity;
     }
-    toTd() {
-        return "<td>"+this.getName()+"</td><td>"+this.getQuantity()+"</td><td>"+this.getPrice()+"</td><td>"+this.getStore()+"</td>";
+    toTr() {
+        return "<tr class=\"element\"><td>"+this.getName()+"</td><td>"+this.getQuantity()+"</td><td>"+this.getPrice()+"</td><td>"+this.getStore()+"</td></tr>";
     }
     toString() {
         return this.getName()+" "+this.getPrice()+" "+this.getStore()+" "+this.getQuantity();
