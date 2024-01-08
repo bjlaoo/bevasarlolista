@@ -1,7 +1,7 @@
 *{
     padding: 0;
     margin: 0;
-    /*outline: 1px solid #f00 !important;*/
+    outline: 1px solid #f00 !important;
 }
 /* scrollbar */
 /* width */
@@ -31,9 +31,12 @@ body{
     overflow: hidden;
     
 }
-.table-container{
-    margin-bottom:240px;
+
+.table-container {
+    margin-bottom: 240px;
 }
+
+
 .container-fluid{
     text-align: center;
 }
@@ -98,7 +101,7 @@ select{
     text-align: center;
 }
 .lists{
-    margin-bottom: 70px;
+    width: 77%;
 }
 
 tbody {
