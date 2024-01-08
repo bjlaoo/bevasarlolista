@@ -1,7 +1,7 @@
 *{
     padding: 0;
     margin: 0;
-    outline: 1px solid #f00 !important;
+    /*outline: 1px solid #f00 !important; */
 }
 /* scrollbar */
 /* width */
@@ -43,7 +43,7 @@ body{
 .container-flud{
     padding:0;
 }
-.mainsecondaryMenu{
+.secondary-menu{
     background-color: #BACDFF;
     padding:15px;
 }
@@ -76,12 +76,15 @@ li:hover{
 .buttons{
     padding-right:250px;
 }
+
 button{
     margin: 5px;
 }
+/*
 select{
     margin: 5px;
 }
+*/
 .dropdown-menu{
     background-color: #98B3FA;
 }
@@ -93,15 +96,16 @@ select{
     background-color: rgb(78, 152, 236);
 }
 .list{
-    margin: 25px 25px;
+    margin: 10px 10px;
     border-radius: 15px;
-    height: 270px;
-    width: 270px;
+    height: 180px;
+    width: 180px;
     background-color: #D9D9D9;
     text-align: center;
 }
 .lists{
-    width: 77%;
+    margin-bottom: 70px;
+    justify-content: center;
 }
 
 tbody {
@@ -132,9 +136,12 @@ thead, tbody tr {
     background-color: #d9544f3a;
     border: 1px solid red;
 }
-tr.selected-element td {
+.selected-element td {
     background-color: #D1E7DD;
 
+}
+.selected-todel-element td{
+    background-color: #ffd4dc;
 }
 /*modal*/
 
@@ -143,4 +150,39 @@ tr.selected-element td {
 }
 .modal-footer{
     background-color: #BACDFF;
+}
+
+/*lapozás gomb*/
+.inline{
+    display: inline-block;
+}
+
+.arrow{
+    background-color:#FFC107;
+    user-select: none; 
+    border-radius: 15px;
+    min-width: 75px;
+}
+.btn{
+    border-radius: 15px;
+}
+.btn-open{
+    background-color: white;
+}
+.btn-open:hover{
+    background-color: white;
+}
+form *{
+    border-radius:15px;
+}
+.form-select{
+    margin: 5px;
+}
+.store-btn{
+    display: inline-block !important;
+    width: 100% !important;
+}
+.store-edit{
+    max-width: 125px!important;
+    overflow: hidden;
 }
