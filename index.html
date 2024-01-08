@@ -81,7 +81,7 @@
             <div class="row container-fluid">
               <div class="col-md-4">
                 <div class="row">
-                  <button type="button" class="btn btn-warning">Elemek szerkesztése</button>
+                  <button type="button" class="btn btn-warning set-elements">Elemek szerkesztése</button>
                 </div>
                 <div class="row">
                   <select class="form-select" aria-label="Default select example">
@@ -198,7 +198,97 @@
         </div>
       </div>
       <footer class="mt-auto del center bg-danger sticky-bottom">
-        <button type="button" class="btn btn-outline-danger del-button">Törlés</button>
+        <button type="button" class="btn btn-outline-danger del-button" data-bs-toggle="modal" data-bs-target=".list-del-confirmation">Törlés</button>
+      </footer>
+    </section>
+    <!--ELEMENT-->
+    <section class="element-container">
+      <div class="container-fluid center">
+        <div class="row lists justify-flex-start">
+          <div class="col-3 center list plus" data-bs-toggle="modal" data-bs-target=".add">
+            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-plus-circle"
+              viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+              <path
+                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+            </svg>
+          </div>
+          <div class="col-3 list center">
+            <div>
+              <p>Elem</p>
+              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target=".set">Szerkesztés</button>
+            </div>
+          </div>
+          <div class="col-3 list center">
+            <div>
+              <p>Lista</p>
+              <button type="button" class="btn btn-primary">Megnyitás</button>
+            </div>
+          </div>
+          <div class="col-3 list center">
+            <div>
+              <p>Lista</p>
+              <button type="button" class="btn btn-primary">Megnyitás</button>
+            </div>
+          </div>
+          <div class="col-3 list center">
+            <div>
+              <p>Lista</p>
+              <button type="button" class="btn btn-primary">Megnyitás</button>
+            </div>
+          </div>
+          <div class="col-3 list center">
+            <div>
+              <p>Lista</p>
+              <button type="button" class="btn btn-primary">Megnyitás</button>
+            </div>
+          </div>
+          <div class="col-3 list center">
+            <div>
+              <p>Lista</p>
+              <button type="button" class="btn btn-primary">Megnyitás</button>
+            </div>
+          </div>
+          <div class="col-3 list center">
+            <div>
+              <p>Lista</p>
+              <button type="button" class="btn btn-primary">Megnyitás</button>
+            </div>
+          </div>
+          <div class="col-3 list center">
+            <div>
+              <p>Lista</p>
+              <button type="button" class="btn btn-primary">Megnyitás</button>
+            </div>
+          </div>
+          <div class="col-3 list center">
+            <div>
+              <p>Lista</p>
+              <button type="button" class="btn btn-primary">Megnyitás</button>
+            </div>
+          </div>
+          <div class="col-3 list center">
+            <div>
+              <p>Lista</p>
+              <button type="button" class="btn btn-primary">Megnyitás</button>
+            </div>
+          </div>
+          <div class="col-3 list center">
+            <div>
+              <p>Lista</p>
+              <button type="button" class="btn btn-primary">Megnyitás</button>
+            </div>
+          </div>
+          <div class="col-3 list center">
+            <div>
+              <p>Lista</p>
+              <button type="button" class="btn btn-primary">Megnyitás</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="mt-auto del center bg-danger sticky-bottom">
+        <button type="button" class="btn btn-outline-danger del-button" data-bs-toggle="modal" data-bs-target=".element-del-confirmation">Törlés</button>
       </footer>
     </section>
     <!-- modal -->
@@ -256,9 +346,37 @@
       </div>
     </div>
   </div>
-    <!--lista elemek-->
-    <section>
-    </section>
+  <!-- elementdelconfirmation -->
+  <div class="modal fade element-del-confirmation"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>Biztos hogy törölni szeretné az alábbi tételeket?</p>
+          <p class="elements">Elem1, elem2, elem3</p>
+        </div>
+        <div class="modal-footer center">
+          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Mégse</button>
+          <button type="button" class="btn btn-danger">Törlés</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- listdelconfirmation -->
+  <div class="modal fade list-del-confirmation"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>Biztos hogy törölni szeretné az alábbi listákat?</p>
+          <p class="elements">Lista1, Lista2, Lista3</p>
+        </div>
+        <div class="modal-footer center">
+          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Mégse</button>
+          <button type="button" class="btn btn-danger">Törlés</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <!--SCRIPTS-->
     <script src="js/element.js"></script>
     <script src="js/list.js"></script>
