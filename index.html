@@ -77,11 +77,11 @@
           <div class="col-md-6 center">
             <h2>Becsült összeg: </h2>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 center">
             <div class="row container-fluid">
               <div class="col-md-4">
                 <div class="row">
-                  <button type="button" class="btn btn-warning">Szerkesztés</button>
+                  <button type="button" class="btn btn-warning">Elemek szerkesztése</button>
                 </div>
                 <div class="row">
                   <select class="form-select" aria-label="Default select example">
@@ -92,7 +92,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-1">
+              <div class="col-md-1 ">
 
               </div>
               <div class="col-md-4">
@@ -113,9 +113,9 @@
     </section>
     <!--LISTA-->
     <section class="list-container">
-      <div class="container-fluid lists justify-content-center">
-        <div class="row" style="align-self: center;">
-          <div class="col-3 center list plus">
+      <div class="container-fluid center">
+        <div class="row lists justify-flex-start">
+          <div class="col-3 center list plus" data-bs-toggle="modal" data-bs-target=".add">
             <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-plus-circle"
               viewBox="0 0 16 16">
               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
@@ -197,10 +197,65 @@
           </div>
         </div>
       </div>
-      <footer class="del center bg-danger fixed-bottom">
-        <button type="button" class="btn btn-outline-danger del-button ">Törlés</button>
+      <footer class="mt-auto del center bg-danger sticky-bottom">
+        <button type="button" class="btn btn-outline-danger del-button">Törlés</button>
       </footer>
     </section>
+    <!-- modal -->
+    <div class="modal fade add"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form class="form floating">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Név">
+                <label for="floatingInput">Név</label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer center">
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Mégse</button>
+            <button type="button" class="btn btn-primary">Hozzáadás</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- set -->
+  <div class="modal fade set"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form class="form floating">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="floatingInput" placeholder="Eredeti név">
+              <label for="floatingInput">Eredeti név</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="number" class="form-control" id="floatingInput" placeholder="Eredeti mennyiség">
+              <label for="floatingInput">Eredeti mennyiség</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="number" class="form-control" id="floatingInput" placeholder="Eredeti egységár">
+              <label for="floatingInput">Eredeti egységár</label>
+            </div>
+            <div class="form-floating">
+              <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                <option selected>Eredeti bolt</option>
+                <option value="1">cba</option>
+                <option value="2">ee</option>
+                <option value="3">ee</option>
+              </select>
+              <label for="floatingSelect">Bolt</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer center">
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Mégse</button>
+          <button type="button" class="btn btn-primary">Szerkesztés</button>
+        </div>
+      </div>
+    </div>
+  </div>
     <!--lista elemek-->
     <section>
     </section>
