@@ -20,6 +20,9 @@ main.addEventListener("click",function(){
 document.querySelector(".lists-page").addEventListener("click",function(){
     load(document.querySelector(".list-container"));
 })
+document.querySelector(".set-elements").addEventListener("click",function(){
+    load(document.querySelector(".element-container"));
+})
 document.addEventListener("DOMContentLoaded", function() {
     load(document.querySelector(".starting-container"));
 });
