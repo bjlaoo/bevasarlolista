@@ -2,7 +2,7 @@ class element{
     #name;
     #price;
     #store;
-    #quantity
+    #quantity;
     constructor(name,quantity,price,store){
         this.setName(name);
         this.setQuantity(quantity);
@@ -34,8 +34,8 @@ class element{
     setQuantity(quantity){
         this.#quantity=quantity;
     }
-    toTr() {
-        return "<tr class=\"element\"><td>"+this.getName()+"</td><td>"+this.getQuantity()+"</td><td>"+this.getPrice()+"</td><td>"+this.getStore()+"</td></tr>";
+    toDiv(){
+        return "<div class=\"list center\"><div><p>"+this.getName()+"</p><button type=\"button\" class=\"btn btn-warning\" data-bs-toggle=\"modal\" data-bs-target=\".set\">Szerkesztés</button></div></div>"
     }
     toString() {
         return this.getName()+" "+this.getPrice()+" "+this.getStore()+" "+this.getQuantity();
