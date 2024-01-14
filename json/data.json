@@ -1,5 +1,4 @@
 {
-{
     "lists": [
         {"name":"List 1","elements":[
             {"name":"Element 1","quantity":"123","price":"123","store":"bolt","isBought":false},
