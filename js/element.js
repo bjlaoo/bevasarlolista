@@ -3,11 +3,13 @@ class element{
     #price;
     #store;
     #quantity;
-    constructor(name,quantity,price,store){
+    #isBought;
+    constructor(name,quantity,price,store,isBought){
         this.setName(name);
         this.setQuantity(quantity);
         this.setPrice(price);
         this.setStore(store);
+        this.setIsBought(isBought);
   
     }
     getName(){
@@ -34,8 +36,20 @@ class element{
     setQuantity(quantity){
         this.#quantity=quantity;
     }
+    getIsBought(){
+        return this.#isBought;
+    }
+    setIsBought(isBought){
+        this.#isBought=isBought;
+    }
+    toTr() {
+
+        return "<tr class=\"element" + (this.getIsBought() ? " selected-element" : "") + "\"><td>" + this.getName()+ "</td><td>" + this.getQuantity() + "</td><td>" + this.getPrice() + "</td><td>" + this.getStore() + "</td></tr>";
+    }
+    
     toDiv(){
-        return "<div class=\"list center\"><div><p>"+this.getName()+"</p><button type=\"button\" class=\"btn btn-warning\" data-bs-toggle=\"modal\" data-bs-target=\".set\">Szerkesztés</button></div></div>"
+        
+        return "<div class=\"list center\"><div><p>"+this.getName()+"</p><button type=\"button\" class=\"btn btn-warning\" data-bs-toggle=\"modal\" data-bs-target=\".set\">Szerkesztés</button></div></div>";
     }
     toString() {
         return this.getName()+" "+this.getPrice()+" "+this.getStore()+" "+this.getQuantity();
