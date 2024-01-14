@@ -1,170 +1,180 @@
-let lists = [];
-//majd jsonből kell kiszedni, amit majd firebaseből kell kiszedni.
-xmlhttp=new XMLHttpRequest();
-xmlhttp.onload=function(){
-    let x=JSON.parse(this.responseText);
-    for(let i=0;i<x.lists.length;i++){
-        let tmplist=new elementlist(x.lists[i].name);
-        for(let j=0;j<x.lists[i].elements.length;j++){
-            tmplist.addElement(new element(x.lists[i].elements[j].name,x.lists[i].elements[j].quantity,x.lists[i].elements[j].price,x.lists[i].elements[j].store));
+//read json
+
+xmlhttp = new XMLHttpRequest();
+xmlhttp.onload = function () {
+    let x = JSON.parse(this.responseText);
+    for (let i = 0; i < x.lists.length; i++) {
+        let tmplist = new elementlist(x.lists[i].name);
+        for (let j = 0; j < x.lists[i].elements.length; j++) {
+            tmplist.addElement(new element(x.lists[i].elements[j].name, x.lists[i].elements[j].quantity, x.lists[i].elements[j].price, x.lists[i].elements[j].store, x.lists[i].elements[j].isBought));
         }
         lists.push(tmplist)
     }
-    console.log(lists);
+    for (let i = 0; i < x.stores.length; i++) {
+        storeslist.push(new store(x.stores[i].name, x.stores[i].address, x.stores[i].opening));
+    }
 
-    let selectedList = lists[0];//majd le kell szűrni
-    let tbody = document.querySelector("tbody");
+
+    let selectedList = lists[0];
+    write(selectedList);
+
+
+    //add list
+    document.querySelector(".btn-add-list").addEventListener("click", function () {
+        lists.push(new elementlist(document.querySelector(".list-input-name").value));
+        write(selectedList);
+    })
+    //del list
+    document.querySelector(".btn-del-list").addEventListener("click", function () {
+        for (let i = 0; i < toDelList.length; i++) {
+            lists[toDelList[i]] = null;
+        }
+        for (let i = 0; i < lists.length; i++) {
+            if (lists[i] != null) {
+                selectedList = lists[i];
+            }
+
+        }
+        write(selectedList);
+    })
+
+
+}
+xmlhttp.open("GET", "json/data.json");
+xmlhttp.send();
+//functions
+
+function clearDivs() {
+    document.querySelector("tbody").innerHTML = "";
+    document.querySelector(".store-table").innerHTML = "";
+    document.querySelector(".lists").innerHTML = "";
+    document.querySelector(".element-conitainer").innerHTML = "";
+}
+
+function write(selectedList) {
+    clearDivs();
     let elements = selectedList.getElements();
-
     for (let i = 0; i < elements.length; i++) {
-        tbody.innerHTML += elements[i].toTr();
+        document.querySelector(".elements-list-out").innerHTML += elements[i].toTr();
     }
 
-    //listdivs feltöltése
     let listdiv = document.querySelector(".lists");
-
+    listdiv.innerHTML += "<div class=\"col-3 center list plus\" data-bs-toggle=\"modal\" data-bs-target=\".add-list\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"200\" height=\"200\" fill=\"currentColor\" class=\"bi bi-plus-circle\"viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\" /><path d=\"M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4\" /> </svg></div>"
     for (let i = 0; i < lists.length; i++) {
-        listdiv.innerHTML += lists[i].toDiv();
+        if (lists[i] != null) {
+            listdiv.innerHTML += lists[i].toDiv();
+        }
     }
-/*
-    listdiv = document.querySelector(".element-conitaner");
-    for (let i = 0; i < selectedList.length; i++) {
-        listdiv.innerHTML += selectedList[i].toDiv();
+    listdiv = document.querySelector(".element-conitainer");
+    listdiv.innerHTML += "<div class=\"col-3 center list plus\" data-bs-toggle=\"modal\" data-bs-target=\".add-element\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"200\" height=\"200\" fill=\"currentColor\" class=\"bi bi-plus-circle\"viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\" /><path d=\"M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4\" /> </svg></div>"
+    for (let i = 0; i < elements.length; i++) {
+        listdiv.innerHTML += elements[i].toDiv();
     }
-*/
+    toDelList = [];
+    listdivs = document.querySelectorAll(".list");
+    for (let i = 0; i < listdivs.length; i++) {
+        (function (index) {
+            listdivs[index].addEventListener("click", function (event) {
+                if (event.target === listdivs[index]) {
+                    if (listdivs[index].classList.contains("selected-list") || listdivs[index].classList.contains("plus")) {
+                        listdivs[index].classList.remove("selected-list");
+                        toDelList.splice(listdivs[index].classList[2], 1);
+                    } else {
+                        listdivs[index].classList.add("selected-list");
+                        toDelList.push(listdivs[index].classList[2]);
+                    }
+                }
+            });
+        })(i);
+    }
+    //selectelements
+    elements = document.querySelectorAll(".element");
+    for (let i = 0; i < elements.length; i++) {
+        (function (index) {
+            elements[index].addEventListener("click", function () {
+                if (elements[index].classList.contains("selected-element")) {
+                    elements[index].classList.remove("selected-element");
+                    selectedList.getElements()[index].setIsBought(false);
+                } else {
+                    elements[index].classList.add("selected-element");
+                    selectedList.getElements()[index].setIsBought(true);
+                }
+            });
+        })(i);
+    }
+    let todelelements = document.querySelectorAll(".store");
+    for (let i = 0; i < todelelements.length; i++) {
+        (function (index) {
+            todelelements[index].addEventListener("click", function (event) {
+                if (!event.target.classList.contains("store-edit")) {
+                    if (todelelements[index].classList.contains("selected-todel-element")) {
+                        todelelements[index].classList.remove("selected-todel-element");
+                    } else {
+                        todelelements[index].classList.add("selected-todel-element");
+                    }
+                }
+            });
+        })(i);
+    }
 
-    
+
+    let tableNumber = Math.ceil(storeslist.length / 10);
+    let div = document.querySelector(".store-table");
+    let index = 0;
+    for (let i = 0; i < tableNumber; i++) {
+        div.innerHTML += "<tbody class=\"page-" + i + " page\"></tbody>";
+        let tbody = document.querySelector(".page-" + i)
+        for (let j = 0; j < 10; j++) {
+            if (index < storeslist.length) {
+                tbody.innerHTML += storeslist[index].toTr();
+                index++;
+            }
+        }
+    }
+    openBtns = document.querySelectorAll(".btn-open");
+    for (let i = 0; i < openBtns.length; i++) {
+        openBtns[i].addEventListener("click", function () {
+            n = openBtns[i].classList[2];
+            selectedList = lists[n];
+            write(selectedList);
+            
+            load(document.querySelector(".starting-container"));
+            console.log(selectedList);
+        });
+    }
+    //list rename
     let listName = document.querySelector(".list-name");
     listName.innerHTML = selectedList.getName() + "<sup><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10\" height=\"10\" fill=\"currentColor\" class=\"bi bi-pencil-square\" viewBox=\"0 0 16 16\"><path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"/><path fill-rule=\"evenodd\" d=\"M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z\"/></svg></sup>";
     listName.addEventListener("click", function () {
-    let originalText = selectedList.getName();
-    listName.innerHTML = '<input type="text" class="list-name form-control" placeholder="' + selectedList.getName() + '">';
-    listName.focus();
-    let inputElement = listName.querySelector('input');
-    inputElement.focus();
-    $(document).on("keydown", function (event) {
-        switch (event.keyCode) {
-            case 13: // Enter key
-                selectedList.setName(inputElement.value);
-                listName.innerHTML = selectedList.getName() + '<sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup>'
-                break;
-            case 27: // Escape key
-                console.log("Escape key pressed");
-                listName.innerHTML =  originalText + '<sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup>'
-                break;
-        }
+        console.log(selectedList);
+        let originalText = selectedList.getName();
+        listName.innerHTML = '<input type="text" class="form-control" placeholder="' + selectedList.getName() + '">';
+        listName.focus();
+        let inputElement = listName.querySelector('input');
+        inputElement.focus();
+        $(document).on("keydown", function (event) {
+            switch (event.keyCode) {
+                case 13: // Enter key
+                    selectedList.setName(inputElement.value);
+                    write(selectedList);
+                    break;
+                case 27: // Escape key
+                    listName.innerHTML = originalText + '<sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup>';
+                    break;
+            }
+        });
     });
-});
 }
-xmlhttp.open("GET","json/data.json");
-xmlhttp.send();
+let lists = [];
+let storeslist = [];
 
-/*lists.push(new elementlist("lista"));
-
-big_list = [
-    ["alma", 3, 22, "abc"],
-    ["banán", 4, 33, "cba"],
-    ["cseresznye", 5, 25, "def"],
-    ["datolyaszilva", 2, 18, "ghi"],
-    ["bodza", 7, 30, "jkl"],
-    ["füge", 6, 28, "mno"],
-    ["citrancs", 8, 40, "pqr"],
-    ["sárgadinnye", 3, 25, "stu"],
-    ["kiwi", 4, 33, "vwx"],
-    ["citrom", 5, 22, "yz"],
-    ["mangó", 2, 18, "123"],
-    ["nektarin", 7, 30, "456"],
-    ["narancs", 6, 28, "789"],
-    ["körte", 8, 40, "012"],
-    ["birsalma", 3, 25, "345"],
-    ["málna", 4, 33, "678"],
-    ["eper", 5, 22, "901"],
-    ["mandarin", 2, 18, "234"],
-    ["pomelo", 7, 30, "567"],
-    ["dinnye", 6, 28, "890"],
-    ["alma", 3, 22, "abc"],
-    ["banán", 4, 33, "cba"],
-    ["cseresznye", 5, 25, "def"],
-    ["datolyaszilva", 2, 18, "ghi"],
-    ["bodza", 7, 30, "jkl"],
-    ["füge", 6, 28, "mno"],
-    ["citrancs", 8, 40, "pqr"],
-    ["sárgadinnye", 3, 25, "stu"],
-    ["kiwi", 4, 33, "vwx"],
-    ["citrom", 5, 22, "yz"],
-    ["mangó", 2, 18, "123"],
-    ["nektarin", 7, 30, "456"],
-    ["narancs", 6, 28, "789"],
-    ["körte", 8, 40, "012"],
-    ["birsalma", 3, 25, "345"],
-    ["málna", 4, 33, "678"],
-    ["eper", 5, 22, "901"],
-    ["mandarin", 2, 18, "234"],
-    ["pomelo", 7, 30, "567"],
-    ["dinnye", 6, 28, "890"]
-]*/
-
-
-
-//list rename
-
-
-//selectlist
-listdivs = document.querySelectorAll(".list");
-
-for (let i = 0; i < listdivs.length; i++) {
-    (function(index) {
-        listdivs[index].addEventListener("click", function (event) {
-            if (event.target === listdivs[index]) {
-                if (listdivs[index].classList.contains("selected-list") || listdivs[index].classList.contains("plus")) {
-                    listdivs[index].classList.remove("selected-list");
-                } else {
-                    listdivs[index].classList.add("selected-list");
-                }
-            }
-        });
-    })(i);
-}
-
-
-//selectelements
-let elements = document.querySelectorAll(".element");
-for (let i = 0; i < elements.length; i++) {
-    (function(index) {
-        elements[index].addEventListener("click", function () {
-            if (elements[index].classList.contains("selected-element")) {
-                elements[index].classList.remove("selected-element");
-            } else {
-                elements[index].classList.add("selected-element");
-            }
-        });
-    })(i);
-}
-let todelelements = document.querySelectorAll(".store");
-
-for (let i = 0; i < todelelements.length; i++) {
-    (function(index) {
-        todelelements[index].addEventListener("click", function(event) {
-            if (!event.target.classList.contains("store-edit")) {
-                if (todelelements[index].classList.contains("selected-todel-element")) {
-                    todelelements[index].classList.remove("selected-todel-element");
-                } else {
-                    todelelements[index].classList.add("selected-todel-element");
-                }
-            }
-        });
-    })(i);
-}
 
 //page (storepage)
-let pages=document.querySelectorAll(".page");
-for(let i=1;i<pages.length;i++){
-    pages[i].style.display="none";
-    console.log(pages[i]);
+let pages = document.querySelectorAll(".page");
+for (let i = 1; i < pages.length; i++) {
+    pages[i].style.display = "none";
 }
-
 let page = 1;
-
 document.querySelector(".btn-left").addEventListener("click", function left() {
     if (page > 1) {
         document.querySelector(".page-" + page).style.display = "none";
@@ -172,7 +182,6 @@ document.querySelector(".btn-left").addEventListener("click", function left() {
         document.querySelector(".page-" + page).style.display = "block";
     }
 });
-
 document.querySelector(".btn-right").addEventListener("click", function right() {
     if (page < 3) {
         document.querySelector(".page-" + page).style.display = "none";
@@ -181,13 +190,21 @@ document.querySelector(".btn-right").addEventListener("click", function right() 
     }
 });
 
-//List add
-var listak=[];
+function Torles() {
+    let selectedLists = document.querySelectorAll(".selected-list");
+    let p = document.querySelector(".del-lists");
+    p.innerHTML = "";
+    for (let i = 0; i < selectedLists.length; i++) {
+        for (let j = 0; j < lists.length; j++) {
+            if (selectedLists[i].classList[2] == lists[j].getId()) {
+                if (i != selectedLists.length - 1) {
+                    p.innerHTML += lists[j].getName() + ", ";
+                }
+                else {
+                    p.innerHTML += lists[j].getName();
+                }
+            }
+        }
 
-var plus = document.querySelector(".plus") 
-
-plus.addEventListener("click", function () {
-    let div = document.querySelector(".lists");
-    div.innerHTML += " <div class=\"list center\"><div><p>"+this.getName()+"</p><button type=\"button\" class=\"btn btn-open\">Megnyitás</button>"+"</div></div>";
-
-});
+    }
+}
