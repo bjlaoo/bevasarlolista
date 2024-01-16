@@ -47,7 +47,35 @@ xmlhttp.onload = function () {
         }
         write(selectedList);
     })
+    
+    //add element
+    document.querySelector(".btn-add-element").addEventListener("click",function(){
+        selectedList.addElement(new element(document.querySelector(".element-input-name").value,document.querySelector(".element-input-quantity").value,document.querySelector(".element-input-price").value,document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text));
+        write(selectedList);
+    })  
+    //edit element
+    editElements=document.querySelectorAll(".btn-set-element");
+    
+    for(let i=0;i<editElements.length;i++){
+            editElements[i].addEventListener("click",function(){
 
+                document.querySelector(".btn-set-confirmation").addEventListener("click",function(){    
+                    let elementindex=editElements[i].classList[2];
+                    alert(i);
+                    selectedList.getElements()[elementindex].setName(document.querySelector(".element-set-name").value);
+                    selectedList.getElements()[elementindex].setQuantity(document.querySelector(".element-set-quantity").value);
+                    selectedList.getElements()[elementindex].setPrice(document.querySelector(".element-set-price").value);
+                    selectedList.getElements()[elementindex].setStore(document.querySelector(".element-set-store").options[document.querySelector(".element-input-store").selectedIndex].text);
+                    write(selectedList);
+            })
+        })
+    }
+    //del element
+    document.querySelector(".btn-del-element").addEventListener("click", function(){
+        for (let i = 0; i<3; i++){
+            ;
+        }
+    })
 
 }
 xmlhttp.open("GET", "json/data.json");
@@ -113,6 +141,19 @@ function write(selectedList) {
         })(i);
     }
 
+    //selectelement-div
+    elementsMain = document.querySelectorAll(".element-div");
+    for (let i = 0; i < elementsMain.length; i++) {
+        (function (index) {
+            elementsMain[index].addEventListener("click", function () {
+                if (elementsMain[index].classList.contains("selected-div")) {
+                    elementsMain[index].classList.remove("selected-div");               
+                } else {
+                    elementsMain[index].classList.add("selected-div");
+                }
+            });
+        })(i);
+    }
 
 
     let tableNumber = Math.ceil(storeslist.length / 10);
@@ -128,6 +169,7 @@ function write(selectedList) {
             }
         }
     }
+ 
     let todelelements = document.querySelectorAll(".store");
     for (let i = 0; i < todelelements.length; i++) {
         (function(index) {
@@ -225,5 +267,27 @@ document.querySelector(".del-button-list").addEventListener("click",function () 
 
         }
     }
-}
-)
+})
+let elementsDiv = [];
+document.querySelector(".del-button-element").addEventListener("click", function(){
+    let selectedElements = document.querySelectorAll(".selected-div");
+    let p = document.querySelector(".del-elements");
+    p.innerHTML="A";
+    for(let i = 0; i<selectedElements.length; i++){
+        for(let j = 0; j<elementsDiv.length; j++){
+            if (elementsDiv[j]!=null){
+                if(selectedElements[i].classList[2] == elementsDiv[j].getId()){
+                    if (i != selectedElements.length - 1) {
+                        p.innerHTML += elementsDiv[j].classList[2]() + ", ";
+                    }
+                    else {
+                        p.innerHTML += elementsDiv[j].classList[2]()+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+                    }
+                }
+            }else{
+                p.innerHTML+="üres a kutya";
+            }
+                
+        }
+    }
+})
