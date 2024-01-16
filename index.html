@@ -268,19 +268,19 @@
           <form class="form floating">
             <div class="form-floating mb-3">
               <input type="text" class="form-control floatingInput element-set-name" placeholder="Eredeti név"><!--placeholder átírása-->
-              <label >Eredeti név</label>
+              <label class="element-set-name-label">Eredeti név</label>
             </div>
             <div class="form-floating mb-3">
               <input type="number" class="form-control floatingInput element-set-quantity" placeholder="Eredeti mennyiség">
-              <label >Eredeti mennyiség</label>
+              <label class="element-set-quantity-label">Eredeti mennyiség</label>
             </div>
             <div class="form-floating mb-3">
               <input type="number" class="form-control floatingInput element-set-price" placeholder="Eredeti egységár">
-              <label >Eredeti egységár</label>
+              <label class="element-set-price-label">Eredeti egységár</label>
             </div>
             <div class="form-floating">
               <select class="form-select floatingSelect element-set-store" aria-label="Floating label select example">
-                <option selected>Eredeti bolt</option>
+                <option class="element-set-store-selected" selected>Eredeti bolt</option>
                 <option value="1">cba</option>
                 <option value="2">ee</option>
                 <option value="3">ee</option>
@@ -318,7 +318,7 @@
         </div>
         <div class="modal-footer center">
           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Mégse</button>
-          <button type="button" class="btn btn-primary">Szerkesztés</button>
+          <button type="submit" class="btn btn-primary">Szerkesztés</button>
         </div>
       </div>
     </div>
