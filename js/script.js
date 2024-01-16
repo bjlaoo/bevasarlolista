@@ -55,21 +55,38 @@ xmlhttp.onload = function () {
     })  
     //edit element
     editElements=document.querySelectorAll(".btn-set-element");
-    
-    for(let i=0;i<editElements.length;i++){
-            editElements[i].addEventListener("click",function(){
 
-                document.querySelector(".btn-set-confirmation").addEventListener("click",function(){    
-                    let elementindex=editElements[i].classList[2];
-                    alert(i);
-                    selectedList.getElements()[elementindex].setName(document.querySelector(".element-set-name").value);
-                    selectedList.getElements()[elementindex].setQuantity(document.querySelector(".element-set-quantity").value);
-                    selectedList.getElements()[elementindex].setPrice(document.querySelector(".element-set-price").value);
-                    selectedList.getElements()[elementindex].setStore(document.querySelector(".element-set-store").options[document.querySelector(".element-input-store").selectedIndex].text);
-                    write(selectedList);
-            })
+    for(let i=0;i<editElements.length;i++){
+        editElements[i].addEventListener("click",function(){
+            document.querySelector(".element-set-name-label").innerHTML=selectedList.getElements()[i].getName();
+            document.querySelector(".element-set-quantity-label").innerHTML=selectedList.getElements()[i].getQuantity();
+            document.querySelector(".element-set-price-label").innerHTML=selectedList.getElements()[i].getPrice();
+            document.querySelector(".element-set-store-selected").innerHTML=selectedList.getElements()[i].getStore();
+            elementindex=editElements[i].classList[2];
+            
         })
     }
+    document.querySelector(".btn-set-confirmation").addEventListener("click",function(){
+        selectedList.getElements()[elementindex].setName(document.querySelector(".element-set-name").value);
+        selectedList.getElements()[elementindex].setQuantity(document.querySelector(".element-set-quantity").value);
+        selectedList.getElements()[elementindex].setPrice(document.querySelector(".element-set-price").value);
+        selectedList.getElements()[elementindex].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
+        write(selectedList);
+        document.querySelector(".element-set-name").value = '';
+        document.querySelector(".element-set-quantity").value = '';
+        document.querySelector(".element-set-price").value = '';
+        //store
+        editElements=document.querySelectorAll(".btn-set-element");
+        for(let i=0;i<editElements.length;i++){
+            editElements[i].addEventListener("click",function(){
+                document.querySelector(".element-set-name-label").innerHTML=selectedList.getElements()[i].getName();
+                document.querySelector(".element-set-quantity-label").innerHTML=selectedList.getElements()[i].getQuantity();
+                document.querySelector(".element-set-price-label").innerHTML=selectedList.getElements()[i].getPrice();
+                document.querySelector(".element-set-store-selected").innerHTML=selectedList.getElements()[i].getStore();
+                elementindex=editElements[i].classList[2];
+            })
+        }
+    })
     //del element
     document.querySelector(".btn-del-element").addEventListener("click", function(){
         for (let i = 0; i<3; i++){
