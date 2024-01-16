@@ -4,12 +4,16 @@ class element{
     #store;
     #quantity;
     #isBought;
+    static elementCounter = 0;
+    #id;
+    
     constructor(name,quantity,price,store,isBought){
         this.setName(name);
         this.setQuantity(quantity);
         this.setPrice(price);
         this.setStore(store);
         this.setIsBought(isBought);
+        this.setId(element.elementCounter++)
   
     }
     getName(){
@@ -42,6 +46,12 @@ class element{
     setIsBought(isBought){
         this.#isBought=isBought;
     }
+    getId(){
+        return this.#id;
+    }
+    setId(id){
+        this.#id=id;
+    }
     toTr() {
 
         return "<tr class=\"element" + (this.getIsBought() ? " selected-element" : "") + "\"><td>" + this.getName()+ "</td><td>" + this.getQuantity() + "</td><td>" + this.getPrice() + "</td><td>" + this.getStore() + "</td></tr>";
@@ -49,7 +59,7 @@ class element{
     
     toDiv(){
         
-        return "<div class=\"list center\"><div><p>"+this.getName()+"</p><button type=\"button\" class=\"btn btn-warning\" data-bs-toggle=\"modal\" data-bs-target=\".set\">Szerkesztés</button></div></div>";
+        return "<div class=\"element-div center "+this.getId()+"\"><div><p>"+this.getName()+"</p><button type=\"button\" class=\"btn btn-warning "+this.getId()+" btn-set-element\" data-bs-toggle=\"modal\" data-bs-target=\".set\">Szerkesztés</button></div></div>";
     }
     toString() {
         return this.getName()+" "+this.getPrice()+" "+this.getStore()+" "+this.getQuantity();
