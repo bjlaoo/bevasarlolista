@@ -27,17 +27,17 @@ xmlhttp.onload = function () {
     document.querySelector(".btn-del-list").addEventListener("click", function () {
         for (let i = 0; i < toDelList.length; i++) {
             lists[toDelList[i]] = null;
-            selectedList=null;            
+            selectedList = null;
         }
-        
+
         for (let i = 0; i < lists.length; i++) {
             if (lists[i] != null) {
                 selectedList = lists[i];
             }
-            
+
         }
-        if(selectedList===null){
-            selectedList=new elementlist("Üres lista");
+        if (selectedList === null) {
+            selectedList = new elementlist("Üres lista");
             lists.push(selectedList);
             for (let i = 0; i < lists.length; i++) {
                 if (lists[i] != null) {
@@ -47,26 +47,47 @@ xmlhttp.onload = function () {
         }
         write(selectedList);
     })
-    
-    //add element
-    document.querySelector(".btn-add-element").addEventListener("click",function(){
-        selectedList.addElement(new element(document.querySelector(".element-input-name").value,document.querySelector(".element-input-quantity").value,document.querySelector(".element-input-price").value,document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text));
-        write(selectedList);
-    })  
-    //edit element
-    editElements=document.querySelectorAll(".btn-set-element");
+    //del list writeout
+    document.querySelector(".del-button-list").addEventListener("click", function () {
+        let selectedLists = document.querySelectorAll(".selected-list");
+        let p = document.querySelector(".del-lists");
+        p.innerHTML = "";
+        for (let i = 0; i < selectedLists.length; i++) {
+            for (let j = 0; j < lists.length; j++) {
+                if (lists[j] != null) {
+                    if (selectedLists[i].classList[2] == lists[j].getId()) {
+                        if (i != selectedLists.length - 1) {
+                            p.innerHTML += lists[j].getName() + ", ";
+                        }
+                        else {
+                            p.innerHTML += lists[j].getName();
+                        }
+                    }
+                }
 
-    for(let i=0;i<editElements.length;i++){
-        editElements[i].addEventListener("click",function(){
-            document.querySelector(".element-set-name-label").innerHTML=selectedList.getElements()[i].getName();
-            document.querySelector(".element-set-quantity-label").innerHTML=selectedList.getElements()[i].getQuantity();
-            document.querySelector(".element-set-price-label").innerHTML=selectedList.getElements()[i].getPrice();
-            document.querySelector(".element-set-store-selected").innerHTML=selectedList.getElements()[i].getStore();
-            elementindex=editElements[i].classList[2];
-            
+            }
+        }
+    })
+    //add element
+    document.querySelector(".btn-add-element").addEventListener("click", function () {
+        selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text));
+        write(selectedList);
+    })
+    //edit element
+    editElements = document.querySelectorAll(".btn-set-element");
+
+    for (let i = 0; i < editElements.length; i++) {
+        editElements[i].addEventListener("click", function () {
+
+            document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[i].getName();
+            document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[i].getQuantity();
+            document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[i].getPrice();
+            document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[i].getStore();
+            elementindex = editElements[i].classList[2];
+
         })
     }
-    document.querySelector(".btn-set-confirmation").addEventListener("click",function(){
+    document.querySelector(".btn-set-confirmation").addEventListener("click", function () {
         selectedList.getElements()[elementindex].setName(document.querySelector(".element-set-name").value);
         selectedList.getElements()[elementindex].setQuantity(document.querySelector(".element-set-quantity").value);
         selectedList.getElements()[elementindex].setPrice(document.querySelector(".element-set-price").value);
@@ -76,23 +97,47 @@ xmlhttp.onload = function () {
         document.querySelector(".element-set-quantity").value = '';
         document.querySelector(".element-set-price").value = '';
         //store
-        editElements=document.querySelectorAll(".btn-set-element");
-        for(let i=0;i<editElements.length;i++){
-            editElements[i].addEventListener("click",function(){
-                document.querySelector(".element-set-name-label").innerHTML=selectedList.getElements()[i].getName();
-                document.querySelector(".element-set-quantity-label").innerHTML=selectedList.getElements()[i].getQuantity();
-                document.querySelector(".element-set-price-label").innerHTML=selectedList.getElements()[i].getPrice();
-                document.querySelector(".element-set-store-selected").innerHTML=selectedList.getElements()[i].getStore();
-                elementindex=editElements[i].classList[2];
+        editElements = document.querySelectorAll(".btn-set-element");
+        for (let i = 0; i < editElements.length; i++) {
+            editElements[i].addEventListener("click", function () {
+                document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[i].getName();
+                document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[i].getQuantity();
+                document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[i].getPrice();
+                document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[i].getStore();
+                elementindex = editElements[i].classList[2];
             })
         }
     })
-    //del element
-    document.querySelector(".btn-del-element").addEventListener("click", function(){
-        for (let i = 0; i<3; i++){
-            ;
+
+    document.querySelector(".btn-del-element").addEventListener("click", function () {
+        for (let i = 0; i < toDelElements.length; i++) {
+            alert(selectedList.getElements()[toDelElements[i]])
+            selectedList.getElements()[toDelElements[i]] = null;
+            alert(selectedList.getElements()[toDelElements[i]])
+        }
+        write(selectedList);
+    })
+    //del element writeout
+    document.querySelector(".del-button-element").addEventListener("click", function () {
+        let selectedElements = document.querySelectorAll(".selected-div");
+        let p = document.querySelector(".del-elements");
+        p.innerHTML = "";
+        for (let i = 0; i < selectedElements.length; i++) {
+            for (let j = 0; j < selectedList.getElements().length; j++) {
+                if (selectedList.getElements()[j] != null) {
+                    if (selectedElements[i].classList[2] == selectedList.getElements()[j].getId()) {
+                        if (i != selectedElements.length - 1) {
+                            p.innerHTML += selectedList.getElements()[j].getName() + ", ";
+                        }
+                        else {
+                            p.innerHTML += selectedList.getElements()[j].getName();
+                        }
+                    }
+                }
+            }
         }
     })
+
 
 }
 xmlhttp.open("GET", "json/data.json");
@@ -103,14 +148,15 @@ function clearDivs() {
     document.querySelector("tbody").innerHTML = "";
     document.querySelector(".store-table").innerHTML = "";
     document.querySelector(".lists").innerHTML = "";
-    document.querySelector(".element-conitainer").innerHTML = "";
+    document.querySelector(".element-div-container").innerHTML = "";
 }
 
 function write(selectedList) {
     clearDivs();
-    let elements = selectedList.getElements();
-    for (let i = 0; i < elements.length; i++) {
-        document.querySelector(".elements-list-out").innerHTML += elements[i].toTr();
+    for (let i = 0; i < selectedList.getElements().length; i++) {
+        if (selectedList.getElements()[i] != null) {
+            document.querySelector(".elements-list-out").innerHTML += selectedList.getElements()[i].toTr();
+        }
     }
 
     let listdiv = document.querySelector(".lists");
@@ -120,10 +166,12 @@ function write(selectedList) {
             listdiv.innerHTML += lists[i].toDiv();
         }
     }
-    listdiv = document.querySelector(".element-conitainer");
+    listdiv = document.querySelector(".element-div-container");
     listdiv.innerHTML += "<div class=\"col-3 center list plus\" data-bs-toggle=\"modal\" data-bs-target=\".add-element\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"200\" height=\"200\" fill=\"currentColor\" class=\"bi bi-plus-circle\"viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\" /><path d=\"M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4\" /> </svg></div>"
-    for (let i = 0; i < elements.length; i++) {
-        listdiv.innerHTML += elements[i].toDiv();
+    for (let i = 0; i < selectedList.getElements().length; i++) {
+        if (selectedList.getElements()[i] != null) {
+            listdiv.innerHTML += selectedList.getElements()[i].toDiv();
+        }
     }
     toDelList = [];
     listdivs = document.querySelectorAll(".list");
@@ -159,14 +207,19 @@ function write(selectedList) {
     }
 
     //selectelement-div
-    elementsMain = document.querySelectorAll(".element-div");
-    for (let i = 0; i < elementsMain.length; i++) {
+    toDelElements = [];
+    elementsDiv = document.querySelectorAll(".element-div");
+    for (let i = 0; i < elementsDiv.length; i++) {
         (function (index) {
-            elementsMain[index].addEventListener("click", function () {
-                if (elementsMain[index].classList.contains("selected-div")) {
-                    elementsMain[index].classList.remove("selected-div");               
-                } else {
-                    elementsMain[index].classList.add("selected-div");
+            elementsDiv[index].addEventListener("click", function (event) {
+                if (event.target == elementsDiv[index]) {
+                    if (elementsDiv[index].classList.contains("selected-div")) {
+                        elementsDiv[index].classList.remove("selected-div");
+                        toDelElements.splice(elementsDiv[index].classList[2], 1);
+                    } else {
+                        elementsDiv[index].classList.add("selected-div");
+                        toDelElements.push(elementsDiv[index].classList[2]);
+                    }
                 }
             });
         })(i);
@@ -186,22 +239,22 @@ function write(selectedList) {
             }
         }
     }
- 
-    let todelelements = document.querySelectorAll(".store");
-    for (let i = 0; i < todelelements.length; i++) {
-        (function(index) {
-            todelelements[index].addEventListener("click", function(event) {
+
+    let toDelStores = document.querySelectorAll(".store");
+    for (let i = 0; i < toDelStores.length; i++) {
+        (function (index) {
+            toDelStores[index].addEventListener("click", function (event) {
                 if (!event.target.classList.contains("store-edit")) {
-                    if (todelelements[index].classList.contains("selected-todel-element")) {
-                        todelelements[index].classList.remove("selected-todel-element");
+                    if (toDelStores[index].classList.contains("selected-todel-element")) {
+                        toDelStores[index].classList.remove("selected-todel-element");
                     } else {
-                        todelelements[index].classList.add("selected-todel-element");
+                        toDelStores[index].classList.add("selected-todel-element");
                     }
                 }
             });
         })(i);
     }
-        //page (storepage)
+    //page (storepage)
     let pages = document.querySelectorAll(".page");
     for (let i = 1; i < pages.length; i++) {
         pages[i].style.display = "none";
@@ -215,7 +268,7 @@ function write(selectedList) {
         }
     });
     document.querySelector(".btn-right").addEventListener("click", function right() {
-        if (page < pages.length-1) {
+        if (page < pages.length - 1) {
             document.querySelector(".page-" + page).style.display = "none";
             page++;
             document.querySelector(".page-" + page).style.display = "block";
@@ -227,16 +280,13 @@ function write(selectedList) {
             n = openBtns[i].classList[2];
             selectedList = lists[n];
             write(selectedList);
-
             load(document.querySelector(".starting-container"));
-            console.log(selectedList);
         });
     }
     //list rename
     let listName = document.querySelector(".list-name");
     listName.innerHTML = selectedList.getName() + "<sup><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10\" height=\"10\" fill=\"currentColor\" class=\"bi bi-pencil-square\" viewBox=\"0 0 16 16\"><path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"/><path fill-rule=\"evenodd\" d=\"M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z\"/></svg></sup>";
     listName.addEventListener("click", function () {
-        console.log(selectedList);
         let originalText = selectedList.getName();
         listName.innerHTML = '<input type="text" class="form-control" placeholder="' + selectedList.getName() + '">';
         let inputElement = listName.querySelector('input');
@@ -265,46 +315,3 @@ let storeslist = [];
 
 
 
-document.querySelector(".del-button-list").addEventListener("click",function () {
-    let selectedLists = document.querySelectorAll(".selected-list");
-    let p = document.querySelector(".del-lists");
-    p.innerHTML = "";
-    for (let i = 0; i < selectedLists.length; i++) {
-        for (let j = 0; j < lists.length; j++) {
-            if(lists[j]!=null){
-                if (selectedLists[i].classList[2] == lists[j].getId()) {
-                    if (i != selectedLists.length - 1) {
-                        p.innerHTML += lists[j].getName() + ", ";
-                    }
-                    else {
-                        p.innerHTML += lists[j].getName();
-                    }
-                }
-            }
-
-        }
-    }
-})
-let elementsDiv = [];
-document.querySelector(".del-button-element").addEventListener("click", function(){
-    let selectedElements = document.querySelectorAll(".selected-div");
-    let p = document.querySelector(".del-elements");
-    p.innerHTML="A";
-    for(let i = 0; i<selectedElements.length; i++){
-        for(let j = 0; j<elementsDiv.length; j++){
-            if (elementsDiv[j]!=null){
-                if(selectedElements[i].classList[2] == elementsDiv[j].getId()){
-                    if (i != selectedElements.length - 1) {
-                        p.innerHTML += elementsDiv[j].classList[2]() + ", ";
-                    }
-                    else {
-                        p.innerHTML += elementsDiv[j].classList[2]()+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-                    }
-                }
-            }else{
-                p.innerHTML+="üres a kutya";
-            }
-                
-        }
-    }
-})
