@@ -62,6 +62,6 @@ class element{
         return "<div class=\"element-div center "+this.getId()+"\"><div><p>"+this.getName()+"</p><button type=\"button\" class=\"btn btn-warning "+this.getId()+" btn-set-element\" data-bs-toggle=\"modal\" data-bs-target=\".set\">Szerkesztés</button></div></div>";
     }
     toString() {
-        return this.getName()+" "+this.getPrice()+" "+this.getStore()+" "+this.getQuantity();
+        return this.getName()+" "+this.getPrice()+" "+this.getStore()+" "+this.getQuantity()+" "+this.getId()+"<br>";
     }
 }
