@@ -1,4 +1,5 @@
 //read json
+let selectedList
 xmlhttp = new XMLHttpRequest();
 xmlhttp.onload = function () {
     let x = JSON.parse(this.responseText);
@@ -14,7 +15,7 @@ xmlhttp.onload = function () {
     }
 
 
-    let selectedList = lists[0];
+    selectedList = lists[0];
     write(selectedList);
 
 
@@ -68,52 +69,63 @@ xmlhttp.onload = function () {
             }
         }
     })
-    //add element
-    document.querySelector(".btn-add-element").addEventListener("click", function () {
-        selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text));
-        write(selectedList);
-    })
     //edit element
     editElements = document.querySelectorAll(".btn-set-element");
-
     for (let i = 0; i < editElements.length; i++) {
         editElements[i].addEventListener("click", function () {
-
-            document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[i].getName();
-            document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[i].getQuantity();
-            document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[i].getPrice();
-            document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[i].getStore();
-            elementindex = editElements[i].classList[2];
-
+            for(let j=0;j<selectedList.getElements().length;j++){
+                if (editElements[i].classList[2]==selectedList.getElements()[j].getId()){
+                    index=j;
+                }
+            }
+            document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[index].getName();
+            document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[index].getQuantity();
+            document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice();
+            document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[index].getStore();
         })
     }
     document.querySelector(".btn-set-confirmation").addEventListener("click", function () {
-        selectedList.getElements()[elementindex].setName(document.querySelector(".element-set-name").value);
-        selectedList.getElements()[elementindex].setQuantity(document.querySelector(".element-set-quantity").value);
-        selectedList.getElements()[elementindex].setPrice(document.querySelector(".element-set-price").value);
-        selectedList.getElements()[elementindex].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
-        write(selectedList);
-        document.querySelector(".element-set-name").value = '';
-        document.querySelector(".element-set-quantity").value = '';
-        document.querySelector(".element-set-price").value = '';
+        alert(index)
+        selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value);
+        selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value);
+        selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value);
+        selectedList.getElements()[index].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
         //store
+        document.querySelector(".element-set-name-label").innerHTML = "";
+                document.querySelector(".element-set-quantity-label").innerHTML = "";
+                document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice();
+                document.querySelector(".element-set-store-selected").innerHTML = "";
+        write(selectedList);
         editElements = document.querySelectorAll(".btn-set-element");
         for (let i = 0; i < editElements.length; i++) {
             editElements[i].addEventListener("click", function () {
-                document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[i].getName();
-                document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[i].getQuantity();
-                document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[i].getPrice();
-                document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[i].getStore();
-                elementindex = editElements[i].classList[2];
+                for(let j=0;j<selectedList.getElements().length;j++){
+                    if (editElements[i].classList[2]==selectedList.getElements()[j].getId()){
+                        index=j;
+                    }
+                }
+                document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[index].getName();
+                document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[index].getQuantity();
+                document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice();
+                document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[index].getStore();
             })
         }
+        
     })
-
+    
     document.querySelector(".btn-del-element").addEventListener("click", function () {
         for (let i = 0; i < toDelElements.length; i++) {
-            alert(selectedList.getElements()[toDelElements[i]])
-            selectedList.getElements()[toDelElements[i]] = null;
-            alert(selectedList.getElements()[toDelElements[i]])
+            for(let j=0;j<selectedList.getElements().length;j++){
+
+                    if(selectedList.getElements()[j]!=null){
+                        if(toDelElements[i]==selectedList.getElements()[j].getId()){
+                            selectedList.getElements()[j] = null;
+                        }
+                    }
+                
+
+            }
+            
         }
         write(selectedList);
     })
@@ -124,6 +136,7 @@ xmlhttp.onload = function () {
         p.innerHTML = "";
         for (let i = 0; i < selectedElements.length; i++) {
             for (let j = 0; j < selectedList.getElements().length; j++) {
+
                 if (selectedList.getElements()[j] != null) {
                     if (selectedElements[i].classList[2] == selectedList.getElements()[j].getId()) {
                         if (i != selectedElements.length - 1) {
@@ -137,7 +150,14 @@ xmlhttp.onload = function () {
             }
         }
     })
-
+    //add element
+    document.querySelector(".btn-add-element").addEventListener("click", function () {
+        selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text));
+        document.querySelector(".element-input-name").value = '';
+        document.querySelector(".element-input-quantity").value = '';
+        document.querySelector(".element-input-price").value = '';
+        write(selectedList);
+    })
 
 }
 xmlhttp.open("GET", "json/data.json");
@@ -283,6 +303,9 @@ function write(selectedList) {
             load(document.querySelector(".starting-container"));
         });
     }
+
+    
+
     //list rename
     let listName = document.querySelector(".list-name");
     listName.innerHTML = selectedList.getName() + "<sup><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10\" height=\"10\" fill=\"currentColor\" class=\"bi bi-pencil-square\" viewBox=\"0 0 16 16\"><path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"/><path fill-rule=\"evenodd\" d=\"M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z\"/></svg></sup>";
@@ -310,6 +333,7 @@ function write(selectedList) {
     });
 
 }
+
 let lists = [];
 let storeslist = [];
 
