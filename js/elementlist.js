@@ -35,6 +35,6 @@ class elementlist{
         return text;
     }
     toDiv(){
-        return "<div class=\"list center "+this.getId()+"\"><div><p>"+this.getName()+"</p><button type=\"button\" class=\"btn btn-open "+this.getId()+"\">Megnyitás</button></div></div>"
+        return "<div class=\"list center "+this.getId()+"\"><div class=\"name-div\"><p>"+this.getName()+"</p><button type=\"button\" class=\"btn btn-open "+this.getId()+"\">Megnyitás</button></div></div>"
     }
 }
