@@ -19,7 +19,7 @@
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-center navbarNavDropdown" id="navbarNavDropdown">
@@ -35,7 +35,7 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                 aria-expanded="false">
+                aria-expanded="false">
                 Lista
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -51,8 +51,10 @@
   </header>
   <!--MAIN-->
   <section class="starting-container">
-    <div class="list-rename center">
-      <p class="list-name"></p>
+    <div class="center">
+      <div class="list-rename center">
+        <p class="list-name"></p>
+      </div>
     </div>
     <div class="container-fluid table-container">
       <table class="table">
@@ -71,7 +73,7 @@
     <footer class="container-fluid fixed-bottom">
       <div class="secondary-menu row">
         <div class="col-md-6 center">
-          <h2>Becsült összeg: </h2>
+          <h2>Becsült összeg: <span class="sum"></span></h2>
         </div>
         <div class="col-md-6 center">
           <div class="row container-fluid">
@@ -118,8 +120,10 @@
   </section>
   <!--ELEMENT-->
   <section class="element-container">
-    <div class="list-rename center">
-      <p class="list-name"></p>
+    <div class="center">
+      <div class="list-rename center">
+        <p class="list-name"></p>
+      </div>
     </div>
     <div class="container-fluid center">
       <div class="row lists element-div-container">
@@ -133,19 +137,21 @@
         </div>
       </div>
     </div>
-      <footer class="mt-auto del center bg-danger fixed-bottom">
-        <button type="button" class="btn btn-outline-danger del-button del-button-element" data-bs-toggle="modal"
-          data-bs-target=".element-del-confirmation">Törlés</button>
-      </footer>
+    <footer class="mt-auto del center bg-danger fixed-bottom">
+      <button type="button" class="btn btn-outline-danger del-button del-button-element" data-bs-toggle="modal"
+        data-bs-target=".element-del-confirmation">Törlés</button>
+    </footer>
   </section>
   <!--STORES-->
   <section class="stores-container">
-    <div class="list-rename center">
-      <p class="list-name"></p>
+    <div class="center">
+      <div class="list-rename center">
+        <p class="list-name"></p>
+      </div>
     </div>
     <div class="container-fluid">
       <table class="store-table table">
-        
+
       </table>
     </div>
     </div>
@@ -185,7 +191,7 @@
           <form class="form floating">
             <div class="form-floating mb-3">
               <input type="text" class="form-control list-input-name floatingInput" placeholder="Név">
-              <label >Név</label>
+              <label>Név</label>
             </div>
           </form>
         </div>
@@ -204,15 +210,15 @@
           <form class="form floating">
             <div class="form-floating mb-3">
               <input type="text" class="form-control element-input-name floatingInput" placeholder="Név">
-              <label >Név</label>
+              <label>Név</label>
             </div>
             <div class="form-floating mb-3">
               <input type="number" class="form-control element-input-quantity floatingInput" placeholder="Mennyiség">
-              <label >Mennyiség</label>
+              <label>Mennyiség</label>
             </div>
             <div class="form-floating mb-3">
               <input type="number" class="form-control element-input-price floatingInput" placeholder="Egységár">
-              <label >Egységár</label>
+              <label>Egységár</label>
             </div>
             <div class="form-floating">
               <select class="form-select element-input-store floatingSelect" aria-label="Floating label select example">
@@ -240,15 +246,15 @@
           <form class="form floating">
             <div class="form-floating mb-3">
               <input type="text" class="form-control floatingInput" placeholder="Név">
-              <label >Név</label>
+              <label>Név</label>
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control floatingInput" placeholder="Cím">
-              <label >Cím</label>
+              <label>Cím</label>
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control floatingInput" placeholder="Nyitvatartás">
-              <label >Nyitvatartás</label>
+              <label>Nyitvatartás</label>
             </div>
           </form>
         </div>
@@ -266,11 +272,13 @@
         <div class="modal-body">
           <form class="form floating">
             <div class="form-floating mb-3">
-              <input type="text" class="form-control floatingInput element-set-name" placeholder="Eredeti név"><!--placeholder átírása-->
+              <input type="text" class="form-control floatingInput element-set-name"
+                placeholder="Eredeti név"><!--placeholder átírása-->
               <label class="element-set-name-label">Eredeti név</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control floatingInput element-set-quantity" placeholder="Eredeti mennyiség">
+              <input type="number" class="form-control floatingInput element-set-quantity"
+                placeholder="Eredeti mennyiség">
               <label class="element-set-quantity-label">Eredeti mennyiség</label>
             </div>
             <div class="form-floating mb-3">
@@ -290,7 +298,8 @@
         </div>
         <div class="modal-footer center">
           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Mégse</button>
-          <button type="button" class="btn btn-primary btn-set-confirmation" data-bs-dismiss="modal">Szerkesztés</button>
+          <button type="button" class="btn btn-primary btn-set-confirmation"
+            data-bs-dismiss="modal">Szerkesztés</button>
         </div>
       </div>
     </div>
@@ -303,15 +312,15 @@
           <form class="form floating">
             <div class="form-floating mb-3">
               <input type="text" class="form-control floatingInput" placeholder="Eredeti név">
-              <label >Eredeti név</label>
+              <label>Eredeti név</label>
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control floatingInput" placeholder="Eredeti cím">
-              <label >Eredeti cím</label>
+              <label>Eredeti cím</label>
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control floatingInput" placeholder="Eredeti nyitvatartás">
-              <label >Eredeti nyitvatartás</label>
+              <label>Eredeti nyitvatartás</label>
             </div>
           </form>
         </div>

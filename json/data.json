@@ -11,6 +11,11 @@
             {"name":"Element 1","quantity":"123","price":"123","store":"bolt","isBought":false},
             {"name":"Element 1","quantity":"123","price":"123","store":"bolt","isBought":true},
             {"name":"Element 1","quantity":"123","price":"123","store":"bolt","isBought":false}
+        ]},
+        {"name":"Bevásárló lista","elements":[
+            {"name":"Körte","quantity":"1","price":"999","store":"Lidl","isBought":true},
+            {"name":"Alma","quantity":"2","price":"349","store":"Tesco","isBought":false},
+            {"name":"Banán","quantity":"1","price":"685 ","store":"Aldi","isBought":true}
         ]}
     ],
     "stores":[

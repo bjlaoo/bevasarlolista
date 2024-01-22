@@ -19,7 +19,6 @@ xmlhttp.onload = function () {
     selectedList = lists[0];
     write();
 
-
     //add list
     document.querySelector(".btn-add-list").addEventListener("click", function () {
         lists.push(new elementlist(document.querySelector(".list-input-name").value));
@@ -89,10 +88,10 @@ xmlhttp.onload = function () {
                 document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[index].getQuantity();
                 document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice();
                 document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[index].getStore();
-                
-                selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value=selectedList.getElements()[index].getName());
-                selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value=selectedList.getElements()[index].getQuantity());
-                selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value=selectedList.getElements()[index].getPrice());
+
+                selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value = selectedList.getElements()[index].getName());
+                selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value = selectedList.getElements()[index].getQuantity());
+                selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value = selectedList.getElements()[index].getPrice());
                 //selectedList.getElements()[index].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
             })
         }
@@ -181,7 +180,7 @@ function write() {
     }
     toDelList = [];
     listdivs = document.querySelectorAll(".list");
-    circlePlacesList=document.querySelectorAll(".circle-list");
+    circlePlacesList = document.querySelectorAll(".circle-list");
 
     for (let i = 0; i < listdivs.length; i++) {
         (function (index) {
@@ -190,13 +189,13 @@ function write() {
                     if (listdivs[index].classList.contains("selected-list") || listdivs[index].classList.contains("plus")) {
                         listdivs[index].classList.remove("selected-list");
                         toDelList.splice(listdivs[index].classList[2], 1);
-                        circlePlacesList[index-1].innerHTML="";
-                        circlePlacesList[index-1].innerHTML="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle-list\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
+                        circlePlacesList[index - 1].innerHTML = "";
+                        circlePlacesList[index - 1].innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle-list\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
                     } else {
                         listdivs[index].classList.add("selected-list");
                         toDelList.push(listdivs[index].classList[2]);
-                        circlePlacesList[index-1].innerHTML="";
-                        circlePlacesList[index-1].innerHTML="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-x-circle circle-list\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/><path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/></svg>";
+                        circlePlacesList[index - 1].innerHTML = "";
+                        circlePlacesList[index - 1].innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-x-circle circle-list\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/><path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/></svg>";
                     }
                 }
             });
@@ -221,20 +220,20 @@ function write() {
     //selectelement-div
     toDelElements = [];
     elementsDiv = document.querySelectorAll(".element-div");
-    circlePlaces=document.querySelectorAll(".circle");
+    circlePlaces = document.querySelectorAll(".circle");
     for (let i = 0; i < elementsDiv.length; i++) {
         (function (index) {
             elementsDiv[index].addEventListener("click", function (event) {
                 if (event.target == elementsDiv[index]) {
                     if (elementsDiv[index].classList.contains("selected-div")) {
                         elementsDiv[index].classList.remove("selected-div");
-                        circlePlaces[index].innerHTML="";
-                        circlePlaces[index].innerHTML+="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
+                        circlePlaces[index].innerHTML = "";
+                        circlePlaces[index].innerHTML += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
                         toDelElements.splice(elementsDiv[index].classList[2], 1);
                     } else {
                         elementsDiv[index].classList.add("selected-div");
-                        circlePlaces[index].innerHTML="";
-                        circlePlaces[index].innerHTML+="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-x-circle circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/><path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/></svg>";
+                        circlePlaces[index].innerHTML = "";
+                        circlePlaces[index].innerHTML += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-x-circle circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/><path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/></svg>";
                         toDelElements.push(elementsDiv[index].classList[2]);
                     }
                 }
@@ -243,13 +242,13 @@ function write() {
     }
 
     //store writeout
-    const TableElementCount=10;
+    const TableElementCount = 10;
     let tableNumber = Math.ceil(storeslist.length / TableElementCount);
     let div = document.querySelector(".store-table");
-    let storeindex=0;
+    let storeindex = 0;
     for (let i = 0; i < tableNumber; i++) {
         div.innerHTML += "<tbody class=\"page-" + i + " page\"></tbody>";
-        
+
         let tbody = document.querySelector(".page-" + i)
         for (let j = 0; j < TableElementCount; j++) {
             if (storeindex < storeslist.length) {
@@ -303,35 +302,50 @@ function write() {
         });
     }
 
-
+    //becsült összeg
+    sum = 0;
+    for (let i = 0; i < selectedList.getElements().length; i++) {
+        if (selectedList.getElements()[i] != null) {
+            sum += (selectedList.getElements()[i].getQuantity() * selectedList.getElements()[i].getPrice());
+        }
+    }
+    document.querySelector(".sum").innerHTML = sum + " Ft";
 
     //list rename
     let listName = document.querySelectorAll(".list-name");
-    for(let i=0;i<listName.length;i++){
+    for (let i = 0; i < listName.length; i++) {
         listName[i].innerHTML = selectedList.getName() + "<sup><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10\" height=\"10\" fill=\"currentColor\" class=\"bi bi-pencil-square\" viewBox=\"0 0 16 16\"><path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"/><path fill-rule=\"evenodd\" d=\"M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z\"/></svg></sup>";
         listName[i].addEventListener("click", function () {
-        let originalText = selectedList.getName();
-        listName[i].innerHTML = '<input type="text" class="form-control" placeholder="' + selectedList.getName() + '">';
-        let inputElement = listName[i].querySelector('input');
-        inputElement.focus();
-
-        // Remove existing "keydown" event listener
-        $(document).off("keydown");
-
-        // Add new "keydown" event listener
-        $(document).on("keydown", function (event) {
-            switch (event.keyCode) {
-                case 13: // Enter key
-                    selectedList.setName(inputElement.value);
-                    write();
-                    break;
-                case 27: // Escape key
-                    listName[i].innerHTML = originalText + '<sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup>';
-                    break;
-            }
+    
+            let originalText = selectedList.getName();
+            document.querySelectorAll(".list-rename")[i].innerHTML = '<div class="input-group mb-3"><input type="text" class="form-control" placeholder="' + selectedList.getName() + '" aria-label="Recipients username" aria-describedby="button-addon2"> <button class="btn btn-primary btn-rename" type="button" id="button-addon2">Átnevezés</button></div>';
+            
+            
+            let inputElement = document.querySelectorAll(".list-rename")[i].querySelector('input');
+            inputElement.focus();
+            document.querySelector(".btn-rename").addEventListener("click", function () {
+                selectedList.setName(inputElement.value);
+                document.querySelectorAll(".list-rename")[i].innerHTML = '<p class="list-name"><sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup></p>';
+                write(selectedList);
+            })
+            $(document).off("keydown");
+            $(document).on("keydown", function (event) {
+                switch (event.keyCode) {
+                    case 13: // Enter key
+                        selectedList.setName(inputElement.value);
+                        document.querySelectorAll(".list-rename")[i].innerHTML = '<p class="list-name"><sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup></p>';
+                        write(selectedList);
+                        break;
+                    case 27: // Escape key
+                        document.querySelectorAll(".list-rename")[i].innerHTML = '<p class="list-name"><sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup></p>';
+                        write(selectedList);
+                        break;
+                }
+            });
+            
         });
-    });
-}
+    }
+    
     //edit element
     editElements = document.querySelectorAll(".btn-set-element");
     for (let i = 0; i < editElements.length; i++) {
@@ -350,9 +364,9 @@ function write() {
             document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice();
             document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[index].getStore();
 
-            selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value=selectedList.getElements()[index].getName());
-            selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value=selectedList.getElements()[index].getQuantity());
-            selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value=selectedList.getElements()[index].getPrice());
+            selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value = selectedList.getElements()[index].getName());
+            selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value = selectedList.getElements()[index].getQuantity());
+            selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value = selectedList.getElements()[index].getPrice());
             //selectedList.getElements()[index].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
         })
     }

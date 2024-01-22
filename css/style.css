@@ -118,6 +118,9 @@ select{
     border:1px solid  #D9D9D9;
     position: relative;
 }
+.list-rename{
+    width: 200px;
+}
 .lists{
     margin-bottom: 70px;
     justify-content: center;
