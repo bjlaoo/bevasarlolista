@@ -49,7 +49,10 @@ body{
 .table-container {
     margin-bottom: 240px;
 }
-
+.store-table{
+    margin-top: 50px;
+    margin-bottom: 375px;
+}
 
 .container-fluid{
     text-align: center;
@@ -119,8 +122,9 @@ select{
     position: relative;
 }
 .list-rename{
-    width: 200px;
+    width: 300px;
 }
+
 .lists{
     margin-bottom: 70px;
     justify-content: center;
