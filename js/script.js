@@ -46,7 +46,7 @@ xmlhttp.onload = function () {
                 }
             }
         }
-        write(selectedList);
+        write();
     })
     //del list writeout
     document.querySelector(".del-button-list").addEventListener("click", function () {
@@ -69,6 +69,46 @@ xmlhttp.onload = function () {
             }
         }
     })
+    //del store
+    document.querySelector(".btn-del-store").addEventListener("click", function () {
+        for (let i = 0; i < toDelStores.length; i++) {
+            for (let j = 0; j < storeslist.length; j++) {
+                if (storeslist[j] != null) {
+                    if (toDelStores[i] == storeslist[j].getId()) {
+                        storeslist[j] = null;
+                    }
+                }
+
+
+            }
+
+        }
+        alert(storeslist)
+        write();
+    })
+    //del store writeout
+    document.querySelector(".del-button-store").addEventListener("click", function () {
+        let selectedStores = document.querySelectorAll(".selected-todel-element");
+        let p = document.querySelector(".del-stores");
+        p.innerHTML = "";
+
+        for (let i = 0; i < selectedStores.length; i++) {
+            for (let j = 0; j < storeslist.length; j++) {
+                if (storeslist[j] != null) {
+                    if (selectedStores[i].classList[1] == storeslist[j].getId()) {
+                        if (i != selectedStores.length - 1) {
+                            p.innerHTML += storeslist[j].getName() + ", ";
+                        }
+                        else {
+                            p.innerHTML += storeslist[j].getName();
+                        }
+                    }
+                }
+            }
+        }
+
+    })
+
 
     document.querySelector(".btn-set-confirmation").addEventListener("click", function () {
         selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value);
@@ -95,7 +135,7 @@ xmlhttp.onload = function () {
                 //selectedList.getElements()[index].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
             })
         }
-
+        
     })
 
     document.querySelector(".btn-del-element").addEventListener("click", function () {
@@ -144,6 +184,30 @@ xmlhttp.onload = function () {
         write();
     })
 
+
+    //sort by name
+    let byName=document.querySelectorAll(".sort-by-name");
+    let forSortingList=[];
+    let sortedList=[];
+    for(let i=0; i<selectedList.getElements().length; i++){
+        if(selectedList.getElements()[i]!=null){
+            forSortingList.push(selectedList.getElements()[i]);
+        }
+    }
+    selectedList.getElements().sort();
+    document.querySelector(".sort-by-name").addEventListener("click", function(){
+        flag=false;
+        console.log(forSortingList);
+        for (let i = 0; i < forSortingList.length; i++) {
+            if (forSortingList[i] != null) {
+                document.querySelector(".elements-list-out").innerHTML += forSortingList[i].toTr();
+            }
+        }
+        write()
+    });
+
+
+
 }
 xmlhttp.open("GET", "json/data.json");
 xmlhttp.send();
@@ -159,11 +223,17 @@ function clearDivs() {
 
 function write() {
     clearDivs();
-    for (let i = 0; i < selectedList.getElements().length; i++) {
-        if (selectedList.getElements()[i] != null) {
-            document.querySelector(".elements-list-out").innerHTML += selectedList.getElements()[i].toTr();
+    //sorting the elements and writing the elements
+    let flag=true;
+    if(flag){
+        for (let i = 0; i < selectedList.getElements().length; i++) {
+            if (selectedList.getElements()[i] != null) {
+                document.querySelector(".elements-list-out").innerHTML += selectedList.getElements()[i].toTr();
+            }
         }
     }
+
+    
 
     document.querySelector(".selected-list-dropdown").innerHTML = selectedList.getName();
     let dropdown = document.querySelector(".dropdown-menu");
@@ -250,9 +320,16 @@ function write() {
         })(i);
     }
 
+
     //store writeout
     const TableElementCount = 10;
-    let tableNumber = Math.ceil(storeslist.length / TableElementCount);
+    storeslistLength=0;
+    for(let i=0;i<storeslist;i++){
+        if(storeslist[i]!=null){
+            storeslistLength++;
+        }
+    }
+    let tableNumber = Math.ceil(storeslistLength / TableElementCount);
     let div = document.querySelector(".store-table");
     let storeindex = 0;
     for (let i = 0; i < tableNumber; i++) {
@@ -261,26 +338,32 @@ function write() {
         let tbody = document.querySelector(".page-" + i)
         for (let j = 0; j < TableElementCount; j++) {
             if (storeindex < storeslist.length) {
+                if(storeslist[storeindex]!=null){
                 tbody.innerHTML += storeslist[storeindex].toTr();
                 storeindex++;
+                }
             }
         }
     }
-
-    let toDelStores = document.querySelectorAll(".store");
-    for (let i = 0; i < toDelStores.length; i++) {
+    //select store-tr
+    toDelStores=[];
+    let stores = document.querySelectorAll(".store");
+    for (let i = 0; i < stores.length; i++) {
         (function (index) {
-            toDelStores[index].addEventListener("click", function (event) {
+            stores[index].addEventListener("click", function (event) {
                 if (!event.target.classList.contains("store-edit")) {
-                    if (toDelStores[index].classList.contains("selected-todel-element")) {
-                        toDelStores[index].classList.remove("selected-todel-element");
+                    if (stores[index].classList.contains("selected-todel-element")) {
+                        stores[index].classList.remove("selected-todel-element");
+                        toDelStores.splice(stores[index].classList[1],1);
                     } else {
-                        toDelStores[index].classList.add("selected-todel-element");
+                        stores[index].classList.add("selected-todel-element");
+                        toDelStores.push(stores[index].classList[1]);
                     }
                 }
             });
         })(i);
     }
+
     //page (storepage)
     let pages = document.querySelectorAll(".page");
     for (let i = 1; i < pages.length; i++) {
@@ -374,7 +457,7 @@ function write() {
                 if (selectedList.getElements()[j] != null) {
                     if (editElements[i].classList[2] == selectedList.getElements()[j].getId()) {
                         index = j;
-                    }
+                    }   
                 }
             }
             document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[index].getName();
@@ -388,6 +471,8 @@ function write() {
             //selectedList.getElements()[index].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
         })
     }
+
+
 }
 
 let lists = [];

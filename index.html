@@ -94,10 +94,10 @@
             </div>
             <div class="col-md-4">
               <div class="row">
-                <button type="button" class="btn btn-primary">Rendezés név szerint</button>
+                <button type="button" class="btn btn-primary sort-by-name">Rendezés név szerint</button>
               </div>
               <div class="row">
-                <button type="button" class="btn btn-primary">Rendezés ár szerint</button>
+                <button type="button" class="btn btn-primary sort-by-price">Rendezés ár szerint</button>
               </div>
             </div>
             <div class="col-md-3">
@@ -161,9 +161,9 @@
         </h2>
       </div>
       <div style="margin: 10px;">
-        <button type="button" class="btn btn-primary add-button store-btn m-0 mb-3" data-bs-toggle="modal"
+        <button type="button" class="btn btn-primary add-button store-btn add-button-store m-0 mb-3" data-bs-toggle="modal"
           data-bs-target=".add-store">Hozzáadás</button>
-        <button type="button" class="btn btn-danger store-btn m-0" data-bs-toggle="modal"
+        <button type="button" class="btn btn-danger store-btn del-button-store m-0" data-bs-toggle="modal"
           data-bs-target=".store-del-confirmation">Törlés</button>
       </div>
       <div class="arrow inline btn-right">
@@ -356,21 +356,21 @@
       </div>
     </div>
   </div>
-  <!-- storedelconfirmation -->
-  <div class="modal fade store-del-confirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <p>Biztos hogy törölni szeretné az alábbi boltokat?</p>
-          <p class="elements">Bolt1, Bolt2, Bolt3</p>
-        </div>
-        <div class="modal-footer center">
-          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Mégse</button>
-          <button type="button" class="btn btn-danger">Törlés</button>
+    <!-- storedelconfirmation -->
+    <div class="modal fade store-del-confirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>Biztos hogy törölni szeretné az alábbi boltokat?</p>
+            <p class="elements del-stores">Bolt1, Bolt2, Bolt3</p>
+          </div>
+          <div class="modal-footer center">
+            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Mégse</button>
+            <button type="button" class="btn btn-danger btn-del-store" data-bs-dismiss="modal">Törlés</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   <!--SCRIPTS-->
   <script src="js/store.js"></script>
   <script src="js/element.js"></script>
