@@ -1,5 +1,8 @@
 //read json
 var selectedList;
+var storeslist = [];
+var lists = [];
+
 let index;
 xmlhttp = new XMLHttpRequest();
 xmlhttp.onload = function () {
@@ -83,8 +86,8 @@ xmlhttp.onload = function () {
             }
 
         }
-        alert(storeslist)
         write();
+
     })
     //del store writeout
     document.querySelector(".del-button-store").addEventListener("click", function () {
@@ -135,7 +138,7 @@ xmlhttp.onload = function () {
                 //selectedList.getElements()[index].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
             })
         }
-        
+
     })
 
     document.querySelector(".btn-del-element").addEventListener("click", function () {
@@ -186,17 +189,17 @@ xmlhttp.onload = function () {
 
 
     //sort by name
-    let byName=document.querySelectorAll(".sort-by-name");
-    let forSortingList=[];
-    let sortedList=[];
-    for(let i=0; i<selectedList.getElements().length; i++){
-        if(selectedList.getElements()[i]!=null){
+    let byName = document.querySelectorAll(".sort-by-name");
+    let forSortingList = [];
+    let sortedList = [];
+    for (let i = 0; i < selectedList.getElements().length; i++) {
+        if (selectedList.getElements()[i] != null) {
             forSortingList.push(selectedList.getElements()[i]);
         }
     }
     selectedList.getElements().sort();
-    document.querySelector(".sort-by-name").addEventListener("click", function(){
-        flag=false;
+    document.querySelector(".sort-by-name").addEventListener("click", function () {
+        flag = false;
         console.log(forSortingList);
         for (let i = 0; i < forSortingList.length; i++) {
             if (forSortingList[i] != null) {
@@ -224,8 +227,8 @@ function clearDivs() {
 function write() {
     clearDivs();
     //sorting the elements and writing the elements
-    let flag=true;
-    if(flag){
+    let flag = true;
+    if (flag) {
         for (let i = 0; i < selectedList.getElements().length; i++) {
             if (selectedList.getElements()[i] != null) {
                 document.querySelector(".elements-list-out").innerHTML += selectedList.getElements()[i].toTr();
@@ -233,7 +236,7 @@ function write() {
         }
     }
 
-    
+
 
     document.querySelector(".selected-list-dropdown").innerHTML = selectedList.getName();
     let dropdown = document.querySelector(".dropdown-menu");
@@ -322,31 +325,42 @@ function write() {
 
 
     //store writeout
-    const TableElementCount = 10;
-    storeslistLength=0;
-    for(let i=0;i<storeslist;i++){
-        if(storeslist[i]!=null){
+    const TableElementCount = 5;
+    storeslistLength = 0;
+
+    for (let i = 0; i < storeslist.length; i++) {
+        if (storeslist[i] != null) {
             storeslistLength++;
         }
     }
     let tableNumber = Math.ceil(storeslistLength / TableElementCount);
     let div = document.querySelector(".store-table");
+    div.innerHTML = "";
     let storeindex = 0;
-    for (let i = 0; i < tableNumber; i++) {
-        div.innerHTML += "<tbody class=\"page-" + i + " page\"></tbody>";
 
-        let tbody = document.querySelector(".page-" + i)
+    for (let i = 0; i < tableNumber; i++) {
+        div.innerHTML += "<table class=\"table page-" + i + " page\"><tr><td>" + (i + 1) + ". lap</td></tr></table>";
+
+        let table = document.querySelector(".page-" + i)
         for (let j = 0; j < TableElementCount; j++) {
             if (storeindex < storeslist.length) {
-                if(storeslist[storeindex]!=null){
-                tbody.innerHTML += storeslist[storeindex].toTr();
-                storeindex++;
+                while (storeslist[storeindex] == null) {
+                    storeindex++;
+
+                }
+                if (storeslist[storeindex] != null) {
+
+                    table.innerHTML += storeslist[storeindex].toTr();
+                    storeindex++;
                 }
             }
+
         }
     }
+
+
     //select store-tr
-    toDelStores=[];
+    toDelStores = [];
     let stores = document.querySelectorAll(".store");
     for (let i = 0; i < stores.length; i++) {
         (function (index) {
@@ -354,7 +368,7 @@ function write() {
                 if (!event.target.classList.contains("store-edit")) {
                     if (stores[index].classList.contains("selected-todel-element")) {
                         stores[index].classList.remove("selected-todel-element");
-                        toDelStores.splice(stores[index].classList[1],1);
+                        toDelStores.splice(stores[index].classList[1], 1);
                     } else {
                         stores[index].classList.add("selected-todel-element");
                         toDelStores.push(stores[index].classList[1]);
@@ -371,6 +385,7 @@ function write() {
     }
     let page = 0;
     document.querySelector(".btn-left").addEventListener("click", function left() {
+        pages = document.querySelectorAll(".page");
         if (page > 0) {
             document.querySelector(".page-" + page).style.display = "none";
             page--;
@@ -378,6 +393,7 @@ function write() {
         }
     });
     document.querySelector(".btn-right").addEventListener("click", function right() {
+        pages = document.querySelectorAll(".page");
         if (page < pages.length - 1) {
             document.querySelector(".page-" + page).style.display = "none";
             page++;
@@ -457,7 +473,7 @@ function write() {
                 if (selectedList.getElements()[j] != null) {
                     if (editElements[i].classList[2] == selectedList.getElements()[j].getId()) {
                         index = j;
-                    }   
+                    }
                 }
             }
             document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[index].getName();
@@ -475,8 +491,7 @@ function write() {
 
 }
 
-let lists = [];
-let storeslist = [];
+
 
 
 
