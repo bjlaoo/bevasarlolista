@@ -42,6 +42,6 @@ class store{
     }
 
     toTr() {
-        return "<tr class=\"store "+this.getId()+"\"><td>"+this.getName()+" "+this.getId()+"</td><td>"+this.getAddress()+"</td><td>"+this.getOpening()+"</td><td><button type=\"button\" class=\"btn btn-warning store-edit store-btn\" data-bs-toggle=\"modal\" data-bs-target=\".set-store\">Szerkesztés</button></td></tr>";
+        return "<tr class=\"store "+this.getId()+"\"><td>"+this.getName()+"</td><td>"+this.getAddress()+"</td><td>"+this.getOpening()+"</td><td><button type=\"button\" class=\"btn btn-warning "+this.getId()+" btn-set-store store-btn\" data-bs-toggle=\"modal\" data-bs-target=\".set-store\">Szerkesztés</button></td></tr>";
     }
 }

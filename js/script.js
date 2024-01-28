@@ -2,8 +2,8 @@
 var selectedList;
 var storeslist = [];
 var lists = [];
-
-let index;
+var page = 0;
+var index;
 xmlhttp = new XMLHttpRequest();
 xmlhttp.onload = function () {
     let x = JSON.parse(this.responseText);
@@ -72,8 +72,15 @@ xmlhttp.onload = function () {
             }
         }
     })
+    //add store
+    document.querySelector(".btn-add-store").addEventListener("click", function () {
+        storeslist.push(new store(document.querySelector(".store-input-name").value, document.querySelector(".store-input-address").value, document.querySelector(".store-input-opening").value));
+
+        write();
+    })
     //del store
     document.querySelector(".btn-del-store").addEventListener("click", function () {
+
         for (let i = 0; i < toDelStores.length; i++) {
             for (let j = 0; j < storeslist.length; j++) {
                 if (storeslist[j] != null) {
@@ -86,8 +93,8 @@ xmlhttp.onload = function () {
             }
 
         }
-        write();
 
+        write();
     })
     //del store writeout
     document.querySelector(".del-button-store").addEventListener("click", function () {
@@ -108,6 +115,30 @@ xmlhttp.onload = function () {
                     }
                 }
             }
+        }
+
+    })
+    document.querySelector(".btn-set-store-confirmation").addEventListener("click", function () {
+        storeslist[index].setName(document.querySelector(".store-set-name").value);
+        storeslist[index].setAddress(document.querySelector(".store-set-address").value);
+        storeslist[index].setOpening(document.querySelector(".store-set-opening").value);
+        write();
+        editStores = document.querySelectorAll(".btn-set-stores");
+        for (let i = 0; i < editElements.length; i++) {
+            editElements[i].addEventListener("click", function () {
+                for (let j = 0; j < storeslist.length; j++) {
+                    if (editElements[i].classList[2] == storeslist[j].getId()) {
+                        index = j;
+                    }
+                }
+                document.querySelector(".store-set-name-label").innerHTML = storeslist[index].getName();
+                document.querySelector(".store-set-quantity-label").innerHTML = storeslist[index].getAddress();
+                document.querySelector(".store-set-price-label").innerHTML = storeslist[index].getOpening();
+
+                storeslist[index].setName(document.querySelector(".store-set-name").value = storeslist[index].getName());
+                storeslist[index].setAddress(document.querySelector(".store-set-quantity").value = storeslist[index].getAddress());
+                storeslist[index].setOpening(document.querySelector(".store-set-price").value = storeslist[index].getOpening());
+            })
         }
 
     })
@@ -200,13 +231,27 @@ xmlhttp.onload = function () {
     selectedList.getElements().sort();
     document.querySelector(".sort-by-name").addEventListener("click", function () {
         flag = false;
-        console.log(forSortingList);
+
         for (let i = 0; i < forSortingList.length; i++) {
             if (forSortingList[i] != null) {
                 document.querySelector(".elements-list-out").innerHTML += forSortingList[i].toTr();
             }
         }
         write()
+    });
+    document.querySelector(".btn-left").addEventListener("click", function left() {
+        if (page > 0) {
+            document.querySelector(".page-" + page).style.display = "none";
+            page--;
+            document.querySelector(".page-" + page).style.display = "block";
+        }
+    });
+    document.querySelector(".btn-right").addEventListener("click", function right() {
+        if (page < pages.length - 1) {
+            document.querySelector(".page-" + page).style.display = "none";
+            page++;
+            document.querySelector(".page-" + page).style.display = "block";
+        }
     });
 
 
@@ -235,7 +280,7 @@ function write() {
             }
         }
     }
-
+    
 
 
     document.querySelector(".selected-list-dropdown").innerHTML = selectedList.getName();
@@ -323,7 +368,7 @@ function write() {
         })(i);
     }
 
-
+    
     //store writeout
     const TableElementCount = 5;
     storeslistLength = 0;
@@ -333,6 +378,7 @@ function write() {
             storeslistLength++;
         }
     }
+    
     let tableNumber = Math.ceil(storeslistLength / TableElementCount);
     let div = document.querySelector(".store-table");
     div.innerHTML = "";
@@ -340,12 +386,15 @@ function write() {
 
     for (let i = 0; i < tableNumber; i++) {
         div.innerHTML += "<table class=\"table page-" + i + " page\"><tr><td>" + (i + 1) + ". lap</td></tr></table>";
-
+        
         let table = document.querySelector(".page-" + i)
+
         for (let j = 0; j < TableElementCount; j++) {
             if (storeindex < storeslist.length) {
-                while (storeslist[storeindex] == null) {
+                
+                while (storeslist[storeindex] == null&&storeindex<storeslist.length) {
                     storeindex++;
+
 
                 }
                 if (storeslist[storeindex] != null) {
@@ -357,7 +406,29 @@ function write() {
 
         }
     }
+    //edit store
+    editStores = document.querySelectorAll(".btn-set-store");
+    for (let i = 0; i < editStores.length; i++) {
 
+        editStores[i].addEventListener("click", function () {
+
+            for (let j = 0; j < storeslist.length; j++) {
+                if (storeslist[j] != null) {
+                    if (editStores[i].classList[2] == storeslist[j].getId()) {
+                        index = j;
+                    }
+                }
+            }
+
+            document.querySelector(".store-set-name-label").innerHTML = storeslist[index].getName();
+            document.querySelector(".store-set-address-label").innerHTML = storeslist[index].getAddress();
+            document.querySelector(".store-set-opening-label").innerHTML = storeslist[index].getOpening();
+
+            storeslist[index].setName(document.querySelector(".store-set-name").value = storeslist[index].getName());
+            storeslist[index].setAddress(document.querySelector(".store-set-address").value = storeslist[index].getAddress());
+            storeslist[index].setOpening(document.querySelector(".store-set-opening").value = storeslist[index].getOpening());
+        })
+    }
 
     //select store-tr
     toDelStores = [];
@@ -379,27 +450,13 @@ function write() {
     }
 
     //page (storepage)
-    let pages = document.querySelectorAll(".page");
-    for (let i = 1; i < pages.length; i++) {
+
+    pages = document.querySelectorAll(".page");
+    for (let i=1; i < pages.length; i++) {
         pages[i].style.display = "none";
     }
-    let page = 0;
-    document.querySelector(".btn-left").addEventListener("click", function left() {
-        pages = document.querySelectorAll(".page");
-        if (page > 0) {
-            document.querySelector(".page-" + page).style.display = "none";
-            page--;
-            document.querySelector(".page-" + page).style.display = "block";
-        }
-    });
-    document.querySelector(".btn-right").addEventListener("click", function right() {
-        pages = document.querySelectorAll(".page");
-        if (page < pages.length - 1) {
-            document.querySelector(".page-" + page).style.display = "none";
-            page++;
-            document.querySelector(".page-" + page).style.display = "block";
-        }
-    });
+    page = 0;
+
     openBtns = document.querySelectorAll(".btn-open");
     for (let i = 0; i < openBtns.length; i++) {
         openBtns[i].addEventListener("click", function () {
