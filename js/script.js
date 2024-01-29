@@ -145,9 +145,11 @@ xmlhttp.onload = function () {
 
 
     document.querySelector(".btn-set-confirmation").addEventListener("click", function () {
+        alert("daléjfd")
         selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value);
         selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value);
         selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value);
+        alert(document.querySelector(".element-input-store").selectedIndex)
         selectedList.getElements()[index].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
         write();
         editElements = document.querySelectorAll(".btn-set-element");
@@ -161,12 +163,12 @@ xmlhttp.onload = function () {
                 document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[index].getName();
                 document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[index].getQuantity();
                 document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice();
-                document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[index].getStore();
+                //document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[index].getStore();
 
                 selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value = selectedList.getElements()[index].getName());
                 selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value = selectedList.getElements()[index].getQuantity());
                 selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value = selectedList.getElements()[index].getPrice());
-                //selectedList.getElements()[index].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
+                selectedList.getElements()[index].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
             })
         }
 
@@ -267,6 +269,11 @@ function clearDivs() {
     document.querySelector(".lists").innerHTML = "";
     document.querySelector(".element-div-container").innerHTML = "";
     document.querySelector(".dropdown-menu").innerHTML = "";
+    formSelect = document.querySelectorAll(".form-select");
+    for (let i = 0; i < formSelect.length; i++) {
+        formSelect[i].innerHTML = "";
+
+    }
 }
 
 function write() {
@@ -280,7 +287,7 @@ function write() {
             }
         }
     }
-    
+
 
 
     document.querySelector(".selected-list-dropdown").innerHTML = selectedList.getName();
@@ -368,9 +375,19 @@ function write() {
         })(i);
     }
 
-    
+    //select input
+    formSelect = document.querySelectorAll(".form-select");
+    for (let i = 0; i < formSelect.length; i++) {
+        for (let j = 0; j < storeslist.length; j++) {
+            if (storeslist[j] != null) {
+                formSelect[i].innerHTML += "<option>" + storeslist[j].getName() + "</option>";
+            }
+        }
+
+
+    }
     //store writeout
-    const TableElementCount = 5;
+    const TableElementCount = 10;
     storeslistLength = 0;
 
     for (let i = 0; i < storeslist.length; i++) {
@@ -378,7 +395,7 @@ function write() {
             storeslistLength++;
         }
     }
-    
+
     let tableNumber = Math.ceil(storeslistLength / TableElementCount);
     let div = document.querySelector(".store-table");
     div.innerHTML = "";
@@ -386,13 +403,13 @@ function write() {
 
     for (let i = 0; i < tableNumber; i++) {
         div.innerHTML += "<table class=\"table page-" + i + " page\"><tr><td>" + (i + 1) + ". lap</td></tr></table>";
-        
+
         let table = document.querySelector(".page-" + i)
 
         for (let j = 0; j < TableElementCount; j++) {
             if (storeindex < storeslist.length) {
-                
-                while (storeslist[storeindex] == null&&storeindex<storeslist.length) {
+
+                while (storeslist[storeindex] == null && storeindex < storeslist.length) {
                     storeindex++;
 
 
@@ -452,7 +469,7 @@ function write() {
     //page (storepage)
 
     pages = document.querySelectorAll(".page");
-    for (let i=1; i < pages.length; i++) {
+    for (let i = 1; i < pages.length; i++) {
         pages[i].style.display = "none";
     }
     page = 0;
@@ -533,15 +550,16 @@ function write() {
                     }
                 }
             }
+            console.log(selectedList.getElements()[index].getName()+" "+index)
             document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[index].getName();
             document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[index].getQuantity();
             document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice();
-            document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[index].getStore();
+            //document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[index].getStore();
 
             selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value = selectedList.getElements()[index].getName());
             selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value = selectedList.getElements()[index].getQuantity());
             selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value = selectedList.getElements()[index].getPrice());
-            //selectedList.getElements()[index].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
+            selectedList.getElements()[index].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
         })
     }
 
