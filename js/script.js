@@ -4,6 +4,7 @@ var storeslist = [];
 var lists = [];
 var page = 0;
 var index;
+var mainTableElements;
 xmlhttp = new XMLHttpRequest();
 xmlhttp.onload = function () {
     let x = JSON.parse(this.responseText);
@@ -20,6 +21,7 @@ xmlhttp.onload = function () {
 
 
     selectedList = lists[0];
+    mainTableElements=selectedList.getElements();
     write();
 
     //add list
@@ -37,6 +39,7 @@ xmlhttp.onload = function () {
         for (let i = 0; i < lists.length; i++) {
             if (lists[i] != null) {
                 selectedList = lists[i];
+                mainTableElements=selectedList.getElements();
             }
 
         }
@@ -46,6 +49,7 @@ xmlhttp.onload = function () {
             for (let i = 0; i < lists.length; i++) {
                 if (lists[i] != null) {
                     selectedList = lists[i];
+                    mainTableElements=selectedList.getElements();
                 }
             }
         }
@@ -255,6 +259,16 @@ xmlhttp.onload = function () {
         }
     });
 
+    document.querySelector(".filter").addEventListener("change",function(){
+        mainTableElements=[];
+        for(let i=0;i<selectedList.getElements().length;i++){
+            if(document.querySelector(".filter").options[document.querySelector(".filter").selectedIndex].text==selectedList.getElements()[i].getStore()){
+                mainTableElements.push(selectedList.getElements()[i]);
+            }
+            
+        }
+        write();
+    })
 
 
 }
@@ -277,16 +291,12 @@ function clearDivs() {
 
 function write() {
     clearDivs();
-    //sorting the elements and writing the elements
-    let flag = true;
-    if (flag) {
-        for (let i = 0; i < selectedList.getElements().length; i++) {
-            if (selectedList.getElements()[i] != null) {
-                document.querySelector(".elements-list-out").innerHTML += selectedList.getElements()[i].toTr();
-            }
+    for (let i = 0; i < mainTableElements.length; i++) {
+        if (mainTableElements != null) {
+            document.querySelector(".elements-list-out").innerHTML += mainTableElements[i].toTr();
         }
     }
-
+    
 
 
     document.querySelector(".selected-list-dropdown").innerHTML = selectedList.getName();
@@ -478,7 +488,8 @@ function write() {
         openBtns[i].addEventListener("click", function () {
             n = openBtns[i].classList[2];
             selectedList = lists[n];
-            write(selectedList);
+            mainTableElements=selectedList.getElements();
+            write();
             load(document.querySelector(".starting-container"));
         });
     }
@@ -487,7 +498,9 @@ function write() {
         openDrpdwns[i].addEventListener("click", function () {
             n = openDrpdwns[i].classList[2];
             selectedList = lists[n];
-            write(selectedList);
+            mainTableElements=selectedList.getElements();
+            
+            write();
             load(document.querySelector(".starting-container"));
         });
     }
