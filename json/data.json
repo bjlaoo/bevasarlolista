@@ -1,10 +1,10 @@
 {
     "lists": [
         {"name":"List 1","elements":[
-            {"name":"Element 1","quantity":"123","price":"123","store":"bolt","isBought":false},
-            {"name":"Element 2","quantity":"123","price":"123","store":"x","isBought":true},
-            {"name":"Element 1","quantity":"123","price":"123","store":"bolt","isBought":false},
-            {"name":"Element 1","quantity":"123","price":"123","store":"bolt","isBought":false}
+            {"name":"Element 1","quantity":"1","price":"123","store":"bolt","isBought":false},
+            {"name":"Element 2","quantity":"2","price":"123","store":"x","isBought":true},
+            {"name":"Element 1","quantity":"3","price":"123","store":"bolt","isBought":false},
+            {"name":"Element 1","quantity":"4","price":"123","store":"bolt","isBought":false}
         ]},
         {"name":"List 2","elements":[
             {"name":"Element 1","quantity":"123","price":"123","store":"bolt","isBought":false},
@@ -51,29 +51,21 @@
             {"name":"last","quantity":"123","price":"123","store":"bolt","isBought":false}
         ]},
         {"name":"Bevásárló lista","elements":[
-            {"name":"Körte","quantity":"1","price":"999","store":"Lidl","isBought":true},
-            {"name":"Alma","quantity":"2","price":"349","store":"Tesco","isBought":false},
-            {"name":"Banán","quantity":"1","price":"685 ","store":"Aldi","isBought":true}
+            {"name":"Körte","quantity":"1","price":1199,"store":"Lidl","isBought":true},
+            {"name":"Alma","quantity":"2","price":349,"store":"Tesco","isBought":false},
+            {"name":"Banán","quantity":"1","price":685,"store":"Aldi","isBought":true}
         ]}
     ],
     "stores":[
-        {"name":"Bolt","address":"123","opening":"123"},
-        {"name":"Element 1","address":"123","opening":"123"},
-        {"name":"Element 1","address":"123","opening":"123"},
-        {"name":"Element 1","address":"123","opening":"123"},
-        {"name":"x","address":"123","opening":"123"},
-        {"name":"Element 1","address":"123","opening":"123"},
-        {"name":"Element 1","address":"123","opening":"123"},
-        {"name":"Element 1","address":"123","opening":"123"},
-        {"name":"Element 1","address":"123","opening":"123"},
-        {"name":"Element 1","address":"123","opening":"123"},
-        {"name":"Element 1","address":"123","opening":"123"},
-        {"name":"Element 1","address":"123","opening":"123"},
-        {"name":"Element 1","address":"123","opening":"123"},
-        {"name":"Element 1","address":"123","opening":"123"},
-        {"name":"Element 1","address":"123","opening":"123"},
-        {"name":"ba","address":"123","opening":"123"}
-
+        {"name":"Kérjük válasszon egyet!","address":"-","opening":"-"},
+        {"name":"Interspar","address":"Tatabánya, Győri út 25","opening":"H-Sz: 6:00-21:00 V: 7:00-19:00"},
+        {"name":"Tesco","address":"Tatabánya, Bláthy Ottó utca 1","opening":"H-V: 6:00-22:00"},
+        {"name":"Lidl","address":"Tatabánya, Győri út 31","opening":"H-Sz: 6:30-21:00 V: 7:00-19:00"},
+        {"name":"Aldi","address":"Tatabánya, Köztársaság útja 1/F","opening":"H-Sz: 7:00-20:00 V: 7:00-19:00"},
+        {"name":"Penny","address":"Tatabánya, Győri út 35","opening":"H-Sz: 6:30-20:00 V: 7:00-18:00"},
+        {"name":"Auchan","address":"Budaörs, Sport u. 2-4","opening":"H-Sz: 6:00-21:00 V: 8:00-20:00"},
+        {"name":"Metro","address":"Budaörs, Keleti u. 3","opening":"H-Sz: 5:30-9:30 V: 8:30-18:30"},
+        {"name":"Príma","address":"Vértesszőlős, Határ út 1-3","opening":"H-P: 7:00-19:00 Sz: 7:00-18:00 V: 9:00-18:00"}
     ]
 }
-        
+       

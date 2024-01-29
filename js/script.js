@@ -224,26 +224,6 @@ xmlhttp.onload = function () {
     })
 
 
-    //sort by name
-    let byName = document.querySelectorAll(".sort-by-name");
-    let forSortingList = [];
-    let sortedList = [];
-    for (let i = 0; i < selectedList.getElements().length; i++) {
-        if (selectedList.getElements()[i] != null) {
-            forSortingList.push(selectedList.getElements()[i]);
-        }
-    }
-    selectedList.getElements().sort();
-    document.querySelector(".sort-by-name").addEventListener("click", function () {
-        flag = false;
-
-        for (let i = 0; i < forSortingList.length; i++) {
-            if (forSortingList[i] != null) {
-                document.querySelector(".elements-list-out").innerHTML += forSortingList[i].toTr();
-            }
-        }
-        write()
-    });
     document.querySelector(".btn-left").addEventListener("click", function left() {
         if (page > 0) {
             document.querySelector(".page-" + page).style.display = "none";
@@ -266,6 +246,68 @@ xmlhttp.onload = function () {
                 mainTableElements.push(selectedList.getElements()[i]);
             }
             
+        }
+        write();
+    })
+    //sort by name ascending
+    document.querySelector(".sort-by-name-asc").addEventListener("click",function(){
+        let temp;
+        for(let i=0;i<mainTableElements.length;i++){
+            for(let j=i+1;j<mainTableElements.length;j++){
+                if(mainTableElements[i].getName()>mainTableElements[j].getName()){
+                    console.log(mainTableElements[i]);
+                    temp=mainTableElements[i];
+                    mainTableElements[i]=mainTableElements[j];
+                    mainTableElements[j]=temp;
+                }
+            }
+        }
+        write();
+    })
+    //sort by name descending
+
+    document.querySelector(".sort-by-name-desc").addEventListener("click",function(){
+        let temp;
+        for(let i=0;i<mainTableElements.length;i++){
+            for(let j=i+1;j<mainTableElements.length;j++){
+                if(mainTableElements[i].getName()<mainTableElements[j].getName()){
+                    console.log(mainTableElements[i]);
+                    temp=mainTableElements[i];
+                    mainTableElements[i]=mainTableElements[j];
+                    mainTableElements[j]=temp;
+                }
+            }
+        }
+        write();
+    })
+
+    //sort by price ascending
+    document.querySelector(".sort-by-price-asc").addEventListener("click",function(){
+        let temp;
+        for(let i=0;i<mainTableElements.length;i++){
+            for(let j=i+1;j<mainTableElements.length;j++){
+                if(mainTableElements[i].getPrice()>mainTableElements[j].getPrice()){
+                    console.log(mainTableElements[i]);
+                    temp=mainTableElements[i];
+                    mainTableElements[i]=mainTableElements[j];
+                    mainTableElements[j]=temp;
+                }
+            }
+        }
+        write();
+    })
+    //sort by price descending
+    document.querySelector(".sort-by-price-desc").addEventListener("click",function(){
+        let temp;
+        for(let i=0;i<mainTableElements.length;i++){
+            for(let j=i+1;j<mainTableElements.length;j++){
+                if(mainTableElements[i].getPrice()<mainTableElements[j].getPrice()){
+                    console.log(mainTableElements[i]);
+                    temp=mainTableElements[i];
+                    mainTableElements[i]=mainTableElements[j];
+                    mainTableElements[j]=temp;
+                }
+            }
         }
         write();
     })

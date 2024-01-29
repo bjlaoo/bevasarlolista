@@ -91,13 +91,25 @@
             </div>
             <div class="col-md-4">
               <div class="row">
-                <button type="button" class="btn btn-primary sort-by-name">Rendezés név szerint</button>
+                <div class="btn-group dropup">
+                  <button class="btn dropdown-toggle btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Rendezés név szerint
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item sort-by-name-asc" href="#">A-Z</a></li>
+                    <li><a class="dropdown-item sort-by-name-desc" href="#">Z-A</a></li>
+                  </ul>
+                </div>
+                <div class="btn-group dropup">
+                  <button class="btn dropdown-toggle btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Rendezés ár szerint
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item sort-by-price-asc" href="#">Olcsóbb elől</a></li>
+                    <li><a class="dropdown-item sort-by-price-desc" href="#">Drágább elől</a></li>
+                  </ul>
+                </div>
               </div>
-              <div class="row">
-                <button type="button" class="btn btn-primary sort-by-price">Rendezés ár szerint</button>
-              </div>
-            </div>
-            <div class="col-md-3">
             </div>
           </div>
         </div>
