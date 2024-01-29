@@ -145,12 +145,11 @@ xmlhttp.onload = function () {
 
 
     document.querySelector(".btn-set-confirmation").addEventListener("click", function () {
-        alert("daléjfd")
+
         selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value);
         selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value);
         selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value);
-        alert(document.querySelector(".element-input-store").selectedIndex)
-        selectedList.getElements()[index].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
+        selectedList.getElements()[index].setStore(document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text);
         write();
         editElements = document.querySelectorAll(".btn-set-element");
         for (let i = 0; i < editElements.length; i++) {
@@ -559,7 +558,7 @@ function write() {
             selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value = selectedList.getElements()[index].getName());
             selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value = selectedList.getElements()[index].getQuantity());
             selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value = selectedList.getElements()[index].getPrice());
-            selectedList.getElements()[index].setStore(document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text);
+            selectedList.getElements()[index].setStore(document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text);
         })
     }
 
