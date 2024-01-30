@@ -475,6 +475,7 @@ function write() {
 
         }
     }
+    storeslist.splice(0,0,new store("Kérjük válasszon egyet!","",""));
     //edit store
     editStores = document.querySelectorAll(".btn-set-store");
     for (let i = 0; i < editStores.length; i++) {
