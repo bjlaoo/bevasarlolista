@@ -428,7 +428,8 @@ function write() {
 
     //select input
     formSelect = document.querySelectorAll(".form-select");
-    for (let i = 0; i < formSelect.length; i++) {
+    for (let i = 0; i < formSelect.length; i++) {       
+        //
         for (let j = 0; j < storeslist.length; j++) {
             if (storeslist[j] != null) {
                 formSelect[i].innerHTML += "<option>" + storeslist[j].getName() + "</option>";
@@ -440,7 +441,7 @@ function write() {
     //store writeout
     const TableElementCount = 10;
     storeslistLength = 0;
-
+    storeslist.splice(0,1);
     for (let i = 0; i < storeslist.length; i++) {
         if (storeslist[i] != null) {
             storeslistLength++;
