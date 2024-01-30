@@ -334,7 +334,7 @@ function clearDivs() {
 function write() {
     clearDivs();
     for (let i = 0; i < mainTableElements.length; i++) {
-        if (mainTableElements != null) {
+        if (mainTableElements[i] != null) {
             document.querySelector(".elements-list-out").innerHTML += mainTableElements[i].toTr();
         }
     }
@@ -551,9 +551,9 @@ function write() {
 
     //becsült összeg
     sum = 0;
-    for (let i = 0; i < selectedList.getElements().length; i++) {
-        if (selectedList.getElements()[i] != null) {
-            sum += (selectedList.getElements()[i].getQuantity() * selectedList.getElements()[i].getPrice());
+    for (let i = 0; i < mainTableElements.length; i++) {
+        if (mainTableElements[i] != null) {
+            sum += (mainTableElements[i].getQuantity() * mainTableElements[i].getPrice());
         }
     }
     document.querySelector(".sum").innerHTML = sum + " Ft";
