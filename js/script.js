@@ -19,15 +19,22 @@ xmlhttp.onload = function () {
         storeslist.push(new store(x.stores[i].name, x.stores[i].address, x.stores[i].opening));
     }
 
-
-    selectedList = lists[0];
-    mainTableElements=selectedList.getElements();
+    selectedList = getNotallgreen();
+    mainTableElements = selectedList.getElements();
     write();
 
     //add list
     document.querySelector(".btn-add-list").addEventListener("click", function () {
-        lists.push(new elementlist(document.querySelector(".list-input-name").value));
-        write();
+        if (document.querySelector(".list-input-name").value == "") {
+            document.querySelector(".list-input-name").classList.add("is-invalid");
+            let dataBsDismiss = document.querySelector(".btn-add-list").attr("data-dismiss");
+            //dataBsDismiss = "";hide.bs.modal
+            
+        }
+        else {
+            lists.push(new elementlist(document.querySelector(".list-input-name").value))
+            write();
+        }
     })
     //del list
     document.querySelector(".btn-del-list").addEventListener("click", function () {
@@ -39,7 +46,7 @@ xmlhttp.onload = function () {
         for (let i = 0; i < lists.length; i++) {
             if (lists[i] != null) {
                 selectedList = lists[i];
-                mainTableElements=selectedList.getElements();
+                mainTableElements = selectedList.getElements();
             }
 
         }
@@ -49,7 +56,7 @@ xmlhttp.onload = function () {
             for (let i = 0; i < lists.length; i++) {
                 if (lists[i] != null) {
                     selectedList = lists[i];
-                    mainTableElements=selectedList.getElements();
+                    mainTableElements = selectedList.getElements();
                 }
             }
         }
@@ -239,26 +246,26 @@ xmlhttp.onload = function () {
         }
     });
 
-    document.querySelector(".filter").addEventListener("change",function(){
-        mainTableElements=[];
-        for(let i=0;i<selectedList.getElements().length;i++){
-            if(document.querySelector(".filter").options[document.querySelector(".filter").selectedIndex].text==selectedList.getElements()[i].getStore()){
+    document.querySelector(".filter").addEventListener("change", function () {
+        mainTableElements = [];
+        for (let i = 0; i < selectedList.getElements().length; i++) {
+            if (document.querySelector(".filter").options[document.querySelector(".filter").selectedIndex].text == selectedList.getElements()[i].getStore()) {
                 mainTableElements.push(selectedList.getElements()[i]);
             }
-            
+
         }
         write();
     })
     //sort by name ascending
-    document.querySelector(".sort-by-name-asc").addEventListener("click",function(){
+    document.querySelector(".sort-by-name-asc").addEventListener("click", function () {
         let temp;
-        for(let i=0;i<mainTableElements.length;i++){
-            for(let j=i+1;j<mainTableElements.length;j++){
-                if(mainTableElements[i].getName()>mainTableElements[j].getName()){
+        for (let i = 0; i < mainTableElements.length; i++) {
+            for (let j = i + 1; j < mainTableElements.length; j++) {
+                if (mainTableElements[i].getName() > mainTableElements[j].getName()) {
                     console.log(mainTableElements[i]);
-                    temp=mainTableElements[i];
-                    mainTableElements[i]=mainTableElements[j];
-                    mainTableElements[j]=temp;
+                    temp = mainTableElements[i];
+                    mainTableElements[i] = mainTableElements[j];
+                    mainTableElements[j] = temp;
                 }
             }
         }
@@ -266,15 +273,15 @@ xmlhttp.onload = function () {
     })
     //sort by name descending
 
-    document.querySelector(".sort-by-name-desc").addEventListener("click",function(){
+    document.querySelector(".sort-by-name-desc").addEventListener("click", function () {
         let temp;
-        for(let i=0;i<mainTableElements.length;i++){
-            for(let j=i+1;j<mainTableElements.length;j++){
-                if(mainTableElements[i].getName()<mainTableElements[j].getName()){
+        for (let i = 0; i < mainTableElements.length; i++) {
+            for (let j = i + 1; j < mainTableElements.length; j++) {
+                if (mainTableElements[i].getName() < mainTableElements[j].getName()) {
                     console.log(mainTableElements[i]);
-                    temp=mainTableElements[i];
-                    mainTableElements[i]=mainTableElements[j];
-                    mainTableElements[j]=temp;
+                    temp = mainTableElements[i];
+                    mainTableElements[i] = mainTableElements[j];
+                    mainTableElements[j] = temp;
                 }
             }
         }
@@ -282,30 +289,30 @@ xmlhttp.onload = function () {
     })
 
     //sort by price ascending
-    document.querySelector(".sort-by-price-asc").addEventListener("click",function(){
+    document.querySelector(".sort-by-price-asc").addEventListener("click", function () {
         let temp;
-        for(let i=0;i<mainTableElements.length;i++){
-            for(let j=i+1;j<mainTableElements.length;j++){
-                if(mainTableElements[i].getPrice()>mainTableElements[j].getPrice()){
+        for (let i = 0; i < mainTableElements.length; i++) {
+            for (let j = i + 1; j < mainTableElements.length; j++) {
+                if (mainTableElements[i].getPrice() > mainTableElements[j].getPrice()) {
                     console.log(mainTableElements[i]);
-                    temp=mainTableElements[i];
-                    mainTableElements[i]=mainTableElements[j];
-                    mainTableElements[j]=temp;
+                    temp = mainTableElements[i];
+                    mainTableElements[i] = mainTableElements[j];
+                    mainTableElements[j] = temp;
                 }
             }
         }
         write();
     })
     //sort by price descending
-    document.querySelector(".sort-by-price-desc").addEventListener("click",function(){
+    document.querySelector(".sort-by-price-desc").addEventListener("click", function () {
         let temp;
-        for(let i=0;i<mainTableElements.length;i++){
-            for(let j=i+1;j<mainTableElements.length;j++){
-                if(mainTableElements[i].getPrice()<mainTableElements[j].getPrice()){
+        for (let i = 0; i < mainTableElements.length; i++) {
+            for (let j = i + 1; j < mainTableElements.length; j++) {
+                if (mainTableElements[i].getPrice() < mainTableElements[j].getPrice()) {
                     console.log(mainTableElements[i]);
-                    temp=mainTableElements[i];
-                    mainTableElements[i]=mainTableElements[j];
-                    mainTableElements[j]=temp;
+                    temp = mainTableElements[i];
+                    mainTableElements[i] = mainTableElements[j];
+                    mainTableElements[j] = temp;
                 }
             }
         }
@@ -317,7 +324,21 @@ xmlhttp.onload = function () {
 xmlhttp.open("GET", "json/data.json");
 xmlhttp.send();
 //functions
+function getNotallgreen() {
+    flag = true;
+    for (let i = 0; i < lists.length; i++) {
+        for (let j = 0; j < lists[i].getElements().length; j++) {
+            if (!lists[i].getElements()[j].isBought) {
+                flag = false;
+            }
+        }
+        if (!flag) {
+            selectedList = lists[i];
+        }
+    }
+    return selectedList;
 
+}
 function clearDivs() {
     document.querySelector("tbody").innerHTML = "";
     document.querySelector(".store-table").innerHTML = "";
@@ -338,7 +359,7 @@ function write() {
             document.querySelector(".elements-list-out").innerHTML += mainTableElements[i].toTr();
         }
     }
-    
+
 
 
     document.querySelector(".selected-list-dropdown").innerHTML = selectedList.getName();
@@ -428,8 +449,7 @@ function write() {
 
     //select input
     formSelect = document.querySelectorAll(".form-select");
-    for (let i = 0; i < formSelect.length; i++) {       
-        //
+    for (let i = 0; i < formSelect.length; i++) {
         for (let j = 0; j < storeslist.length; j++) {
             if (storeslist[j] != null) {
                 formSelect[i].innerHTML += "<option>" + storeslist[j].getName() + "</option>";
@@ -441,7 +461,7 @@ function write() {
     //store writeout
     const TableElementCount = 10;
     storeslistLength = 0;
-    storeslist.splice(0,1);
+    storeslist.splice(0, 1);
     for (let i = 0; i < storeslist.length; i++) {
         if (storeslist[i] != null) {
             storeslistLength++;
@@ -475,7 +495,7 @@ function write() {
 
         }
     }
-    storeslist.splice(0,0,new store("Kérjük válasszon egyet!","",""));
+    storeslist.splice(0, 0, new store("Kérjük válasszon egyet!", "", ""));
     //edit store
     editStores = document.querySelectorAll(".btn-set-store");
     for (let i = 0; i < editStores.length; i++) {
@@ -499,7 +519,6 @@ function write() {
             storeslist[index].setOpening(document.querySelector(".store-set-opening").value = storeslist[index].getOpening());
         })
     }
-
     //select store-tr
     toDelStores = [];
     let stores = document.querySelectorAll(".store");
@@ -519,6 +538,7 @@ function write() {
         })(i);
     }
 
+
     //page (storepage)
 
     pages = document.querySelectorAll(".page");
@@ -532,7 +552,7 @@ function write() {
         openBtns[i].addEventListener("click", function () {
             n = openBtns[i].classList[2];
             selectedList = lists[n];
-            mainTableElements=selectedList.getElements();
+            mainTableElements = selectedList.getElements();
             write();
             load(document.querySelector(".starting-container"));
         });
@@ -542,8 +562,8 @@ function write() {
         openDrpdwns[i].addEventListener("click", function () {
             n = openDrpdwns[i].classList[2];
             selectedList = lists[n];
-            mainTableElements=selectedList.getElements();
-            
+            mainTableElements = selectedList.getElements();
+
             write();
             load(document.querySelector(".starting-container"));
         });
@@ -606,7 +626,7 @@ function write() {
                     }
                 }
             }
-            console.log(selectedList.getElements()[index].getName()+" "+index)
+            console.log(selectedList.getElements()[index].getName() + " " + index)
             document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[index].getName();
             document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[index].getQuantity();
             document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice();

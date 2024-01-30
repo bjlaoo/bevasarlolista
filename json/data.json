@@ -1,10 +1,10 @@
 {
     "lists": [
         {"name":"List 1","elements":[
-            {"name":"Element 1","quantity":"1","price":"123","store":"bolt","isBought":false},
+            {"name":"Element 1","quantity":"1","price":"123","store":"bolt","isBought":true},
             {"name":"Element 2","quantity":"2","price":"123","store":"x","isBought":true},
-            {"name":"Element 1","quantity":"3","price":"123","store":"bolt","isBought":false},
-            {"name":"Element 1","quantity":"4","price":"123","store":"bolt","isBought":false}
+            {"name":"Element 1","quantity":"3","price":"123","store":"bolt","isBought":true},
+            {"name":"Element 1","quantity":"4","price":"123","store":"bolt","isBought":true}
         ]},
         {"name":"List 2","elements":[
             {"name":"Element 1","quantity":"123","price":"123","store":"bolt","isBought":false},
