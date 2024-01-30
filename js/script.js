@@ -26,13 +26,13 @@ xmlhttp.onload = function () {
     //add list
     document.querySelector(".btn-add-list").addEventListener("click", function () {
         if (document.querySelector(".list-input-name").value == "") {
-            document.querySelector(".list-input-name").classList.add("is-invalid");
-            let dataBsDismiss = document.querySelector(".btn-add-list").attr("data-dismiss");
-            //dataBsDismiss = "";hide.bs.modal
-            
+            document.querySelector(".list-input-name").classList.add("is-invalid");           
         }
         else {
             lists.push(new elementlist(document.querySelector(".list-input-name").value))
+            $('.modal').on('hidden.bs.modal', function () {
+                $('.modal').remove();
+            });
             write();
         }
     })
