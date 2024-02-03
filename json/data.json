@@ -1,4 +1,4 @@
-{
+{"data":{
     "lists": [
         {"name":"List 1","elements":[
             {"name":"Element 1","quantity":"1","price":"123","store":"bolt","isBought":true},
@@ -67,5 +67,5 @@
         {"name":"Metro","address":"Budaörs, Keleti u. 3","opening":"H-Sz: 5:30-9:30 V: 8:30-18:30"},
         {"name":"Príma","address":"Vértesszőlős, Határ út 1-3","opening":"H-P: 7:00-19:00 Sz: 7:00-18:00 V: 9:00-18:00"}
     ]
-}
+}}
        

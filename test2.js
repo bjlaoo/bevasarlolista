@@ -3,16 +3,16 @@
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-  apiKey: "AIzaSyCiNJapIQl7q_HAmumYSdBI1cIyBP3SCsE",
-  authDomain: "wrud-5ced6.firebaseapp.com",
-  databaseURL: "https://wrud-5ced6-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "wrud-5ced6",
-  storageBucket: "wrud-5ced6.appspot.com",
-  messagingSenderId: "197962461246",
-  appId: "1:197962461246:web:c9f34f9268b20c8c28a16f"
-  };
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+    apiKey: "AIzaSyCiNJapIQl7q_HAmumYSdBI1cIyBP3SCsE",
+    authDomain: "wrud-5ced6.firebaseapp.com",
+    databaseURL: "https://wrud-5ced6-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "wrud-5ced6",
+    storageBucket: "wrud-5ced6.appspot.com",
+    messagingSenderId: "197962461246",
+    appId: "1:197962461246:web:c9f34f9268b20c8c28a16f"
+    };
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
@@ -27,16 +27,18 @@
       })
   })
 
-    document.querySelector(".lekeres").addEventListener("click",function(){
-        get(child(dbRef, 'Employee/'+"asdf")).then((snapshot)=>{
-            if(snapshot.exists()){
-                console.log(snapshot.val().asdf);
-            }
-        })
+  document.querySelector(".lekeres").addEventListener("click",function(){
+    const dbRef=ref(db);
+    get(child(dbRef, 'lists')).then((snapshot)=>{
+        if(snapshot.exists()){
+            
+            alert(snapshot.val());
+        }
     })
+})
 
 
-    
+
     document.querySelector(".torles").addEventListener("click",function(){
         remove(ref(db,"Employee/"+"asdf"),{
         })
