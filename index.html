@@ -213,28 +213,28 @@
         <div class="modal-body">
           <form class="form floating">
             <div class="form-floating mb-3">
-              <input type="text" class="form-control element-input-name floatingInput" placeholder="Név">
+              <input type="text" class="form-control element-input-name floatingInput" placeholder="Név" required>
               <label>Név</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control element-input-quantity floatingInput" placeholder="Mennyiség">
+              <input type="number" class="form-control element-input-quantity floatingInput" placeholder="Mennyiség" required>
               <label>Mennyiség</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control element-input-price floatingInput" placeholder="Egységár">
-              <label>Egységár</label>
+              <input type="number" class="form-control element-input-price floatingInput optional" placeholder="Egységár">
+              <label class="optional">Egységár (optional)</label>
             </div>
             <div class="form-floating">
-              <select class="form-select element-input-store floatingSelect" aria-label="Floating label select example">
+              <select class="form-select element-input-store floatingSelect optional" aria-label="Floating label select example">
                 <option selected></option>
               </select>
-              <label>Bolt</label>
+              <label>Bolt (optional)</label>
             </div>
           </form>
         </div>
         <div class="modal-footer center">
           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Mégse</button>
-          <button type="button" class="btn btn-primary btn-add-element" data-bs-dismiss="modal">Hozzáadás</button>
+          <button type="button" class="btn btn-primary btn-add-element">Hozzáadás</button>
         </div>
       </div>
     </div>
@@ -273,32 +273,29 @@
         <div class="modal-body">
           <form class="form floating">
             <div class="form-floating mb-3">
-              <input type="text" class="form-control floatingInput element-set-name"
-                placeholder="Eredeti név"><!--placeholder átírása-->
+              <input type="text" class="form-control floatingInput element-set-name" required placeholder="Eredeti név"><!--placeholder átírása-->
               <label class="element-set-name-label">Eredeti név</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control floatingInput element-set-quantity"
-                placeholder="Eredeti mennyiség">
+              <input type="number" class="form-control floatingInput element-set-quantity" required placeholder="Eredeti mennyiség">
               <label class="element-set-quantity-label">Eredeti mennyiség</label>
             </div>
             <div class="form-floating mb-3">
               <input type="number" class="form-control floatingInput element-set-price" placeholder="Eredeti egységár">
-              <label class="element-set-price-label">Eredeti egységár</label>
+              <label class="element-set-price-label optional">Eredeti egységár</label>
             </div>
             <div class="form-floating">
-              <select class="form-select floatingSelect element-set-store" aria-label="Floating label select example">
+              <select class="form-select floatingSelect element-set-store secondary optional" aria-label="Floating label select example">
                 <option class="element-set-store-selected" selected></option>
 
               </select>
-              <label>Bolt</label>
+              <label>Bolt (optional)</label>
             </div>
           </form>
         </div>
         <div class="modal-footer center">
           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Mégse</button>
-          <button type="button" class="btn btn-primary btn-set-confirmation"
-            data-bs-dismiss="modal">Szerkesztés</button>
+          <button type="button" class="btn btn-primary btn-set-confirmation">Szerkesztés</button>
         </div>
       </div>
     </div>

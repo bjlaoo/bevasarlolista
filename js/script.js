@@ -37,9 +37,10 @@ get(child(dbRef, 'data')).then((snapshot) => {
         let x = snapshot.val();
         for (let i = 0; i < x.lists.length; i++) {
             let tmplist = new elementlist(x.lists[i].name);
+            if(x.lists[i].elements!=undefined){
             for (let j = 0; j < x.lists[i].elements.length; j++) {
                 tmplist.addElement(new element(x.lists[i].elements[j].name, x.lists[i].elements[j].quantity, x.lists[i].elements[j].price, x.lists[i].elements[j].store, x.lists[i].elements[j].isBought));
-            }
+            }}
             lists.push(tmplist)
         }
         for (let i = 0; i < x.stores.length; i++) {
@@ -54,13 +55,14 @@ get(child(dbRef, 'data')).then((snapshot) => {
 
         //add list
         document.querySelector(".btn-add-list").addEventListener("click", function () {
-            document.querySelector(".list-input-name").classList.add("is-invalid");
+            document.querySelector(".list-input-name").classList.remove("is-invalid");
             if (document.querySelector(".list-input-name").value == "") {
                 document.querySelector(".list-input-name").classList.add("is-invalid");
             }
             else {
                 lists.push(new elementlist(document.querySelector(".list-input-name").value))
                 $(".modal").modal("hide");
+                document.querySelector(".list-input-name").value = "";
                 write();
             }
         })
@@ -158,6 +160,18 @@ get(child(dbRef, 'data')).then((snapshot) => {
 
         })
         document.querySelector(".btn-set-store-confirmation").addEventListener("click", function () {
+            //asdf
+            document.querySelector(".store-set-name").classList.remove("is-invalid");
+            if (document.querySelector(".store-set-name").value == "") {
+                document.querySelector(".store-set-name").classList.add("is-invalid");
+            }
+            else {
+                storeslist[index].setName(document.querySelector(".store-set-name").value);
+
+            }
+            //majd ha mind megvan
+            $(".modal").modal("hide");
+            write();
             storeslist[index].setName(document.querySelector(".store-set-name").value);
             storeslist[index].setAddress(document.querySelector(".store-set-address").value);
             storeslist[index].setOpening(document.querySelector(".store-set-opening").value);
@@ -184,11 +198,39 @@ get(child(dbRef, 'data')).then((snapshot) => {
 
 
         document.querySelector(".btn-set-confirmation").addEventListener("click", function () {
+            //asdf
+            document.querySelector(".element-set-name").classList.remove("is-invalid");
+            document.querySelector(".element-set-quantity").classList.remove("is-invalid");
+            if (document.querySelector(".element-set-name").value == "") {
+                document.querySelector(".element-set-name").classList.add("is-invalid");
+            }
+            else {
+                selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value);
+            }
 
-            selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value);
-            selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value);
-            selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value);
-            selectedList.getElements()[index].setStore(document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text);
+            if (document.querySelector(".element-set-quantity").value == "") {
+                document.querySelector(".element-set-quantity").classList.add("is-invalid");
+            }
+            else {
+                selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value);
+
+            }
+            if(!(document.querySelector(".element-set-quantity").value == "")&&!(document.querySelector(".element-set-name").value == "")){
+                $(".modal").modal("hide");
+                write();
+            }     
+
+                selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value);
+            
+            
+            
+            if(document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text==document.querySelector(".element-set-store").options[0].text){
+                selectedList.getElements()[index].setStore("Nincs bolt");
+            }
+            else{
+                selectedList.getElements()[index].setStore(document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text);
+            }
+
             write();
             let editElements = document.querySelectorAll(".btn-set-element");
             for (let i = 0; i < editElements.length; i++) {
@@ -200,7 +242,7 @@ get(child(dbRef, 'data')).then((snapshot) => {
                     }
                     document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[index].getName();
                     document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[index].getQuantity();
-                    document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice();
+                    document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice()+" (optional)";
                     //document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[index].getStore();
 
                     selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value = selectedList.getElements()[index].getName());
@@ -251,6 +293,24 @@ get(child(dbRef, 'data')).then((snapshot) => {
         })
         //add element
         document.querySelector(".btn-add-element").addEventListener("click", function () {
+            document.querySelector(".element-input-name").classList.remove("is-invalid");
+            document.querySelector(".element-input-quantity").classList.remove("is-invalid");
+            if (document.querySelector(".element-input-name").value == "") {
+                document.querySelector(".element-input-name").classList.add("is-invalid");
+            }
+            if (document.querySelector(".element-input-quantity").value == "") {
+                document.querySelector(".element-input-quantity").classList.add("is-invalid");
+            }
+            if(!(document.querySelector(".element-input-quantity").value == "")&&!(document.querySelector(".element-input-name").value == "")){
+                $(".modal").modal("hide");
+                write();
+            }            
+            if(document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text==document.querySelector(".element-set-store").options[0].text){
+                selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, "Nincs bolt"));
+            }
+            else{
+                selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text));
+            }
             selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text));
             document.querySelector(".element-input-name").value = '';
             document.querySelector(".element-input-quantity").value = '';
@@ -386,6 +446,13 @@ function clearDivs() {
     }
 }
 function writeTable() {
+    let sum = 0;
+    for (let i = 0; i < mainTableElements.length; i++) {
+        if (mainTableElements[i] != null) {
+            sum += (mainTableElements[i].getQuantity() * mainTableElements[i].getPrice());
+        }
+    }
+    document.querySelector(".sum").innerHTML = sum + " Ft";
     document.querySelector(".elements-list-out").innerHTML = "";
     for (let i = 0; i < mainTableElements.length; i++) {
         if (mainTableElements[i] != null) {
@@ -399,11 +466,9 @@ function writeTable() {
             if (elements[i].classList.contains("selected-element")) {
                 elements[i].classList.remove("selected-element");
                 selectedList.getElements()[i].setIsBought(false);
-                write();
             } else {
                 elements[i].classList.add("selected-element");
                 selectedList.getElements()[i].setIsBought(true);
-                write();
             }
         });
     }
@@ -641,27 +706,44 @@ function write() {
         listName[i].addEventListener("click", function () {
 
             let originalText = selectedList.getName();
-            document.querySelectorAll(".list-rename")[i].innerHTML = '<div class="input-group mb-3"><input type="text" class="form-control" placeholder="' + selectedList.getName() + '" aria-label="Recipients username" aria-describedby="button-addon2"> <button class="btn btn-primary btn-rename" type="button" id="button-addon2">Átnevezés</button></div>';
+            document.querySelectorAll(".list-rename")[i].innerHTML = '<div class="input-group mb-3"><input type="text" class="form-control" required placeholder="' + selectedList.getName() + '" aria-label="Recipients username" aria-describedby="button-addon2"> <button class="btn btn-primary btn-rename" type="button" id="button-addon2">Átnevezés</button></div>';
 
 
             let inputElement = document.querySelectorAll(".list-rename")[i].querySelector('input');
             inputElement.focus();
             document.querySelector(".btn-rename").addEventListener("click", function () {
-                selectedList.setName(inputElement.value);
-                document.querySelectorAll(".list-rename")[i].innerHTML = '<p class="list-name"><sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup></p>';
-                write(selectedList);
+                document.querySelector(".list-input-name").classList.remove("is-invalid");
+                if (inputElement.value == "") {
+                    inputElement.classList.add("is-invalid");
+                }
+                else {
+                    $(".modal").modal("hide");
+                    document.querySelector(".list-input-name").value = "";
+                    selectedList.setName(inputElement.value);
+                    document.querySelectorAll(".list-rename")[i].innerHTML = '<p class="list-name"><sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup></p>';
+                    write();
+                }
+           
             })
             $(document).off("keydown");
             $(document).on("keydown", function (event) {
                 switch (event.keyCode) {
                     case 13: // Enter key
+                    document.querySelector(".list-input-name").classList.remove("is-invalid");
+                    if (inputElement.value == "") {
+                        inputElement.classList.add("is-invalid");
+                    }
+                    else {
+                        $(".modal").modal("hide");
+                        document.querySelector(".list-input-name").value = "";
                         selectedList.setName(inputElement.value);
                         document.querySelectorAll(".list-rename")[i].innerHTML = '<p class="list-name"><sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup></p>';
-                        write(selectedList);
+                        write();
+                    }
                         break;
                     case 27: // Escape key
                         document.querySelectorAll(".list-rename")[i].innerHTML = '<p class="list-name"><sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup></p>';
-                        write(selectedList);
+                        write();
                         break;
                 }
             });
@@ -685,7 +767,7 @@ function write() {
             console.log(selectedList.getElements()[index].getName() + " " + index)
             document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[index].getName();
             document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[index].getQuantity();
-            document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice();
+            document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice()+" (optional)";
             //document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[index].getStore();
 
             selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value = selectedList.getElements()[index].getName());

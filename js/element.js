@@ -54,7 +54,7 @@ class element{
     }
     toTr() {
 
-        return "<tr class=\"element" + (this.getIsBought() ? " selected-element" : "") + "\"><td>" + this.getName()+ "</td><td>" + this.getQuantity() + "</td><td>" + this.getPrice() + " Ft</td><td>" + this.getStore() + "</td></tr>";
+        return "<tr class=\"element" + (this.getIsBought() ? " selected-element" : "") + "\"><td>" + this.getName()+ "</td><td>" + this.getQuantity() + "</td><td>" + (this.getPrice()==""?"-":this.getPrice()) + " Ft</td><td>" + this.getStore() + "</td></tr>";
     }
     
     toDiv(){
