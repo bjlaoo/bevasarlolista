@@ -357,16 +357,18 @@ get(child(dbRef, 'data')).then((snapshot) => {
 })
 //functions
 function getNotallgreen() {
-    flag = true;
-    for (let i = 0; i < lists.length; i++) {
-        for (let j = 0; j < lists[i].getElements().length; j++) {
-            if (!lists[i].getElements()[j].isBought) {
-                flag = false;
+    flag = false;
+    index = 0;
+    while (index < lists.length && !flag) {
+        for (let j = 0; j < lists[index].getElements().length; j++) {
+            if (!lists[index].getElements()[j].getIsBought()) {
+                flag = true;
             }
         }
-        if (!flag) {
-            selectedList = lists[i];
+        if (flag) {
+            selectedList = lists[index];
         }
+        index++;
     }
     return selectedList;
 
@@ -389,6 +391,21 @@ function writeTable() {
         if (mainTableElements[i] != null) {
             document.querySelector(".elements-list-out").innerHTML += mainTableElements[i].toTr();
         }
+    }
+    //selectelements
+    let elements = document.querySelectorAll(".element");
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].addEventListener("click", function () {
+            if (elements[i].classList.contains("selected-element")) {
+                elements[i].classList.remove("selected-element");
+                selectedList.getElements()[i].setIsBought(false);
+                write();
+            } else {
+                elements[i].classList.add("selected-element");
+                selectedList.getElements()[i].setIsBought(true);
+                write();
+            }
+        });
     }
 }
 function write() {
@@ -427,36 +444,38 @@ function write() {
     let circlePlacesList = document.querySelectorAll(".circle-list");
 
     for (let i = 0; i < listdivs.length; i++) {
-    
-            listdivs[i].addEventListener("click", function (event) {
-                if (event.target === listdivs[i]) {
-                    if (listdivs[i].classList.contains("selected-list") || listdivs[i].classList.contains("plus")) {
-                        listdivs[i].classList.remove("selected-list");
-                        toDelList.splice(listdivs[i].classList[2], 1);
-                        circlePlacesList[i - 1].innerHTML = "";
-                        circlePlacesList[i - 1].innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle-list\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
-                    } else {
-                        listdivs[i].classList.add("selected-list");
-                        toDelList.push(listdivs[i].classList[2]);
-                        circlePlacesList[i - 1].innerHTML = "";
-                        circlePlacesList[i - 1].innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-x-circle circle-list\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/><path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/></svg>";
-                    }
+
+        listdivs[i].addEventListener("click", function (event) {
+            if (event.target === listdivs[i]) {
+                if (listdivs[i].classList.contains("selected-list") || listdivs[i].classList.contains("plus")) {
+                    listdivs[i].classList.remove("selected-list");
+                    toDelList.splice(listdivs[i].classList[2], 1);
+                    circlePlacesList[i - 1].innerHTML = "";
+                    circlePlacesList[i - 1].innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle-list\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
+                } else {
+                    listdivs[i].classList.add("selected-list");
+                    toDelList.push(listdivs[i].classList[2]);
+                    circlePlacesList[i - 1].innerHTML = "";
+                    circlePlacesList[i - 1].innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-x-circle circle-list\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/><path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/></svg>";
                 }
-            });
+            }
+        });
 
     }
     //selectelements
     let elements = document.querySelectorAll(".element");
     for (let i = 0; i < elements.length; i++) {
-            elements[i].addEventListener("click", function () {
-                if (elements[i].classList.contains("selected-element")) {
-                    elements[i].classList.remove("selected-element");
-                    selectedList.getElements()[i].setIsBought(false);
-                } else {
-                    elements[i].classList.add("selected-element");
-                    selectedList.getElements()[i].setIsBought(true);
-                }
-            });
+        elements[i].addEventListener("click", function () {
+            if (elements[i].classList.contains("selected-element")) {
+                elements[i].classList.remove("selected-element");
+                selectedList.getElements()[i].setIsBought(false);
+                write();
+            } else {
+                elements[i].classList.add("selected-element");
+                selectedList.getElements()[i].setIsBought(true);
+                write();
+            }
+        });
 
     }
 
@@ -464,21 +483,21 @@ function write() {
     let elementsDiv = document.querySelectorAll(".element-div");
     let circlePlaces = document.querySelectorAll(".circle");
     for (let i = 0; i < elementsDiv.length; i++) {
-            elementsDiv[i].addEventListener("click", function (event) {
-                if (event.target == elementsDiv[i]) {
-                    if (elementsDiv[i].classList.contains("selected-div")) {
-                        elementsDiv[i].classList.remove("selected-div");
-                        circlePlaces[i].innerHTML = "";
-                        circlePlaces[i].innerHTML += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
-                        toDelElements.splice(elementsDiv[i].classList[2], 1);
-                    } else {
-                        elementsDiv[i].classList.add("selected-div");
-                        circlePlaces[i].innerHTML = "";
-                        circlePlaces[i].innerHTML += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-x-circle circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/><path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/></svg>";
-                        toDelElements.push(elementsDiv[i].classList[2]);
-                    }
+        elementsDiv[i].addEventListener("click", function (event) {
+            if (event.target == elementsDiv[i]) {
+                if (elementsDiv[i].classList.contains("selected-div")) {
+                    elementsDiv[i].classList.remove("selected-div");
+                    circlePlaces[i].innerHTML = "";
+                    circlePlaces[i].innerHTML += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
+                    toDelElements.splice(elementsDiv[i].classList[2], 1);
+                } else {
+                    elementsDiv[i].classList.add("selected-div");
+                    circlePlaces[i].innerHTML = "";
+                    circlePlaces[i].innerHTML += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-x-circle circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/><path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/></svg>";
+                    toDelElements.push(elementsDiv[i].classList[2]);
                 }
-            });
+            }
+        });
     }
 
     //select input
@@ -507,7 +526,7 @@ function write() {
     let storeindex = 0;
 
     for (let i = 0; i < tableNumber; i++) {
-        div.innerHTML += "<table class=\"table page-" + i + " page\"><tr><td>" + (i + 1) + ". lap</td></tr></table>";
+        div.innerHTML += "<table class=\"table page-" + i + " page\"><tr><td>" + (i + 1) + ". lap</td></tr><tr><th>Név</th><th>Cím</th><th>Nyitvatartás</th><th></th></tr></table>";
 
         let table = document.querySelector(".page-" + i)
 
@@ -556,19 +575,24 @@ function write() {
 
     let stores = document.querySelectorAll(".store");
     for (let i = 0; i < stores.length; i++) {
-            stores[i].addEventListener("click", function (event) {
-                alert(event.target + " " + stores[i])
-                if (event.target == stores[i]) {
-                    if (stores[i].classList.contains("selected-todel-element")) {
-                        stores[i].classList.remove("selected-todel-element");
-                        toDelStores.splice(stores[i].classList[1], 1);
-                    } else {
-                        stores[i].classList.add("selected-todel-element");
-                        toDelStores.push(stores[i].classList[1]);
-                    }
-                }
-            });
+        stores[i].addEventListener("click", function (event) {
+            // Check if the clicked element is the button
+            if (event.target.tagName.toLowerCase() === 'button') {
+                // Do nothing if the clicked element is a button
+                return;
+            }
+
+            // Your selection logic
+            if (stores[i].classList.contains("selected-todel-element")) {
+                stores[i].classList.remove("selected-todel-element");
+                toDelStores.splice(stores[i].classList[1], 1);
+            } else {
+                stores[i].classList.add("selected-todel-element");
+                toDelStores.push(stores[i].classList[1]);
+            }
+        });
     }
+
 
 
     //page (storepage)
@@ -676,8 +700,8 @@ function write() {
     })
         .catch((error) => {
             console.log(error);
-        })  
-    let listIndex=0;
+        })
+    let listIndex = 0;
     let elementIndex;
     for (let i = 0; i < lists.length; i++) {
         if (lists[i] !== null) {
@@ -685,11 +709,11 @@ function write() {
                 name: lists[i].getName(),
                 elements: elements
             });
-            elementIndex=0;
-            for(let j=0;j<lists[i].getElements().length;j++){
-                if(j!=null){
-                    set(ref(db, "data/lists/"+i+"/elements/" + elementIndex), {
-                        name: lists[i].getElements()[j].getName(),   
+            elementIndex = 0;
+            for (let j = 0; j < lists[i].getElements().length; j++) {
+                if (lists[i].getElements()[j] != null) {
+                    set(ref(db, "data/lists/" + listIndex + "/elements/" + elementIndex), {
+                        name: lists[i].getElements()[j].getName(),
                         quantity: lists[i].getElements()[j].getQuantity(),
                         price: lists[i].getElements()[j].getPrice(),
                         store: lists[i].getElements()[j].getStore(),
@@ -702,7 +726,7 @@ function write() {
             listIndex++;
         }
     }
-    let storeIndex=0;
+    let storeIndex = 0;
     for (let i = 0; i < storeslist.length; i++) {
         if (storeslist[i] !== null) {
             set(ref(db, "data/stores/" + storeIndex), {

@@ -28,9 +28,9 @@ class elementlist{
     }
     toString() {
         let text="";
-        text+=this.getName()+": <br>";
+        text+=this.getName()+":";
         for(let i=0;i<this.getElements().length;i++){
-            text+=this.#elements[0];
+            text+=" "+this.#elements[0];
         }
         return text;
     }

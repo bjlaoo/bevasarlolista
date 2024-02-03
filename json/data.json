@@ -57,7 +57,7 @@
         ]}
     ],
     "stores":[
-        {"name":"Kérjük válasszon egyet!","address":"-","opening":"-"},
+        {"name":"Kérjük válasszon egy boltot!","address":"-","opening":"-"},
         {"name":"Interspar","address":"Tatabánya, Győri út 25","opening":"H-Sz: 6:00-21:00 V: 7:00-19:00"},
         {"name":"Tesco","address":"Tatabánya, Bláthy Ottó utca 1","opening":"H-V: 6:00-22:00"},
         {"name":"Lidl","address":"Tatabánya, Győri út 31","opening":"H-Sz: 6:30-21:00 V: 7:00-19:00"},
