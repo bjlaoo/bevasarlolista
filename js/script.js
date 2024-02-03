@@ -25,14 +25,13 @@ xmlhttp.onload = function () {
 
     //add list
     document.querySelector(".btn-add-list").addEventListener("click", function () {
+        document.querySelector(".list-input-name").classList.add("is-invalid");
         if (document.querySelector(".list-input-name").value == "") {
-            document.querySelector(".list-input-name").classList.add("is-invalid");           
+            document.querySelector(".list-input-name").classList.add("is-invalid");
         }
         else {
             lists.push(new elementlist(document.querySelector(".list-input-name").value))
-            $('.modal').on('hidden.bs.modal', function () {
-                $('.modal').remove();
-            });
+            $(".modal").modal("hide");
             write();
         }
     })
@@ -246,15 +245,21 @@ xmlhttp.onload = function () {
         }
     });
 
+
     document.querySelector(".filter").addEventListener("change", function () {
         mainTableElements = [];
-        for (let i = 0; i < selectedList.getElements().length; i++) {
-            if (document.querySelector(".filter").options[document.querySelector(".filter").selectedIndex].text == selectedList.getElements()[i].getStore()) {
-                mainTableElements.push(selectedList.getElements()[i]);
-            }
-
+        if (document.querySelector(".filter").options[document.querySelector(".filter").selectedIndex].text == "Kérjük válasszon egyet!") {
+            mainTableElements = selectedList.getElements();
         }
-        write();
+        else {
+            for (let i = 0; i < selectedList.getElements().length; i++) {
+                if (document.querySelector(".filter").options[document.querySelector(".filter").selectedIndex].text == selectedList.getElements()[i].getStore()) {
+                    mainTableElements.push(selectedList.getElements()[i]);
+                }
+
+            }
+        }
+        writetable();
     })
     //sort by name ascending
     document.querySelector(".sort-by-name-asc").addEventListener("click", function () {
@@ -340,7 +345,7 @@ function getNotallgreen() {
 
 }
 function clearDivs() {
-    document.querySelector("tbody").innerHTML = "";
+    document.querySelector(".elements-list-out").innerHTML = "";
     document.querySelector(".store-table").innerHTML = "";
     document.querySelector(".lists").innerHTML = "";
     document.querySelector(".element-div-container").innerHTML = "";
@@ -351,7 +356,16 @@ function clearDivs() {
 
     }
 }
+//hogy a szűrő ne frissüljön
+function writetable(){
+    document.querySelector(".elements-list-out").innerHTML = "";
+    for (let i = 0; i < mainTableElements.length; i++) {
+        if (mainTableElements[i] != null) {
+            document.querySelector(".elements-list-out").innerHTML += mainTableElements[i].toTr();
+        }
+    }
 
+};
 function write() {
     clearDivs();
     for (let i = 0; i < mainTableElements.length; i++) {
@@ -449,14 +463,13 @@ function write() {
 
     //select input
     formSelect = document.querySelectorAll(".form-select");
+
     for (let i = 0; i < formSelect.length; i++) {
         for (let j = 0; j < storeslist.length; j++) {
             if (storeslist[j] != null) {
                 formSelect[i].innerHTML += "<option>" + storeslist[j].getName() + "</option>";
             }
         }
-
-
     }
     //store writeout
     const TableElementCount = 10;
