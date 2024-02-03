@@ -48,6 +48,8 @@ get(child(dbRef, 'data')).then((snapshot) => {
 
         selectedList = getNotallgreen();
         mainTableElements = selectedList.getElements();
+        console.log(lists)
+        console.log(storeslist)
         write();
 
         //add list
@@ -425,61 +427,58 @@ function write() {
     let circlePlacesList = document.querySelectorAll(".circle-list");
 
     for (let i = 0; i < listdivs.length; i++) {
-        (function (index) {
-            listdivs[index].addEventListener("click", function (event) {
-                if (event.target === listdivs[index]) {
-                    if (listdivs[index].classList.contains("selected-list") || listdivs[index].classList.contains("plus")) {
-                        listdivs[index].classList.remove("selected-list");
-                        toDelList.splice(listdivs[index].classList[2], 1);
-                        circlePlacesList[index - 1].innerHTML = "";
-                        circlePlacesList[index - 1].innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle-list\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
+    
+            listdivs[i].addEventListener("click", function (event) {
+                if (event.target === listdivs[i]) {
+                    if (listdivs[i].classList.contains("selected-list") || listdivs[i].classList.contains("plus")) {
+                        listdivs[i].classList.remove("selected-list");
+                        toDelList.splice(listdivs[i].classList[2], 1);
+                        circlePlacesList[i - 1].innerHTML = "";
+                        circlePlacesList[i - 1].innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle-list\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
                     } else {
-                        listdivs[index].classList.add("selected-list");
-                        toDelList.push(listdivs[index].classList[2]);
-                        circlePlacesList[index - 1].innerHTML = "";
-                        circlePlacesList[index - 1].innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-x-circle circle-list\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/><path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/></svg>";
+                        listdivs[i].classList.add("selected-list");
+                        toDelList.push(listdivs[i].classList[2]);
+                        circlePlacesList[i - 1].innerHTML = "";
+                        circlePlacesList[i - 1].innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-x-circle circle-list\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/><path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/></svg>";
                     }
                 }
             });
-        })(i);
+
     }
     //selectelements
     let elements = document.querySelectorAll(".element");
     for (let i = 0; i < elements.length; i++) {
-        (function (index) {
-            elements[index].addEventListener("click", function () {
-                if (elements[index].classList.contains("selected-element")) {
-                    elements[index].classList.remove("selected-element");
-                    selectedList.getElements()[index].setIsBought(false);
+            elements[i].addEventListener("click", function () {
+                if (elements[i].classList.contains("selected-element")) {
+                    elements[i].classList.remove("selected-element");
+                    selectedList.getElements()[i].setIsBought(false);
                 } else {
-                    elements[index].classList.add("selected-element");
-                    selectedList.getElements()[index].setIsBought(true);
+                    elements[i].classList.add("selected-element");
+                    selectedList.getElements()[i].setIsBought(true);
                 }
             });
-        })(i);
+
     }
 
     //selectelement-div
     let elementsDiv = document.querySelectorAll(".element-div");
     let circlePlaces = document.querySelectorAll(".circle");
     for (let i = 0; i < elementsDiv.length; i++) {
-        (function (index) {
-            elementsDiv[index].addEventListener("click", function (event) {
-                if (event.target == elementsDiv[index]) {
-                    if (elementsDiv[index].classList.contains("selected-div")) {
-                        elementsDiv[index].classList.remove("selected-div");
-                        circlePlaces[index].innerHTML = "";
-                        circlePlaces[index].innerHTML += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
-                        toDelElements.splice(elementsDiv[index].classList[2], 1);
+            elementsDiv[i].addEventListener("click", function (event) {
+                if (event.target == elementsDiv[i]) {
+                    if (elementsDiv[i].classList.contains("selected-div")) {
+                        elementsDiv[i].classList.remove("selected-div");
+                        circlePlaces[i].innerHTML = "";
+                        circlePlaces[i].innerHTML += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
+                        toDelElements.splice(elementsDiv[i].classList[2], 1);
                     } else {
-                        elementsDiv[index].classList.add("selected-div");
-                        circlePlaces[index].innerHTML = "";
-                        circlePlaces[index].innerHTML += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-x-circle circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/><path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/></svg>";
-                        toDelElements.push(elementsDiv[index].classList[2]);
+                        elementsDiv[i].classList.add("selected-div");
+                        circlePlaces[i].innerHTML = "";
+                        circlePlaces[i].innerHTML += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-x-circle circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/><path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708\"/></svg>";
+                        toDelElements.push(elementsDiv[i].classList[2]);
                     }
                 }
             });
-        })(i);
     }
 
     //select input
@@ -553,23 +552,22 @@ function write() {
             storeslist[index].setOpening(document.querySelector(".store-set-opening").value = storeslist[index].getOpening());
         })
     }
-    //select store-tr
+
 
     let stores = document.querySelectorAll(".store");
     for (let i = 0; i < stores.length; i++) {
-        (function (index) {
-            stores[index].addEventListener("click", function (event) {
-                if (!event.target.classList.contains("store-edit")) {
-                    if (stores[index].classList.contains("selected-todel-element")) {
-                        stores[index].classList.remove("selected-todel-element");
-                        toDelStores.splice(stores[index].classList[1], 1);
+            stores[i].addEventListener("click", function (event) {
+                alert(event.target + " " + stores[i])
+                if (event.target == stores[i]) {
+                    if (stores[i].classList.contains("selected-todel-element")) {
+                        stores[i].classList.remove("selected-todel-element");
+                        toDelStores.splice(stores[i].classList[1], 1);
                     } else {
-                        stores[index].classList.add("selected-todel-element");
-                        toDelStores.push(stores[index].classList[1]);
+                        stores[i].classList.add("selected-todel-element");
+                        toDelStores.push(stores[i].classList[1]);
                     }
                 }
             });
-        })(i);
     }
 
 
@@ -674,45 +672,49 @@ function write() {
     }
 
     //feltöltés
-    console.log(lists)
-    console.log(storeslist)
     remove(ref(db, "data"), {
     })
         .catch((error) => {
             console.log(error);
-        })
-
-    set(ref(db, "Employee/" + "asdf"), {
-        asdf: "érték"
-    })
-    //listnames
-    index=0;
-    elements=[]
+        })  
+    let listIndex=0;
+    let elementIndex;
     for (let i = 0; i < lists.length; i++) {
         if (lists[i] !== null) {
-            for(let j=0;j<lists[i].getElements().length;j++){
-                if(j!=null){
-                    elements.push(JSON.stringify(lists[i].getElements()[j]));
-                }
-            }
-            set(ref(db, "data/lists/" + index), {
+            set(ref(db, "data/lists/" + listIndex), {
                 name: lists[i].getName(),
                 elements: elements
             });
-    
-            index++;
+            elementIndex=0;
+            for(let j=0;j<lists[i].getElements().length;j++){
+                if(j!=null){
+                    set(ref(db, "data/lists/"+i+"/elements/" + elementIndex), {
+                        name: lists[i].getElements()[j].getName(),   
+                        quantity: lists[i].getElements()[j].getQuantity(),
+                        price: lists[i].getElements()[j].getPrice(),
+                        store: lists[i].getElements()[j].getStore(),
+                        isBought: lists[i].getElements()[j].getIsBought()
+
+                    });
+                    elementIndex++;
+                }
+            }
+            listIndex++;
         }
     }
-    
+    let storeIndex=0;
+    for (let i = 0; i < storeslist.length; i++) {
+        if (storeslist[i] !== null) {
+            set(ref(db, "data/stores/" + storeIndex), {
+                name: storeslist[i].getName(),
+                address: storeslist[i].getAddress(),
+                opening: storeslist[i].getOpening()
 
+            });
+            storeIndex++;
+        }
+    }
 
-    set(ref(db, "data/stores"), {
-        stores: (storeslist),
-
-    })
-        .catch((error) => {
-            console.log(error);
-        })
 
 
 }
