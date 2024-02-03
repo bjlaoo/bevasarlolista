@@ -7,6 +7,7 @@ var index;
 var mainTableElements;
 var toDelStores = [];
 var toDelElements=[];
+var pages = document.querySelectorAll(".page");
 let flag=false;
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -574,7 +575,6 @@ function write() {
 
     //page (storepage)
 
-    let pages = document.querySelectorAll(".page");
     for (let i = 1; i < pages.length; i++) {
         pages[i].style.display = "none";
     }
