@@ -37,10 +37,11 @@ get(child(dbRef, 'data')).then((snapshot) => {
         let x = snapshot.val();
         for (let i = 0; i < x.lists.length; i++) {
             let tmplist = new elementlist(x.lists[i].name);
-            if(x.lists[i].elements!=undefined){
-            for (let j = 0; j < x.lists[i].elements.length; j++) {
-                tmplist.addElement(new element(x.lists[i].elements[j].name, x.lists[i].elements[j].quantity, x.lists[i].elements[j].price, x.lists[i].elements[j].store, x.lists[i].elements[j].isBought));
-            }}
+            if (x.lists[i].elements != undefined) {
+                for (let j = 0; j < x.lists[i].elements.length; j++) {
+                    tmplist.addElement(new element(x.lists[i].elements[j].name, x.lists[i].elements[j].quantity, x.lists[i].elements[j].price, x.lists[i].elements[j].store, x.lists[i].elements[j].isBought));
+                }
+            }
             lists.push(tmplist)
         }
         for (let i = 0; i < x.stores.length; i++) {
@@ -215,19 +216,17 @@ get(child(dbRef, 'data')).then((snapshot) => {
                 selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value);
 
             }
-            if(!(document.querySelector(".element-set-quantity").value == "")&&!(document.querySelector(".element-set-name").value == "")){
+            if (!(document.querySelector(".element-set-quantity").value == "") && !(document.querySelector(".element-set-name").value == "")) {
                 $(".modal").modal("hide");
-                write();
-            }     
+            }
 
-                selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value);
-            
-            
-            
-            if(document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text==document.querySelector(".element-set-store").options[0].text){
+            selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value);
+
+
+            if (document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text == document.querySelector(".element-set-store").options[0].text) {
                 selectedList.getElements()[index].setStore("Nincs bolt");
             }
-            else{
+            else {
                 selectedList.getElements()[index].setStore(document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text);
             }
 
@@ -242,8 +241,8 @@ get(child(dbRef, 'data')).then((snapshot) => {
                     }
                     document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[index].getName();
                     document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[index].getQuantity();
-                    document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice()+" (optional)";
-                    //document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[index].getStore();
+                    document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice() + " (optional)";
+                    document.querySelector(".element-set-store").value = selectedList.getElements()[index].getStore();
 
                     selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value = selectedList.getElements()[index].getName());
                     selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value = selectedList.getElements()[index].getQuantity());
@@ -301,13 +300,13 @@ get(child(dbRef, 'data')).then((snapshot) => {
             if (document.querySelector(".element-input-quantity").value == "") {
                 document.querySelector(".element-input-quantity").classList.add("is-invalid");
             }
-            if(!(document.querySelector(".element-input-quantity").value == "")&&!(document.querySelector(".element-input-name").value == "")){
+            if (!(document.querySelector(".element-input-quantity").value == "") && !(document.querySelector(".element-input-name").value == "")) {
                 alert("xd")
-                if(document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text==document.querySelector(".element-set-store").options[0].text){
-                    selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, "Nincs bolt",false));
+                if (document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text == document.querySelector(".element-set-store").options[0].text) {
+                    selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, "Nincs bolt", false));
                 }
-                else{
-                    selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text,false));
+                else {
+                    selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text, false));
                 }
                 alert(selectedList.getElements())
                 $(".modal").modal("hide");
@@ -589,7 +588,7 @@ function write() {
     let storeindex = 0;
 
     for (let i = 0; i < tableNumber; i++) {
-        div.innerHTML += "<table class=\"table page-" + i + " page\"><tr><td>" + (i + 1) +"/"+tableNumber+"</td></tr><tr><th>Név</th><th>Cím</th><th>Nyitvatartás</th><th></th></tr></table>";
+        div.innerHTML += "<table class=\"table page-" + i + " page\"><tr><td>" + (i + 1) + "/" + tableNumber + "</td></tr><tr><th>Név</th><th>Cím</th><th>Nyitvatartás</th><th></th></tr></table>";
 
         let table = document.querySelector(".page-" + i)
 
@@ -721,23 +720,23 @@ function write() {
                     document.querySelectorAll(".list-rename")[i].innerHTML = '<p class="list-name"><sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup></p>';
                     write();
                 }
-           
+
             })
             $(document).off("keydown");
             $(document).on("keydown", function (event) {
                 switch (event.keyCode) {
                     case 13: // Enter key
-                    document.querySelector(".list-input-name").classList.remove("is-invalid");
-                    if (inputElement.value == "") {
-                        inputElement.classList.add("is-invalid");
-                    }
-                    else {
-                        $(".modal").modal("hide");
-                        document.querySelector(".list-input-name").value = "";
-                        selectedList.setName(inputElement.value);
-                        document.querySelectorAll(".list-rename")[i].innerHTML = '<p class="list-name"><sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup></p>';
-                        write();
-                    }
+                        document.querySelector(".list-input-name").classList.remove("is-invalid");
+                        if (inputElement.value == "") {
+                            inputElement.classList.add("is-invalid");
+                        }
+                        else {
+                            $(".modal").modal("hide");
+                            document.querySelector(".list-input-name").value = "";
+                            selectedList.setName(inputElement.value);
+                            document.querySelectorAll(".list-rename")[i].innerHTML = '<p class="list-name"><sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup></p>';
+                            write();
+                        }
                         break;
                     case 27: // Escape key
                         document.querySelectorAll(".list-rename")[i].innerHTML = '<p class="list-name"><sup><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></sup></p>';
@@ -754,7 +753,6 @@ function write() {
     for (let i = 0; i < editElements.length; i++) {
 
         editElements[i].addEventListener("click", function () {
-
             for (let j = 0; j < selectedList.getElements().length; j++) {
                 if (selectedList.getElements()[j] != null) {
                     if (editElements[i].classList[2] == selectedList.getElements()[j].getId()) {
@@ -765,13 +763,14 @@ function write() {
             console.log(selectedList.getElements()[index].getName() + " " + index)
             document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[index].getName();
             document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[index].getQuantity();
-            document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice()+" (optional)";
-            //document.querySelector(".element-set-store-selected").innerHTML = selectedList.getElements()[index].getStore();
+            document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice() + " (optional)";
+            document.querySelector(".element-set-store").value = selectedList.getElements()[index].getStore();
+            
+  
 
             selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value = selectedList.getElements()[index].getName());
             selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value = selectedList.getElements()[index].getQuantity());
             selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value = selectedList.getElements()[index].getPrice());
-            selectedList.getElements()[index].setStore(document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text);
         })
     }
 
