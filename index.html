@@ -214,18 +214,18 @@
               <label>Név</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control element-input-quantity floatingInput" placeholder="Mennyiség" required>
+              <input type="number" class="form-control element-input-quantity floatingInput" min="0.000001" onkeyup="if(this.value<0){this.value= this.value * -1}" placeholder="Mennyiség" required>
               <label>Mennyiség</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control element-input-price floatingInput optional" placeholder="Egységár">
-              <label class="optional">Egységár (optional)</label>
+              <input type="number" class="form-control element-input-price floatingInput optional" min="0.000001" onkeyup="if(this.value<0){this.value= this.value * -1}" placeholder="Egységár">
+              <label class="optional">Egységár (nem kötelező)</label>
             </div>
             <div class="form-floating">
               <select class="form-select element-input-store floatingSelect optional" aria-label="Floating label select example">
                 <option selected></option>
               </select>
-              <label>Bolt (optional)</label>
+              <label>Bolt (nem kötelező)</label>
             </div>
           </form>
         </div>
@@ -258,7 +258,7 @@
         </div>
         <div class="modal-footer center">
           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Mégse</button>
-          <button type="button" class="btn btn-primary btn-add-store" data-bs-dismiss="modal">Hozzáadás</button>
+          <button type="button" class="btn btn-primary btn-add-store">Hozzáadás</button>
         </div>
       </div>
     </div>
@@ -274,17 +274,17 @@
               <label class="element-set-name-label">Eredeti név</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control floatingInput element-set-quantity" required placeholder="Eredeti mennyiség">
+              <input type="number" class="form-control floatingInput element-set-quantity" required min="0.000001"onkeyup=" if(this.value<0){this.value= this.value * -1}" placeholder="Eredeti mennyiség">
               <label class="element-set-quantity-label">Eredeti mennyiség</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control floatingInput element-set-price" placeholder="Eredeti egységár">
+              <input type="number" class="form-control floatingInput element-set-price" min="0.000001" onkeyup="if(this.value<0){this.value= this.value * -1}" placeholder="Eredeti egységár">
               <label class="element-set-price-label optional">Eredeti egységár</label>
             </div>
             <div class="form-floating">
               <select class="form-select floatingSelect element-set-store secondary optional" aria-label="Floating label select example">
               </select>
-              <label>Bolt (optional)</label>
+              <label>Bolt (nem kötelező)</label>
             </div>
           </form>
         </div>
@@ -317,7 +317,7 @@
         </div>
         <div class="modal-footer center">
           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Mégse</button>
-          <button type="submit" class="btn btn-primary btn-set-store-confirmation" data-bs-dismiss="modal">Szerkesztés</button>
+          <button type="submit" class="btn btn-primary btn-set-store-confirmation">Szerkesztés</button>
         </div>
       </div>
     </div>

@@ -1,4 +1,3 @@
-
 const main=document.querySelector(".main-page");
 //functions
 function clear() {
@@ -13,11 +12,10 @@ function load(page){
 }
 
 clear();
-//oldalak betöltése
+//loading pages
 main.addEventListener("click",function(){
     load(document.querySelector(".starting-container"));   
 })
-
 document.querySelector(".lists-page").addEventListener("click",function(){
     load(document.querySelector(".list-container"));
 })

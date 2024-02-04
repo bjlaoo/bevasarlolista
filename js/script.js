@@ -17,15 +17,15 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCiNJapIQl7q_HAmumYSdBI1cIyBP3SCsE",
-    authDomain: "wrud-5ced6.firebaseapp.com",
-    databaseURL: "https://wrud-5ced6-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "wrud-5ced6",
-    storageBucket: "wrud-5ced6.appspot.com",
-    messagingSenderId: "197962461246",
-    appId: "1:197962461246:web:c9f34f9268b20c8c28a16f"
-};
-
+    apiKey: "AIzaSyDK2FTsj1yhy9FqqxloZESUT6mK-hV9cZg",
+    authDomain: "bevasarlolista-fba63.firebaseapp.com",
+    databaseURL: "https://bevasarlolista-fba63-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "bevasarlolista-fba63",
+    storageBucket: "bevasarlolista-fba63.appspot.com",
+    messagingSenderId: "823455732215",
+    appId: "1:823455732215:web:16b685c00582345c9b1ef2",
+    measurementId: "G-Y9MRH8EYVY"
+  };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 import { getDatabase, ref, child, get, set, update, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js"
@@ -33,8 +33,8 @@ const db = getDatabase();
 const dbRef = ref(db);
 get(child(dbRef, 'data')).then((snapshot) => {
     if (snapshot.exists()) {
-
         let x = snapshot.val();
+        //create list and fill with objects
         for (let i = 0; i < x.lists.length; i++) {
             let tmplist = new elementlist(x.lists[i].name);
             if (x.lists[i].elements != undefined) {
@@ -44,6 +44,7 @@ get(child(dbRef, 'data')).then((snapshot) => {
             }
             lists.push(tmplist)
         }
+        //reading the stores and adding them to storelist
         for (let i = 0; i < x.stores.length; i++) {
             storeslist.push(new store(x.stores[i].name, x.stores[i].address, x.stores[i].opening));
         }
@@ -73,15 +74,13 @@ get(child(dbRef, 'data')).then((snapshot) => {
                 lists[toDelList[i]] = null;
                 selectedList = null;
             }
-
             for (let i = 0; i < lists.length; i++) {
                 if (lists[i] != null) {
                     selectedList = lists[i];
                     mainTableElements = selectedList.getElements();
                 }
-
             }
-            if (selectedList === null) {
+            if (selectedList == null) {
                 selectedList = new elementlist("Üres lista");
                 lists.push(selectedList);
                 for (let i = 0; i < lists.length; i++) {
@@ -110,19 +109,25 @@ get(child(dbRef, 'data')).then((snapshot) => {
                             }
                         }
                     }
-
                 }
             }
         })
         //add store
         document.querySelector(".btn-add-store").addEventListener("click", function () {
-            storeslist.push(new store(document.querySelector(".store-input-name").value, document.querySelector(".store-input-address").value, document.querySelector(".store-input-opening").value));
-
+            document.querySelector(".store-input-name").classList.remove("is-invalid");
+                if (document.querySelector(".store-input-name").value == "") {
+                    document.querySelector(".store-input-name").classList.add("is-invalid");
+                }
+                else {
+                    $(".modal").modal("hide");
+                    document.querySelector(".list-input-name").value = "";
+                    storeslist.push(new store(document.querySelector(".store-input-name").value, document.querySelector(".store-input-address").value, document.querySelector(".store-input-opening").value));
+                    write();
+                }
             write();
         })
         //del store
         document.querySelector(".btn-del-store").addEventListener("click", function () {
-
             for (let i = 0; i < toDelStores.length; i++) {
                 for (let j = 0; j < storeslist.length; j++) {
                     if (storeslist[j] != null) {
@@ -130,12 +135,8 @@ get(child(dbRef, 'data')).then((snapshot) => {
                             storeslist[j] = null;
                         }
                     }
-
-
                 }
-
             }
-
             write();
         })
         //del store writeout
@@ -143,7 +144,6 @@ get(child(dbRef, 'data')).then((snapshot) => {
             let selectedStores = document.querySelectorAll(".selected-todel-element");
             let p = document.querySelector(".del-stores");
             p.innerHTML = "";
-
             for (let i = 0; i < selectedStores.length; i++) {
                 for (let j = 0; j < storeslist.length; j++) {
                     if (storeslist[j] != null) {
@@ -158,21 +158,17 @@ get(child(dbRef, 'data')).then((snapshot) => {
                     }
                 }
             }
-
         })
+        //store edit
         document.querySelector(".btn-set-store-confirmation").addEventListener("click", function () {
-            //asdf
             document.querySelector(".store-set-name").classList.remove("is-invalid");
             if (document.querySelector(".store-set-name").value == "") {
                 document.querySelector(".store-set-name").classList.add("is-invalid");
             }
             else {
                 storeslist[index].setName(document.querySelector(".store-set-name").value);
-
-            }
-            //majd ha mind megvan
-            $(".modal").modal("hide");
-            write();
+                $(".modal").modal("hide");
+            }            
             storeslist[index].setName(document.querySelector(".store-set-name").value);
             storeslist[index].setAddress(document.querySelector(".store-set-address").value);
             storeslist[index].setOpening(document.querySelector(".store-set-opening").value);
@@ -188,7 +184,6 @@ get(child(dbRef, 'data')).then((snapshot) => {
                     document.querySelector(".store-set-name-label").innerHTML = storeslist[index].getName();
                     document.querySelector(".store-set-quantity-label").innerHTML = storeslist[index].getAddress();
                     document.querySelector(".store-set-price-label").innerHTML = storeslist[index].getOpening();
-
                     storeslist[index].setName(document.querySelector(".store-set-name").value = storeslist[index].getName());
                     storeslist[index].setAddress(document.querySelector(".store-set-quantity").value = storeslist[index].getAddress());
                     storeslist[index].setOpening(document.querySelector(".store-set-price").value = storeslist[index].getOpening());
@@ -196,12 +191,10 @@ get(child(dbRef, 'data')).then((snapshot) => {
             }
 
         })
-
-
         document.querySelector(".btn-set-confirmation").addEventListener("click", function () {
-            //asdf
             document.querySelector(".element-set-name").classList.remove("is-invalid");
             document.querySelector(".element-set-quantity").classList.remove("is-invalid");
+            //adsf
             if (document.querySelector(".element-set-name").value == "") {
                 document.querySelector(".element-set-name").classList.add("is-invalid");
             }
@@ -214,7 +207,6 @@ get(child(dbRef, 'data')).then((snapshot) => {
             }
             else {
                 selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value);
-
             }
             if (!(document.querySelector(".element-set-quantity").value == "") && !(document.querySelector(".element-set-name").value == "")) {
                 $(".modal").modal("hide");
@@ -241,7 +233,7 @@ get(child(dbRef, 'data')).then((snapshot) => {
                     }
                     document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[index].getName();
                     document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[index].getQuantity();
-                    document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice() + " (optional)";
+                    document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice() + " (nem kötelező)";
                     document.querySelector(".element-set-store").value = selectedList.getElements()[index].getStore();
 
                     selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value = selectedList.getElements()[index].getName());
@@ -256,16 +248,12 @@ get(child(dbRef, 'data')).then((snapshot) => {
         document.querySelector(".btn-del-element").addEventListener("click", function () {
             for (let i = 0; i < toDelElements.length; i++) {
                 for (let j = 0; j < selectedList.getElements().length; j++) {
-
                     if (selectedList.getElements()[j] != null) {
                         if (toDelElements[i] == selectedList.getElements()[j].getId()) {
                             selectedList.getElements()[j] = null;
                         }
                     }
-
-
                 }
-
             }
             write();
         })
@@ -301,21 +289,21 @@ get(child(dbRef, 'data')).then((snapshot) => {
                 document.querySelector(".element-input-quantity").classList.add("is-invalid");
             }
             if (!(document.querySelector(".element-input-quantity").value == "") && !(document.querySelector(".element-input-name").value == "")) {
-                alert("xd")
                 if (document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text == document.querySelector(".element-set-store").options[0].text) {
                     selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, "Nincs bolt", false));
                 }
                 else {
                     selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text, false));
                 }
-                alert(selectedList.getElements())
                 $(".modal").modal("hide");
+                document.querySelector(".element-input-name").value="";
+                document.querySelector(".element-input-quantity").value="";
+                document.querySelector(".element-input-price").value="";
                 write();
             }
-            write();
         })
         page = document.querySelectorAll(".page");
-
+        //flipping left
         document.querySelector(".btn-left").addEventListener("click", function left() {
             if (page > 0) {
                 document.querySelector(".page-" + page).style.display = "none";
@@ -323,6 +311,7 @@ get(child(dbRef, 'data')).then((snapshot) => {
                 document.querySelector(".page-" + page).style.display = "block";
             }
         });
+        //flipping right
         document.querySelector(".btn-right").addEventListener("click", function right() {
             if (page < pages.length - 1) {
                 document.querySelector(".page-" + page).style.display = "none";
@@ -330,8 +319,7 @@ get(child(dbRef, 'data')).then((snapshot) => {
                 document.querySelector(".page-" + page).style.display = "block";
             }
         });
-
-
+        //filter by store
         document.querySelector(".filter").addEventListener("change", function () {
             mainTableElements = [];
             if (document.querySelector(".filter").options[document.querySelector(".filter").selectedIndex].text == document.querySelector(".filter").options[0].text) {
@@ -342,7 +330,6 @@ get(child(dbRef, 'data')).then((snapshot) => {
                     if (document.querySelector(".filter").options[document.querySelector(".filter").selectedIndex].text == selectedList.getElements()[i].getStore()) {
                         mainTableElements.push(selectedList.getElements()[i]);
                     }
-
                 }
             }
             writeTable();
@@ -363,7 +350,6 @@ get(child(dbRef, 'data')).then((snapshot) => {
             write();
         })
         //sort by name descending
-
         document.querySelector(".sort-by-name-desc").addEventListener("click", function () {
             let temp;
             for (let i = 0; i < mainTableElements.length; i++) {
@@ -378,7 +364,6 @@ get(child(dbRef, 'data')).then((snapshot) => {
             }
             write();
         })
-
         //sort by price ascending
         document.querySelector(".sort-by-price-asc").addEventListener("click", function () {
             let temp;
@@ -409,7 +394,6 @@ get(child(dbRef, 'data')).then((snapshot) => {
             }
             write();
         })
-
     }
 })
 //functions
@@ -439,7 +423,6 @@ function clearDivs() {
     let formSelect = document.querySelectorAll(".form-select");
     for (let i = 0; i < formSelect.length; i++) {
         formSelect[i].innerHTML = "";
-
     }
 }
 function writeTable() {
@@ -456,7 +439,7 @@ function writeTable() {
             document.querySelector(".elements-list-out").innerHTML += mainTableElements[i].toTr();
         }
     }
-    //selectelements
+    //select elements
     let elements = document.querySelectorAll(".element");
     for (let i = 0; i < elements.length; i++) {
         elements[i].addEventListener("click", function () {
@@ -477,8 +460,6 @@ function write() {
             document.querySelector(".elements-list-out").innerHTML += mainTableElements[i].toTr();
         }
     }
-
-
 
     document.querySelector(".selected-list-dropdown").innerHTML = selectedList.getName();
     let dropdown = document.querySelector(".dropdown-menu");
@@ -522,7 +503,6 @@ function write() {
                 }
             }
         });
-
     }
     //selectelements
     let elements = document.querySelectorAll(".element");
@@ -538,7 +518,6 @@ function write() {
                 write();
             }
         });
-
     }
 
     //selectelement-div
@@ -564,7 +543,6 @@ function write() {
 
     //select input
     let formSelect = document.querySelectorAll(".form-select");
-
     for (let i = 0; i < formSelect.length; i++) {
         for (let j = 0; j < storeslist.length; j++) {
             if (storeslist[j] != null) {
@@ -581,41 +559,30 @@ function write() {
             storeslistLength++;
         }
     }
-
     let tableNumber = Math.ceil(storeslistLength / TableElementCount);
     let div = document.querySelector(".store-table");
     div.innerHTML = "";
     let storeindex = 0;
-
     for (let i = 0; i < tableNumber; i++) {
         div.innerHTML += "<table class=\"table page-" + i + " page\"><tr><td>" + (i + 1) + "/" + tableNumber + "</td></tr><tr><th>Név</th><th>Cím</th><th>Nyitvatartás</th><th></th></tr></table>";
-
         let table = document.querySelector(".page-" + i)
-
         for (let j = 0; j < TableElementCount; j++) {
             if (storeindex < storeslist.length) {
-
                 while (storeslist[storeindex] == null && storeindex < storeslist.length) {
                     storeindex++;
-
-
                 }
                 if (storeslist[storeindex] != null) {
-
                     table.innerHTML += storeslist[storeindex].toTr();
                     storeindex++;
                 }
             }
-
         }
     }
     storeslist.splice(0, 0, new store("Kérjük válasszon egyet!", "", ""));
     //edit store
     let editStores = document.querySelectorAll(".btn-set-store");
     for (let i = 0; i < editStores.length; i++) {
-
         editStores[i].addEventListener("click", function () {
-
             for (let j = 0; j < storeslist.length; j++) {
                 if (storeslist[j] != null) {
                     if (editStores[i].classList[2] == storeslist[j].getId()) {
@@ -623,28 +590,21 @@ function write() {
                     }
                 }
             }
-
             document.querySelector(".store-set-name-label").innerHTML = storeslist[index].getName();
             document.querySelector(".store-set-address-label").innerHTML = storeslist[index].getAddress();
             document.querySelector(".store-set-opening-label").innerHTML = storeslist[index].getOpening();
-
             storeslist[index].setName(document.querySelector(".store-set-name").value = storeslist[index].getName());
             storeslist[index].setAddress(document.querySelector(".store-set-address").value = storeslist[index].getAddress());
             storeslist[index].setOpening(document.querySelector(".store-set-opening").value = storeslist[index].getOpening());
         })
     }
 
-
     let stores = document.querySelectorAll(".store");
     for (let i = 0; i < stores.length; i++) {
         stores[i].addEventListener("click", function (event) {
-            // Check if the clicked element is the button
-            if (event.target.tagName.toLowerCase() === 'button') {
-                // Do nothing if the clicked element is a button
+            if (event.target.tagName.toLowerCase() == 'button') {
                 return;
             }
-
-            // Your selection logic
             if (stores[i].classList.contains("selected-todel-element")) {
                 stores[i].classList.remove("selected-todel-element");
                 toDelStores.splice(stores[i].classList[1], 1);
@@ -655,8 +615,6 @@ function write() {
         });
     }
 
-
-
     //page (storepage)
     pages = document.querySelectorAll(".page");
     for (let i = 1; i < pages.length; i++) {
@@ -665,11 +623,11 @@ function write() {
     page = 0;
 
     let openBtns = document.querySelectorAll(".btn-open");
-    let n;
+    let id;
     for (let i = 0; i < openBtns.length; i++) {
         openBtns[i].addEventListener("click", function () {
-            n = openBtns[i].classList[2];
-            selectedList = lists[n];
+            id = openBtns[i].classList[2];
+            selectedList = lists[id];
             mainTableElements = selectedList.getElements();
             write();
             load(document.querySelector(".starting-container"));
@@ -678,8 +636,9 @@ function write() {
     let openDrpdwns = document.querySelectorAll(".open");
     for (let i = 0; i < openDrpdwns.length; i++) {
         openDrpdwns[i].addEventListener("click", function () {
-            n = openDrpdwns[i].classList[2];
-            selectedList = lists[n];
+            id = openDrpdwns[i].classList[2];
+
+            selectedList = lists[id];
             mainTableElements = selectedList.getElements();
 
             write();
@@ -687,7 +646,7 @@ function write() {
         });
     }
 
-    //becsült összeg
+    //estamated price
     let sum = 0;
     for (let i = 0; i < mainTableElements.length; i++) {
         if (mainTableElements[i] != null) {
@@ -701,11 +660,7 @@ function write() {
     for (let i = 0; i < listName.length; i++) {
         listName[i].innerHTML = selectedList.getName() + "<sup><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10\" height=\"10\" fill=\"currentColor\" class=\"bi bi-pencil-square\" viewBox=\"0 0 16 16\"><path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"/><path fill-rule=\"evenodd\" d=\"M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z\"/></svg></sup>";
         listName[i].addEventListener("click", function () {
-
-            let originalText = selectedList.getName();
             document.querySelectorAll(".list-rename")[i].innerHTML = '<div class="input-group mb-3"><input type="text" class="form-control" required placeholder="' + selectedList.getName() + '" aria-label="Recipients username" aria-describedby="button-addon2"> <button class="btn btn-primary btn-rename" type="button" id="button-addon2">Átnevezés</button></div>';
-
-
             let inputElement = document.querySelectorAll(".list-rename")[i].querySelector('input');
             inputElement.focus();
             document.querySelector(".btn-rename").addEventListener("click", function () {
@@ -751,7 +706,6 @@ function write() {
     //edit element
     let editElements = document.querySelectorAll(".btn-set-element");
     for (let i = 0; i < editElements.length; i++) {
-
         editElements[i].addEventListener("click", function () {
             for (let j = 0; j < selectedList.getElements().length; j++) {
                 if (selectedList.getElements()[j] != null) {
@@ -760,21 +714,17 @@ function write() {
                     }
                 }
             }
-            console.log(selectedList.getElements()[index].getName() + " " + index)
             document.querySelector(".element-set-name-label").innerHTML = selectedList.getElements()[index].getName();
             document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[index].getQuantity();
-            document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice() + " (optional)";
+            document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice() + " (nem kötelező)";
             document.querySelector(".element-set-store").value = selectedList.getElements()[index].getStore();
-            
-  
-
+           
             selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value = selectedList.getElements()[index].getName());
             selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value = selectedList.getElements()[index].getQuantity());
             selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value = selectedList.getElements()[index].getPrice());
         })
     }
-
-    //feltöltés
+    //reloading the elements
     remove(ref(db, "data"), {
     })
         .catch((error) => {
@@ -817,12 +767,10 @@ function write() {
             storeIndex++;
         }
     }
-
-
-
+    //narrow by location
+    if(selectedList.getElements().length<20){
+        document.querySelector(".filter").style.display = "none";
+    }else{
+        document.querySelector(".filter").style.display = "block";
+    }
 }
-
-
-
-
-
