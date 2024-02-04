@@ -1,10 +1,10 @@
-{data:{
+{
     "lists": [
         {"name":"HB","elements":[
             {"name":"Russian Standard","quantity":"1","price":10999,"store":"Interspar","isBought":true},
-            {"name":"Fragolino","quantity":"2","price":1350,"store":"Lidl","isBought":true},
-            {"name":"Hoegaarden","quantity":"3","price":689,"store":"Tesco","isBought":true},
-            {"name":"Jägermeister","quantity":"4","price":5599,"store":"Metro","isBought":true}
+            {"name":"Fragolino","quantity":"2","price":2700,"store":"Lidl","isBought":true},
+            {"name":"Hoegaarden","quantity":"3","price":2067,"store":"Tesco","isBought":true},
+            {"name":"Jägermeister","quantity":"4","price":22396,"store":"Metro","isBought":true}
         ]},
         {"name":"Nyaralás","elements":[
             {"name":"Sapka","quantity":"4","price":2050,"store":"Auchan","isBought":false},
@@ -51,6 +51,18 @@
             {"name":"Körte","quantity":"1","price":1199,"store":"Lidl","isBought":true},
             {"name":"Alma","quantity":"2","price":349,"store":"Tesco","isBought":false},
             {"name":"Banán","quantity":"1","price":685,"store":"Aldi","isBought":true}
+        ]},
+        {"name":"Iskolakezdés", "elements":[
+            {"name":"Toll","quantity":"3","price":550,"store":"Auchan","isBought":false},
+            {"name":"Négyzetrácsos füzet","quantity":"2","price":520,"store":"Tesco","isBought":false},
+            {"name":"Vonalas füzet","quantity":"5","price":520,"store":"Aldi","isBought":false},
+            {"name":"Sima füzet","quantity":"2","price":520,"store":"a","isBought":false}
+        ]},
+        {"name":"Moziest", "elements":[
+            {"name":"Popcorn","quantity":"1","price":550,"store":"Auchan","isBought":false},
+            {"name":"Tál","quantity":"1","price":270,"store":"Tesco","isBought":false},
+            {"name":"Coca Cola","quantity":"2","price":555,"store":"Aldi","isBought":false},
+            {"name":"Fanta","quantity":"2","price":555,"store":"a","isBought":false}
         ]}
     ],
     "stores":[
@@ -65,4 +77,4 @@
         {"name":"Príma","address":"Vértesszőlős, Határ út 1-3","opening":"H-P: 7:00-19:00 Sz: 7:00-18:00 V: 9:00-18:00"}
     ]
 }
-} 
+       
