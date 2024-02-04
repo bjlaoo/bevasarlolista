@@ -302,19 +302,17 @@ get(child(dbRef, 'data')).then((snapshot) => {
                 document.querySelector(".element-input-quantity").classList.add("is-invalid");
             }
             if(!(document.querySelector(".element-input-quantity").value == "")&&!(document.querySelector(".element-input-name").value == "")){
+                alert("xd")
+                if(document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text==document.querySelector(".element-set-store").options[0].text){
+                    selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, "Nincs bolt",false));
+                }
+                else{
+                    selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text,false));
+                }
+                alert(selectedList.getElements())
                 $(".modal").modal("hide");
                 write();
-            }            
-            if(document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text==document.querySelector(".element-set-store").options[0].text){
-                selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, "Nincs bolt"));
             }
-            else{
-                selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text));
-            }
-            selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text));
-            document.querySelector(".element-input-name").value = '';
-            document.querySelector(".element-input-quantity").value = '';
-            document.querySelector(".element-input-price").value = '';
             write();
         })
         page = document.querySelectorAll(".page");
@@ -337,7 +335,7 @@ get(child(dbRef, 'data')).then((snapshot) => {
 
         document.querySelector(".filter").addEventListener("change", function () {
             mainTableElements = [];
-            if (document.querySelector(".filter").options[document.querySelector(".filter").selectedIndex].text == "Kérjük válasszon egyet!") {
+            if (document.querySelector(".filter").options[document.querySelector(".filter").selectedIndex].text == document.querySelector(".filter").options[0].text) {
                 mainTableElements = selectedList.getElements();
             }
             else {
@@ -591,7 +589,7 @@ function write() {
     let storeindex = 0;
 
     for (let i = 0; i < tableNumber; i++) {
-        div.innerHTML += "<table class=\"table page-" + i + " page\"><tr><td>" + (i + 1) + ". lap</td></tr><tr><th>Név</th><th>Cím</th><th>Nyitvatartás</th><th></th></tr></table>";
+        div.innerHTML += "<table class=\"table page-" + i + " page\"><tr><td>" + (i + 1) +"/"+tableNumber+"</td></tr><tr><th>Név</th><th>Cím</th><th>Nyitvatartás</th><th></th></tr></table>";
 
         let table = document.querySelector(".page-" + i)
 
