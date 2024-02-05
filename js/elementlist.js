@@ -1,12 +1,12 @@
 
-class elementlist{
+class Elementlist{
     #name;
     static elementCounter = 0;
     #id;
     #elements=[];
     constructor(name){
-        this.setName(name)
-        this.setId(elementlist.elementCounter++)
+        this.setName(name);
+        this.setId(Elementlist.elementCounter++);
     }
     getName(){
         return this.#name;
@@ -28,7 +28,7 @@ class elementlist{
     }
     toString() {
         let text="";
-        text+=this.getName()+":";
+        text+=this.getName()+": ";
         for(let i=0;i<this.getElements().length;i++){
             text+=" "+this.#elements[0];
         }

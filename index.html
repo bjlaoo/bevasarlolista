@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,8 +34,8 @@
               <a class="nav-link" href="#">Listák</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle selected-list-dropdown" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">  
+              <a class="nav-link dropdown-toggle selected-list-dropdown" href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="#">Törlés</a>
@@ -80,7 +81,7 @@
               </div>
               <div class="row">
                 <select class="form-select filter" aria-label="Default select example">
-                  
+
                 </select>
               </div>
             </div>
@@ -89,7 +90,8 @@
             <div class="col-md-4">
               <div class="row">
                 <div class="btn-group dropup">
-                  <button class="btn dropdown-toggle btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn dropdown-toggle btn-primary" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Rendezés név szerint
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -98,7 +100,8 @@
                   </ul>
                 </div>
                 <div class="btn-group dropup">
-                  <button class="btn dropdown-toggle btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn dropdown-toggle btn-primary" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Rendezés ár szerint
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -120,8 +123,7 @@
 
       </div>
       <footer class="mt-auto del center bg-danger fixed-bottom">
-        <button type="button" class="btn btn-outline-danger del-button del-button-list" data-bs-toggle="modal"
-          data-bs-target=".list-del-confirmation">Törlés</button>
+        <button type="button" class="btn btn-outline-danger del-button del-button-list">Törlés</button>
       </footer>
   </section>
   <!--ELEMENT-->
@@ -144,8 +146,7 @@
       </div>
     </div>
     <footer class="mt-auto del center bg-danger fixed-bottom">
-      <button type="button" class="btn btn-outline-danger del-button del-button-element" data-bs-toggle="modal"
-        data-bs-target=".element-del-confirmation">Törlés</button>
+      <button type="button" class="btn btn-outline-danger del-button del-button-element">Törlés</button>
     </footer>
   </section>
   <!--STORES-->
@@ -167,10 +168,9 @@
         </h2>
       </div>
       <div style="margin: 10px;">
-        <button type="button" class="btn btn-primary add-button store-btn add-button-store m-0 mb-3" data-bs-toggle="modal"
-          data-bs-target=".add-store">Hozzáadás</button>
-        <button type="button" class="btn btn-danger store-btn del-button-store m-0" data-bs-toggle="modal"
-          data-bs-target=".store-del-confirmation">Törlés</button>
+        <button type="button" class="btn btn-primary add-button store-btn add-button-store m-0 mb-3"
+          data-bs-toggle="modal" data-bs-target=".add-store">Hozzáadás</button>
+        <button type="button" class="btn btn-danger store-btn del-button-store m-0">Törlés</button>
       </div>
       <div class="arrow inline btn-right">
         <h2 class="inline">
@@ -214,15 +214,18 @@
               <label>Név</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control element-input-quantity floatingInput" min="0.000001" onkeyup="if(this.value<0){this.value= this.value * -1}" placeholder="Mennyiség" required>
+              <input type="number" class="form-control element-input-quantity floatingInput" min="0.000001"
+                onkeyup="if(this.value<0){this.value= this.value * -1}" placeholder="Mennyiség" required>
               <label>Mennyiség</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control element-input-price floatingInput optional" min="0.000001" onkeyup="if(this.value<0){this.value= this.value * -1}" placeholder="Egységár">
+              <input type="number" class="form-control element-input-price floatingInput optional" min="0.000001"
+                onkeyup="if(this.value<0){this.value= this.value * -1}" placeholder="Egységár">
               <label class="optional">Egységár (nem kötelező)</label>
             </div>
             <div class="form-floating">
-              <select class="form-select element-input-store floatingSelect optional" aria-label="Floating label select example">
+              <select class="form-select element-input-store floatingSelect optional"
+                aria-label="Floating label select example">
                 <option selected></option>
               </select>
               <label>Bolt (nem kötelező)</label>
@@ -270,19 +273,23 @@
         <div class="modal-body">
           <form class="form floating">
             <div class="form-floating mb-3">
-              <input type="text" class="form-control floatingInput element-set-name" required placeholder="Eredeti név"><!--placeholder átírása-->
+              <input type="text" class="form-control floatingInput element-set-name" required
+                placeholder="Eredeti név"><!--placeholder átírása-->
               <label class="element-set-name-label">Eredeti név</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control floatingInput element-set-quantity" required min="0.000001"onkeyup=" if(this.value<0){this.value= this.value * -1}" placeholder="Eredeti mennyiség">
+              <input type="number" class="form-control floatingInput element-set-quantity" required min="0.000001"
+                onkeyup=" if(this.value<0){this.value= this.value * -1}" placeholder="Eredeti mennyiség">
               <label class="element-set-quantity-label">Eredeti mennyiség</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control floatingInput element-set-price" min="0.000001" onkeyup="if(this.value<0){this.value= this.value * -1}" placeholder="Eredeti egységár">
+              <input type="number" class="form-control floatingInput element-set-price" min="0.000001"
+                onkeyup="if(this.value<0){this.value= this.value * -1}" placeholder="Eredeti egységár">
               <label class="element-set-price-label optional">Eredeti egységár</label>
             </div>
             <div class="form-floating">
-              <select class="form-select floatingSelect element-set-store secondary optional" aria-label="Floating label select example">
+              <select class="form-select floatingSelect element-set-store secondary optional"
+                aria-label="Floating label select example">
               </select>
               <label>Bolt (nem kötelező)</label>
             </div>
@@ -310,7 +317,8 @@
               <label class="store-set-address-label">Eredeti cím</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control store-set-opening floatingInput" placeholder="Eredeti nyitvatartás">
+              <input type="text" class="form-control store-set-opening floatingInput"
+                placeholder="Eredeti nyitvatartás">
               <label class="store-set-opening-label">Eredeti nyitvatartás</label>
             </div>
           </form>
@@ -322,7 +330,7 @@
       </div>
     </div>
   </div>
-  <!-- elementdelconfirmation -->
+  <!-- element del confirmation -->
   <div class="modal fade element-del-confirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -337,7 +345,21 @@
       </div>
     </div>
   </div>
-  <!-- listdelconfirmation -->
+  <!-- element no selected to del -->
+  <div class="modal fade no-selected-element" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog center">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>Nincs kiválasztott elem.</p>
+          <p class="elements del-elements"></p>
+        </div>
+        <div class="modal-footer center">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- list del confirmation -->
   <div class="modal fade list-del-confirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -352,25 +374,53 @@
       </div>
     </div>
   </div>
-    <!-- storedelconfirmation -->
-    <div class="modal fade store-del-confirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <p>Biztos hogy törölni szeretné az alábbi boltokat?</p>
-            <p class="elements del-stores">Bolt1, Bolt2, Bolt3</p>
-          </div>
-          <div class="modal-footer center">
-            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Mégse</button>
-            <button type="button" class="btn btn-danger btn-del-store" data-bs-dismiss="modal">Törlés</button>
+      <!-- list no selected to del -->
+      <div class="modal fade no-selected-list" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog center">
+          <div class="modal-content">
+            <div class="modal-body">
+              <p>Nincs kiválasztott lista.</p>
+              <p class="elements del-elements"></p>
+            </div>
+            <div class="modal-footer center">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
           </div>
         </div>
       </div>
+  <!-- storedelconfirmation -->
+  <div class="modal fade store-del-confirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>Biztos hogy törölni szeretné az alábbi boltokat?</p>
+          <p class="elements del-stores">Bolt1, Bolt2, Bolt3</p>
+        </div>
+        <div class="modal-footer center">
+          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Mégse</button>
+          <button type="button" class="btn btn-danger btn-del-store" data-bs-dismiss="modal">Törlés</button>
+        </div>
+      </div>
     </div>
+  </div>
+      <!-- store no selected to del -->
+      <div class="modal fade no-selected-store" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog center">
+          <div class="modal-content">
+            <div class="modal-body">
+              <p>Nincs kiválasztott bolt.</p>
+              <p class="elements del-elements"></p>
+            </div>
+            <div class="modal-footer center">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
   <!--SCRIPTS-->
-  <script src="js/store.js"></script>
-  <script src="js/element.js"></script>
-  <script src="js/elementlist.js"></script>
+  <script src="js/Store.js"></script>
+  <script src="js/Thing.js"></script>
+  <script src="js/Elementlist.js"></script>
   <script src="js/script.js" type="module"></script>
   <script src="js/menu.js"></script>
 </body>

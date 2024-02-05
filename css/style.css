@@ -202,7 +202,7 @@ thead, tbody tr {
 }
 .btn-set-store{
     max-width: 125px!important;
-    overflow: hidden;
+    overflow:hidden;
 }
 .element-div{
     border: 1px solid #c2c2c2;
@@ -219,4 +219,7 @@ thead, tbody tr {
 }
 .optional{
     color:rgb(100, 100, 100);
+}
+.no-selected-store .modal-content, .no-selected-list .modal-content,.no-selected-element .modal-content{
+    width: 50%;
 }

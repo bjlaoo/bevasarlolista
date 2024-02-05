@@ -1,4 +1,4 @@
-class store{
+class Store{
     #name;
     #address;
     #opening;
@@ -8,7 +8,7 @@ class store{
         this.setName(name);
         this.setAddress(address);
         this.setOpening(opening);
-        this.setId(store.elementCounter++)
+        this.setId(Store.elementCounter++)
     }
     getName(){
         return this.#name;

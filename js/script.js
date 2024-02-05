@@ -25,10 +25,10 @@ const firebaseConfig = {
     messagingSenderId: "823455732215",
     appId: "1:823455732215:web:16b685c00582345c9b1ef2",
     measurementId: "G-Y9MRH8EYVY"
-  };
+};
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-import { getDatabase, ref, child, get, set, update, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js"
+import { getDatabase, ref, child, get, set, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js"
 const db = getDatabase();
 const dbRef = ref(db);
 get(child(dbRef, 'data')).then((snapshot) => {
@@ -36,23 +36,21 @@ get(child(dbRef, 'data')).then((snapshot) => {
         let x = snapshot.val();
         //create list and fill with objects
         for (let i = 0; i < x.lists.length; i++) {
-            let tmplist = new elementlist(x.lists[i].name);
+            let tmplist = new Elementlist(x.lists[i].name);
             if (x.lists[i].elements != undefined) {
                 for (let j = 0; j < x.lists[i].elements.length; j++) {
-                    tmplist.addElement(new element(x.lists[i].elements[j].name, x.lists[i].elements[j].quantity, x.lists[i].elements[j].price, x.lists[i].elements[j].store, x.lists[i].elements[j].isBought));
+                    tmplist.addElement(new Thing(x.lists[i].elements[j].name, x.lists[i].elements[j].quantity, x.lists[i].elements[j].price, x.lists[i].elements[j].store, x.lists[i].elements[j].isBought));
                 }
             }
             lists.push(tmplist)
         }
         //reading the stores and adding them to storelist
         for (let i = 0; i < x.stores.length; i++) {
-            storeslist.push(new store(x.stores[i].name, x.stores[i].address, x.stores[i].opening));
+            storeslist.push(new Store(x.stores[i].name, x.stores[i].address, x.stores[i].opening));
         }
 
         selectedList = getNotallgreen();
         mainTableElements = selectedList.getElements();
-        console.log(lists)
-        console.log(storeslist)
         write();
 
         //add list
@@ -62,7 +60,7 @@ get(child(dbRef, 'data')).then((snapshot) => {
                 document.querySelector(".list-input-name").classList.add("is-invalid");
             }
             else {
-                lists.push(new elementlist(document.querySelector(".list-input-name").value))
+                lists.push(new Elementlist(document.querySelector(".list-input-name").value))
                 $(".modal").modal("hide");
                 document.querySelector(".list-input-name").value = "";
                 write();
@@ -81,7 +79,7 @@ get(child(dbRef, 'data')).then((snapshot) => {
                 }
             }
             if (selectedList == null) {
-                selectedList = new elementlist("Üres lista");
+                selectedList = new Elementlist("Üres lista");
                 lists.push(selectedList);
                 for (let i = 0; i < lists.length; i++) {
                     if (lists[i] != null) {
@@ -90,22 +88,29 @@ get(child(dbRef, 'data')).then((snapshot) => {
                     }
                 }
             }
+            toDelList = [];
             write();
         })
         //del list writeout
         document.querySelector(".del-button-list").addEventListener("click", function () {
-            let selectedLists = document.querySelectorAll(".selected-list");
-            let p = document.querySelector(".del-lists");
-            p.innerHTML = "";
-            for (let i = 0; i < selectedLists.length; i++) {
-                for (let j = 0; j < lists.length; j++) {
-                    if (lists[j] != null) {
-                        if (selectedLists[i].classList[2] == lists[j].getId()) {
-                            if (i != selectedLists.length - 1) {
-                                p.innerHTML += lists[j].getName() + ", ";
-                            }
-                            else {
-                                p.innerHTML += lists[j].getName();
+            if (toDelList.length == 0) {
+                $('.no-selected-list').modal('show');
+            }
+            else {
+                $('.list-del-confirmation').modal('show');
+                let selectedLists = document.querySelectorAll(".selected-list");
+                let p = document.querySelector(".del-lists");
+                p.innerHTML = "";
+                for (let i = 0; i < selectedLists.length; i++) {
+                    for (let j = 0; j < lists.length; j++) {
+                        if (lists[j] != null) {
+                            if (selectedLists[i].classList[2] == lists[j].getId()) {
+                                if (i != selectedLists.length - 1) {
+                                    p.innerHTML += lists[j].getName() + ", ";
+                                }
+                                else {
+                                    p.innerHTML += lists[j].getName();
+                                }
                             }
                         }
                     }
@@ -115,15 +120,15 @@ get(child(dbRef, 'data')).then((snapshot) => {
         //add store
         document.querySelector(".btn-add-store").addEventListener("click", function () {
             document.querySelector(".store-input-name").classList.remove("is-invalid");
-                if (document.querySelector(".store-input-name").value == "") {
-                    document.querySelector(".store-input-name").classList.add("is-invalid");
-                }
-                else {
-                    $(".modal").modal("hide");
-                    document.querySelector(".list-input-name").value = "";
-                    storeslist.push(new store(document.querySelector(".store-input-name").value, document.querySelector(".store-input-address").value, document.querySelector(".store-input-opening").value));
-                    write();
-                }
+            if (document.querySelector(".store-input-name").value == "") {
+                document.querySelector(".store-input-name").classList.add("is-invalid");
+            }
+            else {
+                $(".modal").modal("hide");
+                document.querySelector(".list-input-name").value = "";
+                storeslist.push(new Store(document.querySelector(".store-input-name").value, document.querySelector(".store-input-address").value, document.querySelector(".store-input-opening").value));
+                write();
+            }
             write();
         })
         //del store
@@ -137,22 +142,29 @@ get(child(dbRef, 'data')).then((snapshot) => {
                     }
                 }
             }
+            toDelStores = [];
             write();
         })
         //del store writeout
         document.querySelector(".del-button-store").addEventListener("click", function () {
-            let selectedStores = document.querySelectorAll(".selected-todel-element");
-            let p = document.querySelector(".del-stores");
-            p.innerHTML = "";
-            for (let i = 0; i < selectedStores.length; i++) {
-                for (let j = 0; j < storeslist.length; j++) {
-                    if (storeslist[j] != null) {
-                        if (selectedStores[i].classList[1] == storeslist[j].getId()) {
-                            if (i != selectedStores.length - 1) {
-                                p.innerHTML += storeslist[j].getName() + ", ";
-                            }
-                            else {
-                                p.innerHTML += storeslist[j].getName();
+            if (toDelStores.length == 0) {
+                $('.no-selected-store').modal('show');
+            }
+            else {
+                $('.store-del-confirmation').modal('show');
+                let selectedStores = document.querySelectorAll(".selected-todel-element");
+                let p = document.querySelector(".del-stores");
+                p.innerHTML = "";
+                for (let i = 0; i < selectedStores.length; i++) {
+                    for (let j = 0; j < storeslist.length; j++) {
+                        if (storeslist[j] != null) {
+                            if (selectedStores[i].classList[1] == storeslist[j].getId()) {
+                                if (i != selectedStores.length - 1) {
+                                    p.innerHTML += storeslist[j].getName() + ", ";
+                                }
+                                else {
+                                    p.innerHTML += storeslist[j].getName();
+                                }
                             }
                         }
                     }
@@ -168,7 +180,7 @@ get(child(dbRef, 'data')).then((snapshot) => {
             else {
                 storeslist[index].setName(document.querySelector(".store-set-name").value);
                 $(".modal").modal("hide");
-            }            
+            }
             storeslist[index].setName(document.querySelector(".store-set-name").value);
             storeslist[index].setAddress(document.querySelector(".store-set-address").value);
             storeslist[index].setOpening(document.querySelector(".store-set-opening").value);
@@ -194,7 +206,6 @@ get(child(dbRef, 'data')).then((snapshot) => {
         document.querySelector(".btn-set-confirmation").addEventListener("click", function () {
             document.querySelector(".element-set-name").classList.remove("is-invalid");
             document.querySelector(".element-set-quantity").classList.remove("is-invalid");
-            //adsf
             if (document.querySelector(".element-set-name").value == "") {
                 document.querySelector(".element-set-name").classList.add("is-invalid");
             }
@@ -213,7 +224,7 @@ get(child(dbRef, 'data')).then((snapshot) => {
             }
 
             selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value);
-
+            
 
             if (document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text == document.querySelector(".element-set-store").options[0].text) {
                 selectedList.getElements()[index].setStore("Nincs bolt");
@@ -221,7 +232,6 @@ get(child(dbRef, 'data')).then((snapshot) => {
             else {
                 selectedList.getElements()[index].setStore(document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text);
             }
-
             write();
             let editElements = document.querySelectorAll(".btn-set-element");
             for (let i = 0; i < editElements.length; i++) {
@@ -246,6 +256,7 @@ get(child(dbRef, 'data')).then((snapshot) => {
         })
 
         document.querySelector(".btn-del-element").addEventListener("click", function () {
+
             for (let i = 0; i < toDelElements.length; i++) {
                 for (let j = 0; j < selectedList.getElements().length; j++) {
                     if (selectedList.getElements()[j] != null) {
@@ -255,23 +266,30 @@ get(child(dbRef, 'data')).then((snapshot) => {
                     }
                 }
             }
+            toDelElements = [];
             write();
         })
         //del element writeout
         document.querySelector(".del-button-element").addEventListener("click", function () {
-            let selectedElements = document.querySelectorAll(".selected-div");
-            let p = document.querySelector(".del-elements");
-            p.innerHTML = "";
-            for (let i = 0; i < selectedElements.length; i++) {
-                for (let j = 0; j < selectedList.getElements().length; j++) {
+            if (toDelElements.length == 0) {
+                $('.no-selected-element').modal('show');
+            }
+            else {
+                $('.element-del-confirmation').modal('show');
+                let selectedElements = document.querySelectorAll(".selected-div");
+                let p = document.querySelector(".del-elements");
+                p.innerHTML = "";
+                for (let i = 0; i < selectedElements.length; i++) {
+                    for (let j = 0; j < selectedList.getElements().length; j++) {
 
-                    if (selectedList.getElements()[j] != null) {
-                        if (selectedElements[i].classList[2] == selectedList.getElements()[j].getId()) {
-                            if (i != selectedElements.length - 1) {
-                                p.innerHTML += selectedList.getElements()[j].getName() + ", ";
-                            }
-                            else {
-                                p.innerHTML += selectedList.getElements()[j].getName();
+                        if (selectedList.getElements()[j] != null) {
+                            if (selectedElements[i].classList[2] == selectedList.getElements()[j].getId()) {
+                                if (i != selectedElements.length - 1) {
+                                    p.innerHTML += selectedList.getElements()[j].getName() + ", ";
+                                }
+                                else {
+                                    p.innerHTML += selectedList.getElements()[j].getName();
+                                }
                             }
                         }
                     }
@@ -290,15 +308,15 @@ get(child(dbRef, 'data')).then((snapshot) => {
             }
             if (!(document.querySelector(".element-input-quantity").value == "") && !(document.querySelector(".element-input-name").value == "")) {
                 if (document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text == document.querySelector(".element-set-store").options[0].text) {
-                    selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, "Nincs bolt", false));
+                    selectedList.addElement(new Thing(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, "Nincs bolt", false));
                 }
                 else {
-                    selectedList.addElement(new element(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text, false));
+                    selectedList.addElement(new Thing(document.querySelector(".element-input-name").value, document.querySelector(".element-input-quantity").value, document.querySelector(".element-input-price").value, document.querySelector(".element-input-store").options[document.querySelector(".element-input-store").selectedIndex].text, false));
                 }
                 $(".modal").modal("hide");
-                document.querySelector(".element-input-name").value="";
-                document.querySelector(".element-input-quantity").value="";
-                document.querySelector(".element-input-price").value="";
+                document.querySelector(".element-input-name").value = "";
+                document.querySelector(".element-input-quantity").value = "";
+                document.querySelector(".element-input-price").value = "";
                 write();
             }
         })
@@ -340,7 +358,6 @@ get(child(dbRef, 'data')).then((snapshot) => {
             for (let i = 0; i < mainTableElements.length; i++) {
                 for (let j = i + 1; j < mainTableElements.length; j++) {
                     if (mainTableElements[i].getName() > mainTableElements[j].getName()) {
-                        console.log(mainTableElements[i]);
                         temp = mainTableElements[i];
                         mainTableElements[i] = mainTableElements[j];
                         mainTableElements[j] = temp;
@@ -355,7 +372,6 @@ get(child(dbRef, 'data')).then((snapshot) => {
             for (let i = 0; i < mainTableElements.length; i++) {
                 for (let j = i + 1; j < mainTableElements.length; j++) {
                     if (mainTableElements[i].getName() < mainTableElements[j].getName()) {
-                        console.log(mainTableElements[i]);
                         temp = mainTableElements[i];
                         mainTableElements[i] = mainTableElements[j];
                         mainTableElements[j] = temp;
@@ -370,7 +386,6 @@ get(child(dbRef, 'data')).then((snapshot) => {
             for (let i = 0; i < mainTableElements.length; i++) {
                 for (let j = i + 1; j < mainTableElements.length; j++) {
                     if (mainTableElements[i].getPrice() > mainTableElements[j].getPrice()) {
-                        console.log(mainTableElements[i]);
                         temp = mainTableElements[i];
                         mainTableElements[i] = mainTableElements[j];
                         mainTableElements[j] = temp;
@@ -385,7 +400,6 @@ get(child(dbRef, 'data')).then((snapshot) => {
             for (let i = 0; i < mainTableElements.length; i++) {
                 for (let j = i + 1; j < mainTableElements.length; j++) {
                     if (mainTableElements[i].getPrice() < mainTableElements[j].getPrice()) {
-                        console.log(mainTableElements[i]);
                         temp = mainTableElements[i];
                         mainTableElements[i] = mainTableElements[j];
                         mainTableElements[j] = temp;
@@ -492,7 +506,11 @@ function write() {
             if (event.target === listdivs[i]) {
                 if (listdivs[i].classList.contains("selected-list") || listdivs[i].classList.contains("plus")) {
                     listdivs[i].classList.remove("selected-list");
-                    toDelList.splice(listdivs[i].classList[2], 1);
+                    for (let j = 0; j < toDelList.length; j++) {
+                        if (listdivs[i].classList[2], toDelList[j]) {
+                            toDelList.splice(j, 1)
+                        }
+                    }
                     circlePlacesList[i - 1].innerHTML = "";
                     circlePlacesList[i - 1].innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle-list\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
                 } else {
@@ -530,7 +548,11 @@ function write() {
                     elementsDiv[i].classList.remove("selected-div");
                     circlePlaces[i].innerHTML = "";
                     circlePlaces[i].innerHTML += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-circle circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16\"/></svg>";
-                    toDelElements.splice(elementsDiv[i].classList[2], 1);
+                    for (let j = 0; j < toDelElements.length; j++) {
+                        if (elementsDiv[i].classList[2], toDelElements[j]) {
+                            toDelElements.splice(j, 1)
+                        }
+                    }
                 } else {
                     elementsDiv[i].classList.add("selected-div");
                     circlePlaces[i].innerHTML = "";
@@ -578,7 +600,7 @@ function write() {
             }
         }
     }
-    storeslist.splice(0, 0, new store("Kérjük válasszon egyet!", "", ""));
+    storeslist.splice(0, 0, new Store("Kérjük válasszon egyet!", "", ""));
     //edit store
     let editStores = document.querySelectorAll(".btn-set-store");
     for (let i = 0; i < editStores.length; i++) {
@@ -607,7 +629,11 @@ function write() {
             }
             if (stores[i].classList.contains("selected-todel-element")) {
                 stores[i].classList.remove("selected-todel-element");
-                toDelStores.splice(stores[i].classList[1], 1);
+                for (let j = 0; j < toDelStores.length; j++) {
+                    if (stores[i].classList[2], toDelStores[j]) {
+                        toDelStores.splice(j, 1)
+                    }
+                }
             } else {
                 stores[i].classList.add("selected-todel-element");
                 toDelStores.push(stores[i].classList[1]);
@@ -718,7 +744,7 @@ function write() {
             document.querySelector(".element-set-quantity-label").innerHTML = selectedList.getElements()[index].getQuantity();
             document.querySelector(".element-set-price-label").innerHTML = selectedList.getElements()[index].getPrice() + " (nem kötelező)";
             document.querySelector(".element-set-store").value = selectedList.getElements()[index].getStore();
-           
+
             selectedList.getElements()[index].setName(document.querySelector(".element-set-name").value = selectedList.getElements()[index].getName());
             selectedList.getElements()[index].setQuantity(document.querySelector(".element-set-quantity").value = selectedList.getElements()[index].getQuantity());
             selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value = selectedList.getElements()[index].getPrice());
@@ -768,9 +794,10 @@ function write() {
         }
     }
     //narrow by location
-    if(selectedList.getElements().length<20){
+    if (selectedList.getElements().length < 20) {
         document.querySelector(".filter").style.display = "none";
-    }else{
+        
+    } else {
         document.querySelector(".filter").style.display = "block";
     }
 }
