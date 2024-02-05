@@ -224,7 +224,7 @@ get(child(dbRef, 'data')).then((snapshot) => {
             }
 
             selectedList.getElements()[index].setPrice(document.querySelector(".element-set-price").value);
-            
+
 
             if (document.querySelector(".element-set-store").options[document.querySelector(".element-set-store").selectedIndex].text == document.querySelector(".element-set-store").options[0].text) {
                 selectedList.getElements()[index].setStore("Nincs bolt");
@@ -345,8 +345,10 @@ get(child(dbRef, 'data')).then((snapshot) => {
             }
             else {
                 for (let i = 0; i < selectedList.getElements().length; i++) {
-                    if (document.querySelector(".filter").options[document.querySelector(".filter").selectedIndex].text == selectedList.getElements()[i].getStore()) {
-                        mainTableElements.push(selectedList.getElements()[i]);
+                    if (selectedList.getElements()[i] != null) {
+                        if (document.querySelector(".filter").options[document.querySelector(".filter").selectedIndex].text == selectedList.getElements()[i].getStore()) {
+                            mainTableElements.push(selectedList.getElements()[i]);
+                        }
                     }
                 }
             }
@@ -796,7 +798,7 @@ function write() {
     //narrow by location
     if (selectedList.getElements().length < 20) {
         document.querySelector(".filter").style.display = "none";
-        
+
     } else {
         document.querySelector(".filter").style.display = "block";
     }
